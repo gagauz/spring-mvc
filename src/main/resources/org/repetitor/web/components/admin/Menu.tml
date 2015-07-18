@@ -1,0 +1,140 @@
+<!-- menu -->
+<div xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter" class="page-sidebar-wrapper">
+           <!-- BEGIN SIDEBAR -->
+        
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                    <li class="sidebar-toggler-wrapper">
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <div class="sidebar-toggler"></div>
+                        <!-- END SIDEBAR TOGGLER BUTTON -->
+                    </li>
+                    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                    <li class="sidebar-search-wrapper">
+                        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                        <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                        <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                        <form class="sidebar-search " action="/" method="POST">
+                            <a href="javascript:;" class="remove">
+                                <i class="icon-close"></i>
+                            </a>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Поиск..." />
+                                <span class="input-group-btn">
+                                    <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                                </span>
+                            </div>
+                        </form>
+                        <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                    </li>
+                    <li class="start active open">
+					    <a href="/">
+					        <i class="icon-home"></i>
+					        <span class="title">Админка</span>
+					        <span class="selected"></span>
+					        <!-- <span class="arrow open"></span> -->
+					    </a>
+					</li>
+					<li class="open">
+					    <a href="javascript:;">
+					        <i class="icon-settings"></i>
+					        <span class="title">Настройки</span>
+					        <span class="arrow"></span>
+					    </a>
+					    <ul style="display: block;" class="sub-menu">
+					        <li>
+					            <t:pagelink page="admin/allorders">
+					                <i class="icon-order"></i>
+					                Заявки
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/transactions">
+					                <i class="icon-order"></i>
+					                Транзакции
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/repetitors">
+					                <i class="icon-user"></i>
+					                Репетиторы
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/repetitorimages">
+					                <i class="icon-user"></i>
+					                Фото на проверку
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/pupils">
+					                <i class="icon-user"></i>
+					                Ученики
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/comments">
+					                <i class="icon-comment"></i>
+					                Отзывы учеников
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/allsubjects">
+					                <i class="icon-comment"></i>
+					                Предметы
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/allregions">
+					                <i class="icon-comment"></i>
+					                Регионы
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/allmanagers">
+					                <i class="icon-comment"></i>
+					                Администраторы
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/mailmanagement">
+					                <i class="icon-comment"></i>
+					             	Письма
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/templatemanagement">
+					                <i class="icon-comment"></i>
+					             	Шаблоны писем
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/configmanagement">
+					                <i class="icon-comment"></i>
+					             	Конфигурации
+					            </t:pagelink>
+					        </li>
+					        <li>
+					            <t:pagelink page="admin/smsmanagement">
+					                <i class="icon-comment"></i>
+					             	СМС
+					            </t:pagelink>
+					        </li>
+					    </ul>
+					</li>
+                </ul>
+                <!-- END SIDEBAR MENU -->
+            </div>
+        
+        <!-- END SIDEBAR -->
+</div>
+<!-- menu -->
+

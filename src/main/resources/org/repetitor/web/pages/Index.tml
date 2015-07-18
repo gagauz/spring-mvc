@@ -1,0 +1,9 @@
+<t:MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<t:Banner />
+    <div class="f-row s-p_0_20 s-pt_18">
+        <h1 class="s-ta_c">
+        	<strong>Ассоциация репетиторов Москвы</strong>
+        </h1>
+    </div>
+
+</t:MainTemplate>

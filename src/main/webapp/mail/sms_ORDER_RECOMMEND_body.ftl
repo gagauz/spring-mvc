@@ -1,0 +1,1 @@
+Контактные данные по заявке #${order.id}: ${order.pupil.name}<#if order.pupil.email??>, ${order.pupil.email}</#if><#if order.pupil.phone??>, ${order.pupil.phone}</#if>.

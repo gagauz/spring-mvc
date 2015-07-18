@@ -1,0 +1,24 @@
+<t:MainTemplate
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter">
+	<div id="BalanceRefill" class="s-p_wrapper f-row customform customform-small">
+		<h1>
+			<strong>Пополнение счета</strong>
+		</h1>
+		<p>В данном разделе можно пополнить ваш счет. Оплату можно производить практически любыми электронными деньгами (Яндекс.Деньги, Moneymail RUR, RBK Money RUR, EasyPay, Единый кошелек, LiqPay, WebCreds), через систему денежных переводов Contact, а также при помощи пластиковых карт (Visa, Mastercard). </p>
+		<p>	
+			Текущий балланс&ampnbsp;
+			<strong class="s-mr_5">0</strong>
+			<i class="fa fa-rub"></i>
+			
+		</p>
+		<div class="s-filter_deline"></div>
+		<input class="s-mr_20" data-bind="value:ammount, valueUpdate:'input', checkSumm:ammount" type="number"/>
+		<button class="ask_btn">Перейти к оплате</button>
+		
+	</div>
+	<t:IncludeBlock>
+	<script src="/static/js/models/BalanceRefillModel.js"></script>
+	
+	</t:IncludeBlock>
+</t:MainTemplate>

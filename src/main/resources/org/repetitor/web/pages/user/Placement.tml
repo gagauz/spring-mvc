@@ -1,0 +1,60 @@
+<t:MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<link href="/static/css/bootstrap-slider.css" rel="stylesheet"/>
+	<div class="s-p_wrapper f-row">
+		<h1 class="fluid-head"><strong>Платное размещение</strong></h1>
+		<p>
+		<strong>Платное размещение</strong> - это уникальная возможность для Вас максимально быстро найти себе учеников на длительный срок. Платное размещение представляет собой особые места анкет в выдаче. Основное преимущество платного размещения в том, что Ваша анкета существенно поднимается в поисковой выдаче на нашем сайте. По статистике на анкету репетитора, находящуюся в платном размещении, в среднем откликаются в три раза чаще, чем на его основную анкету.
+		</p>
+		<p class="s-mb_9">
+		<strong>Обращаем внимание</strong>, что выбранный коэффициент платного размещения будет действовать на все заявки, передаваемые репетитору по данному предмету (до момента отключения платного размещения). В том числе на заявки, где:
+		</p>
+		<ul class="list-default s-mb_27">
+			<li>ученик выбрал репетитора на нашем сайте</li>
+			<li>консультант выбрал репетитора на нашем сайте</li>
+			<li>репетитор оставил самостоятельно запрос</li>
+		</ul>
+		<t:foreach source="subjects" value="subject">
+			<div class="s-mb_18 row">
+				<div class="col-md-7 col-lg-7 col-sm-8 col-xs-12">
+					<h3>
+						<strong class="s-mr_10 s-icon">${subject.subject.name}</strong>
+						<input class="css-checkbox" id="enable-${subject.subject.id}" name="enable-${subject.subject.id}" type="checkbox"/>
+						<label for="enable-${subject.subject.id}" class="css-checkbox-label s-fs_14">Включить платное размещение</label>
+					</h3>
+					<div class="js-placement">
+						<div class="s-mb_18 slider-full s-slider_wrapper">
+		                    <input  
+		                    type="text" 
+		                    class="js-slider span2" 
+		                    value="2.00" 
+		                    data-slider-step="0.05" 
+		                    data-slider-value="2.00" />
+		                </div>
+	
+		                <p>С коэффициентом <strong class="js-coefficient">2.00</strong>, Ваша анкета окажется на 1-й странице, на 1-й позиции платного размещения по запросу на этот предмет. Для этого Вам нужно 
+		                <a class="js-link" href="/user/BalanceRefill?summ=2000">зачислить <span class="js-summ">2000</span> р. на счет</a>. У вас недостаточно средств на счету для платного размещения по этому предмету</p>
+					</div>
+					<input name="" type="hidden" value="${total}" />
+				</div>
+			</div>
+			${total}
+		</t:foreach>
+	</div>
+	<t:IncludeBlock>
+	<script src="/static/js/libs/bootstrap-slider.js"></script>
+	<script>
+	(function($){
+		var $sliderSelector = $('.js-slider'),
+		slider = $sliderSelector.slider({ min: 2.0, max: 10}),
+		$c = $(".js-coefficient"), $targetConteiner;
+		
+		$sliderSelector.on("slide", function(slideEvt) {
+			$targetConteiner = $(this).closest(".js-placement");
+			$targetConteiner.find(".js-coefficient").text(slideEvt.value);
+			$targetConteiner.find(".js-summ").text(slideEvt.value*1000);
+			$targetConteiner.find(".js-link").prop("href", "/user/BalanceRefill/?summ=".concat(slideEvt.value*1000));
+		});
+	})(jQuery);
+	</script>
+	</t:IncludeBlock>
+</t:MainTemplate>
