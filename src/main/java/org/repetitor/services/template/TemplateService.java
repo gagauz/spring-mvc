@@ -1,53 +1,59 @@
-package org.repetitor.services;
+package org.repetitor.services.template;
 
-import freemarker.cache.TemplateLoader;
-import freemarker.ext.beans.CollectionModel;
-import freemarker.ext.beans.NumberModel;
-import freemarker.template.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Map;
+
 import org.apache.commons.io.FileUtils;
-import org.repetitor.database.dao.MessageTemplateDao;
-import org.repetitor.database.model.Mail;
+import org.repetitor.database.dao.PageTemplateDao;
 import org.repetitor.database.model.Message;
 import org.repetitor.database.model.MessageTemplate;
-import org.repetitor.database.model.Sms;
-import org.repetitor.database.model.enums.MessageType;
+import org.repetitor.database.model.PageTemplate;
 import org.repetitor.utils.SysEnv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.Map;
+import freemarker.cache.TemplateLoader;
+import freemarker.ext.beans.CollectionModel;
+import freemarker.ext.beans.NumberModel;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
 
 @Service
-public class FreemarkerService {
-    private static final Logger LOG = LoggerFactory.getLogger(FreemarkerService.class);
+public class TemplateService {
+    private static final Logger LOG = LoggerFactory.getLogger(TemplateService.class);
 
-    private static final String SMS_PREFIX = "sms_";
-    private static final String MAIL_PREFIX = "mail_";
-    private static final String SUBJ_SUFFIX = "_subj.ftl";
-    private static final String BODY_SUFFIX = "_body.ftl";
+    private static final String SUFFIX = ".ftl";
     private final File templatePath;
     private final Configuration fileCfg;
     private final Configuration databaseCfg;
 
     @Autowired
-    private MessageTemplateDao messageTemplateDao;
+    private PageTemplateDao templateDao;
 
     private ObjectProxy objectProxy = new ObjectProxy();
 
-    public FreemarkerService() throws IOException {
-        templatePath = new File(SysEnv.MAIL_TEMPLATE_DIR.toString());
+    public TemplateService() throws IOException {
+        templatePath = new File(SysEnv.PAGE_TEMPLATE_DIR.toString());
         fileCfg = new Configuration();
         fileCfg.setDirectoryForTemplateLoading(templatePath);
         fileCfg.setDefaultEncoding("UTF-8");
         fileCfg.setNumberFormat("0.######");
         fileCfg.setObjectWrapper(new DefaultObjectWrapper());
 
-        //--
+        // --
 
         databaseCfg = new Configuration();
         databaseCfg.setDefaultEncoding("UTF-8");
@@ -56,40 +62,49 @@ public class FreemarkerService {
         databaseCfg.setTemplateLoader(new ProxyTemplateLoader(objectProxy));
     }
 
-    public Mail createEmailContent(MessageType type, Map<String, Object> map) {
-        return createMessageContentFromFile(new Mail(), type, map);
-    }
+    protected String createContentFromFile(final String name, Map<String, Object> rootMap) {
 
-    public Sms createSmsContent(MessageType type, Map<String, Object> map) {
-        return createMessageContentFromFile(new Sms(), type, map);
-    }
-
-    protected <T extends Message> T createMessageContentFromFile(final T mesage, final MessageType type, Map<String, Object> rootMap) {
         try {
 
-            final String prefix = mesage instanceof Sms ? SMS_PREFIX : MAIL_PREFIX;
+            final Template template = fileCfg.getTemplate(name + SUFFIX);
 
-            final Template subjTemplate = fileCfg.getTemplate(prefix + type.name() + SUBJ_SUFFIX);
-
-            final Template bodyTemplate = fileCfg.getTemplate(prefix + type.name() + BODY_SUFFIX);
-
-            mesage.setType(type);
-
-            processTemplate(mesage, rootMap, subjTemplate, bodyTemplate);
-
-            return mesage;
+            return processTemplate(rootMap, template);
         } catch (Exception e) {
-            LOG.error("Exception while merging template " + type, e);
-            return createMessageContentFromDB(mesage, type, rootMap);
+            LOG.error("Exception while merging template " + name, e);
+            return createContentFromDB(name, rootMap);
         }
+
     }
 
-    protected <T extends Message> T createMessageContentFromDB(final T mesage, final MessageType type, Map<String, Object> rootMap) {
+    protected String createContentFromDB(final String name, Map<String, Object> rootMap) {
 
         try {
             synchronized (objectProxy) {
 
-                final boolean isSms = mesage instanceof Sms;
+                PageTemplate template = templateDao.findByName(name);
+
+                objectProxy.setObject(template, rootMap);
+                Template subjTemplate = databaseCfg.getTemplate(type + SUBJ_SUFFIX);
+                Template bodyTemplate = databaseCfg.getTemplate(type + BODY_SUFFIX);
+                mesage.setType(template.getType());
+                processTemplate(mesage, rootMap, subjTemplate, bodyTemplate);
+                objectProxy.setObject(null, null);
+
+                saveTemplateToFile(template);
+
+                return mesage;
+            }
+        } catch (Exception e) {
+            LOG.error("Exception while merging template " + type, e);
+            e.printStackTrace();
+            throw new IllegalStateException("Failed to create template for " + type);
+        }
+    }
+
+    protected String createContentFromDB(final String name, Map<String, Object> rootMap) {
+
+        try {
+            synchronized (objectProxy) {
 
                 MessageTemplate template = messageTemplateDao.findByType(type, isSms);
 
@@ -113,19 +128,23 @@ public class FreemarkerService {
 
     public void saveTemplateToFile(MessageTemplate template) throws IOException {
         final String prefix = template.isSms() ? SMS_PREFIX : MAIL_PREFIX;
-        File subjectTemplateFile = new File(templatePath, prefix + template.getType().name() + SUBJ_SUFFIX);
+        File subjectTemplateFile = new File(templatePath, prefix + template.getType().name()
+                + SUBJ_SUFFIX);
         FileUtils.writeStringToFile(subjectTemplateFile, template.getSubjectTemplate());
-        File bodyTemplateFile = new File(templatePath, prefix + template.getType().name() + BODY_SUFFIX);
+        File bodyTemplateFile = new File(templatePath, prefix + template.getType().name()
+                + BODY_SUFFIX);
         FileUtils.writeStringToFile(bodyTemplateFile, template.getBodyTemplate());
     }
 
-    private void processTemplate(Message mesage, Map<String, Object> rootMap, Template subjTemplate, Template bodyTemplate) throws TemplateException,
+    private void processTemplate(Message mesage, Map<String, Object> rootMap,
+            Template subjTemplate, Template bodyTemplate) throws TemplateException,
             IOException {
         mesage.setSubject(processTemplate(rootMap, subjTemplate));
         mesage.setBody(processTemplate(rootMap, bodyTemplate));
     }
 
-    private String processTemplate(Map<String, Object> rootMap, Template template) throws TemplateException,
+    private String processTemplate(Map<String, Object> rootMap, Template template)
+            throws TemplateException,
             IOException {
         Writer writer = new StringWriter();
         template.process(rootMap, writer);
@@ -133,12 +152,11 @@ public class FreemarkerService {
     }
 
     /**
-     * Simple proxy object which will provide string template each time 
-     * last modified is changed.
-     * TODO May be used not only for MarketGenerator
+     * Simple proxy object which will provide string template each time last
+     * modified is changed. TODO May be used not only for MarketGenerator
      */
     class ObjectProxy {
-        private MessageTemplate proxyTemplate;
+        private PageTemplate proxyTemplate;
         private Map<String, Object> proxyMap;
 
         public long getLastModification(Object templateSource) {
@@ -146,25 +164,22 @@ public class FreemarkerService {
         }
 
         public String getTemplateName() {
-            return proxyTemplate.getType().name();
+            return proxyTemplate.getName();
         }
 
         public Map<String, Object> getProxyMap() {
             return proxyMap;
         }
 
-        public void setObject(MessageTemplate template, Map<String, Object> rootMap) {
+        public void setObject(PageTemplate template, Map<String, Object> rootMap) {
             proxyTemplate = template;
             proxyMap = rootMap;
         }
 
-        public String getSubjectTemplate() {
-            return proxyTemplate.getSubjectTemplate();
+        public String getTemplate() {
+            return proxyTemplate.getTemplate();
         }
 
-        public String getBodyTemplate() {
-            return proxyTemplate.getBodyTemplate();
-        }
     }
 
     class ProxyTemplateLoader implements TemplateLoader {
@@ -179,13 +194,9 @@ public class FreemarkerService {
         public Object findTemplateSource(String name) throws IOException {
             if (name.startsWith(objectProxy.getTemplateName())) {
                 // return current proxy object
-                if (name.contains(BODY_SUFFIX))
-                    return objectProxy.getBodyTemplate();
-                if (name.contains(SUBJ_SUFFIX))
-                    return objectProxy.getSubjectTemplate();
-                return null;
-            }
-            //Handle includes
+                return objectProxy.getTemplate();
+            } else {
+            // Handle includes
             try {
                 Template template = fileCfg.getTemplate(name);
                 return processTemplate(objectProxy.getProxyMap(), template);

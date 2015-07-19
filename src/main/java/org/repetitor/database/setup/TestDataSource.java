@@ -1,11 +1,13 @@
 package org.repetitor.database.setup;
 
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import java.util.Map.Entry;
-import java.util.Properties;
+import org.repetitor.database.setup.utils.StatementInterceptor;
+import org.repetitor.utils.SysEnv;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 public class TestDataSource extends SimpleDriverDataSource implements DataSource {
 
@@ -14,10 +16,9 @@ public class TestDataSource extends SimpleDriverDataSource implements DataSource
             System.out.format("%1$40s = %2$s\n", e.getKey(), e.getValue());
         }
         setDriverClass(com.mysql.jdbc.Driver.class);
-        setUrl(System.getProperty("tracker.jdbc-url",
-                "jdbc:mysql://localhost:3306/repetitor?autoReconnect=true"));
-        setUsername(System.getProperty("tracker.db-username", "b4f"));
-        setPassword(System.getProperty("tracker.db-password", "office"));
+        setUrl(SysEnv.JDBC_URL.toString());
+        setUsername(SysEnv.JDBC_USERNAME.toString());
+        setPassword(SysEnv.JDBC_PASSWORD.toString());
         Properties props = new Properties();
         props.setProperty("cacheServerConfiguration", "true");
         props.setProperty("useUnicode", "true");

@@ -1,31 +1,35 @@
 package org.repetitor.utils;
 
-public enum SysEnv {
+public enum SysEnv implements Config {
     JDBC_USERNAME("b4f"),
     JDBC_PASSWORD("office"),
     JDBC_URL("jdbc:mysql://localhost:3306/repetitor?autoReconnect=true"),
     MAIL_TEMPLATE_DIR("/var/tmp"),
+    PAGE_TEMPLATE_DIR("/var/tmp"),
     PRODUCTION_MODE("false");
 
-    private String value;
-    private final String defaultValue;
+    private ConfigValue value;
 
     SysEnv(String defaultValue) {
-        this.defaultValue = defaultValue;
+        String string = System.getenv(name());
+        if (null == string && null != defaultValue) {
+            this.value = new ConfigValue(defaultValue);
+        } else if (null != string) {
+            this.value = new ConfigValue(string);
+        } else {
+            throw new IllegalStateException("No system variable with name " + name()
+                    + " present!");
+        }
+
     }
 
     @Override
     public String toString() {
-        if (null == value) {
-            value = System.getenv(name());
-            if (null == value) {
-                if (null == defaultValue) {
-                    throw new IllegalStateException("No system variable with name " + name()
-                            + " present!");
-                }
-                value = defaultValue;
-            }
-        }
+        return value.toString();
+    }
+
+    @Override
+    public ConfigValue get() {
         return value;
     }
 }

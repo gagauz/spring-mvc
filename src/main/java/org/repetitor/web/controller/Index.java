@@ -28,7 +28,7 @@ public class Index {
         return new ResponseEntity<String>("Yau!!!", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/1", produces = { "application/json" })
+    @RequestMapping(value = "/1", produces = { "application/json; charset=utf-8" })
     @Transactional
     public @ResponseBody
     List<Payment> handle1() {

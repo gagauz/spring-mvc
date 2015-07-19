@@ -5,6 +5,7 @@ import org.repetitor.database.dao.MailDao;
 import org.repetitor.database.dao.SmsDao;
 import org.repetitor.database.model.*;
 import org.repetitor.database.model.enums.MessageType;
+import org.repetitor.services.template.FreemarkerService;
 import org.repetitor.utils.CryptoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

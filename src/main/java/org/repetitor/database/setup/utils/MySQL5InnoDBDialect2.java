@@ -1,4 +1,4 @@
-package org.repetitor.database.setup;
+package org.repetitor.database.setup.utils;
 
 import org.hibernate.dialect.MySQL5InnoDBDialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;
