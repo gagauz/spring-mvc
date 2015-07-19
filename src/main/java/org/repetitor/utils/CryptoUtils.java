@@ -11,6 +11,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class CryptoUtils {
 
     private static final String JOIN_STR = "\0";
