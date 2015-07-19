@@ -11,7 +11,6 @@ import org.repetitor.database.setup.SessionFactoryBean;
 import org.repetitor.database.setup.TestDataSource;
 import org.repetitor.utils.SysEnv;
 import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +22,6 @@ import org.springframework.transaction.annotation.AnnotationTransactionAttribute
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
-import org.springframework.web.context.WebApplicationContext;
 
 @Configuration
 @EnableScheduling
@@ -32,9 +30,6 @@ import org.springframework.web.context.WebApplicationContext;
         "org.repetitor.database.dao",
         "org.repetitor.services" })
 public class Setup {
-
-    @Autowired
-    private WebApplicationContext context;
 
     @Bean(autowire = Autowire.BY_NAME)
     public DataSource dataSource() {
