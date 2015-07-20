@@ -1,13 +1,15 @@
-package org.repetitor.database.setup;
+package org.repetitor.database.datasource;
 
 import java.util.Map.Entry;
+
+import javax.sql.DataSource;
 
 import org.repetitor.utils.SysEnv;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class ProdDataSource extends HikariDataSource {
+public class ProdDataSource extends HikariDataSource implements DataSource {
 
     public ProdDataSource() {
         super(getConfig());

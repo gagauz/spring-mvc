@@ -1,4 +1,4 @@
-package org.repetitor.database.setup.utils;
+package org.repetitor.database.utils;
 
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.type.StringType;

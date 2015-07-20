@@ -1,4 +1,4 @@
-package org.repetitor.database.setup.utils;
+package org.repetitor.database.utils;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.JDBC4Connection;

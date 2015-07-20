@@ -1,4 +1,4 @@
-package org.repetitor.web.setup.context;
+package org.repetitor.web.context;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;

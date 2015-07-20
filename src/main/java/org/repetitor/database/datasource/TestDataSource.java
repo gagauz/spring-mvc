@@ -1,11 +1,11 @@
-package org.repetitor.database.setup;
+package org.repetitor.database.datasource;
 
 import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.repetitor.database.setup.utils.StatementInterceptor;
+import org.repetitor.database.utils.StatementInterceptor;
 import org.repetitor.utils.SysEnv;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 

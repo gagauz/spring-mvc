@@ -1,23 +1,16 @@
-package org.repetitor.setup;
+package org.repetitor.database.setup;
 
 import static org.hibernate.cfg.AvailableSettings.HBM2DDL_AUTO;
 
-import java.util.Locale;
-import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.repetitor.database.model.enums.MessageType;
-import org.repetitor.database.setup.ProdDataSource;
-import org.repetitor.database.setup.TestDataSource;
-import org.repetitor.database.setup.utils.SessionFactoryBean;
-import org.repetitor.services.template.FreemarkerService;
+import org.repetitor.database.datasource.ProdDataSource;
+import org.repetitor.database.datasource.TestDataSource;
+import org.repetitor.database.utils.SessionFactoryBean;
 import org.repetitor.utils.SysEnv;
 import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,16 +22,12 @@ import org.springframework.transaction.annotation.AnnotationTransactionAttribute
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.ViewResolver;
 
 @Configuration
 @EnableScheduling
 @EnableTransactionManagement(proxyTargetClass = true)
-@ComponentScan(basePackages = {
-        "org.repetitor.database.dao",
-        "org.repetitor.services" })
-public class Setup {
+@ComponentScan(basePackages = { "org.repetitor.database.dao" })
+public class DBSetup {
 
     @Bean(autowire = Autowire.BY_NAME)
     public DataSource dataSource() {
@@ -46,30 +35,6 @@ public class Setup {
                 ? new ProdDataSource()
                 : new TestDataSource();
 
-    }
-
-    @Bean(autowire = Autowire.BY_NAME)
-    @Autowired
-    public ViewResolver viewResolver(FreemarkerService freemarkerService) {
-        return new ViewResolver() {
-            @Override
-            public View resolveViewName(String viewName, Locale locale) throws Exception {
-                return new View() {
-
-                    @Override
-                    public String getContentType() {
-                        return "text/html; charset=utf-8";
-                    }
-
-                    @Override
-                    public void render(Map<String, ?> model, HttpServletRequest request,
-                            HttpServletResponse response) throws Exception {
-                        freemarkerService.createEmailContent(MessageType.CONTACT_SENT, model);
-                    }
-
-                };
-            }
-        };
     }
 
     @Bean(autowire = Autowire.BY_NAME)
