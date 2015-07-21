@@ -29,44 +29,44 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 @ComponentScan(basePackages = { "org.repetitor.database.dao" })
 public class DBSetup {
 
-    @Bean(autowire = Autowire.BY_NAME)
-    public DataSource dataSource() {
-        return (SysEnv.PRODUCTION_MODE.get().toBool())
-                ? new ProdDataSource()
-                : new TestDataSource();
+	@Bean
+	public DataSource dataSource() {
+		return (SysEnv.PRODUCTION_MODE.get().toBool())
+				? new ProdDataSource()
+		: new TestDataSource();
 
-    }
+	}
 
-    @Bean(autowire = Autowire.BY_NAME)
-    public LocalSessionFactoryBean sessionFactory() {
-        Properties properties = new Properties();
-        if ("true".equals(SysEnv.PRODUCTION_MODE.toString())) {
-            properties.put(HBM2DDL_AUTO, "false");
-        } else {
-            properties.put(HBM2DDL_AUTO, "create");
-        }
-        return new SessionFactoryBean(properties);
-    }
+	@Bean(autowire = Autowire.BY_NAME)
+	public LocalSessionFactoryBean sessionFactory() {
+		Properties properties = new Properties();
+		if ("true".equals(SysEnv.PRODUCTION_MODE.toString())) {
+			properties.put(HBM2DDL_AUTO, "false");
+		} else {
+			properties.put(HBM2DDL_AUTO, "create");
+		}
+		return new SessionFactoryBean(properties);
+	}
 
-    @Bean(autowire = Autowire.BY_NAME)
-    public PlatformTransactionManager transactionManager() {
-        HibernateTransactionManager tm = new HibernateTransactionManager();
-        tm.setNestedTransactionAllowed(true);
-        return tm;
-    }
+	@Bean(autowire = Autowire.BY_NAME)
+	public PlatformTransactionManager transactionManager() {
+		HibernateTransactionManager tm = new HibernateTransactionManager();
+		tm.setNestedTransactionAllowed(true);
+		return tm;
+	}
 
-    @Bean(autowire = Autowire.BY_NAME)
-    public TransactionInterceptor transactionInterceptor() {
-        return new TransactionInterceptor();
-    }
+	@Bean(autowire = Autowire.BY_NAME)
+	public TransactionInterceptor transactionInterceptor() {
+		return new TransactionInterceptor();
+	}
 
-    @Bean
-    public AnnotationTransactionAttributeSource transactionAttributeSource() {
-        return new AnnotationTransactionAttributeSource();
-    }
+	@Bean
+	public AnnotationTransactionAttributeSource transactionAttributeSource() {
+		return new AnnotationTransactionAttributeSource();
+	}
 
-    @Bean(autowire = Autowire.BY_NAME)
-    public TransactionAttributeSourceAdvisor transactionAttributeSourceAdvisor() {
-        return new TransactionAttributeSourceAdvisor();
-    }
+	@Bean(autowire = Autowire.BY_NAME)
+	public TransactionAttributeSourceAdvisor transactionAttributeSourceAdvisor() {
+		return new TransactionAttributeSourceAdvisor();
+	}
 }

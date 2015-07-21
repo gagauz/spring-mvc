@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.View;
@@ -30,38 +31,39 @@ import freemarker.cache.URLTemplateLoader;
 
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement(proxyTargetClass = true)
 @ComponentScan(basePackages = { "org.repetitor.web.controller" })
 public class WebSetup extends WebMvcConfigurationSupport {
-    @SuppressWarnings("deprecation")
-    protected List<HttpMessageConverter<?>> getMessageConverters2() {
+	@SuppressWarnings("deprecation")
+	protected List<HttpMessageConverter<?>> getMessageConverters2() {
 
-        List<HttpMessageConverter<?>> converters = C.newArrayList();
-        MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
-        converters
-                .add(converter);
-        converter.getObjectMapper().configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,
-                false);
-        return converters;
-    }
+		List<HttpMessageConverter<?>> converters = C.newArrayList();
+		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
+		converters
+				.add(converter);
+		converter.getObjectMapper().configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,
+				false);
+		return converters;
+	}
 
-    @Override
-    @Bean
-    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
-        List<HandlerMethodArgumentResolver> argumentResolvers = new ArrayList<HandlerMethodArgumentResolver>();
-        addArgumentResolvers(argumentResolvers);
+	@Override
+	@Bean
+	public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
+		List<HandlerMethodArgumentResolver> argumentResolvers = new ArrayList<HandlerMethodArgumentResolver>();
+		addArgumentResolvers(argumentResolvers);
 
-        List<HandlerMethodReturnValueHandler> returnValueHandlers = new ArrayList<HandlerMethodReturnValueHandler>();
-        addReturnValueHandlers(returnValueHandlers);
+		List<HandlerMethodReturnValueHandler> returnValueHandlers = new ArrayList<HandlerMethodReturnValueHandler>();
+		addReturnValueHandlers(returnValueHandlers);
 
-        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
-        adapter.setContentNegotiationManager(mvcContentNegotiationManager());
-        adapter.setMessageConverters(getMessageConverters2());
-        adapter.setWebBindingInitializer(getConfigurableWebBindingInitializer());
-        adapter.setCustomArgumentResolvers(argumentResolvers);
-        adapter.setCustomReturnValueHandlers(returnValueHandlers);
+		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+		adapter.setContentNegotiationManager(mvcContentNegotiationManager());
+		adapter.setMessageConverters(getMessageConverters2());
+		adapter.setWebBindingInitializer(getConfigurableWebBindingInitializer());
+		adapter.setCustomArgumentResolvers(argumentResolvers);
+		adapter.setCustomReturnValueHandlers(returnValueHandlers);
 
-        return adapter;
-    }
+		return adapter;
+	}
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
