@@ -1,5 +1,8 @@
 <html>
 	<body>
-		Hello!
+		SomeVariable:
+		<#if someVariable??>
+			${someVariable}
+		</#if>
 	</body>
 </html>

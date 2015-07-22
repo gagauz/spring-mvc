@@ -1,6 +1,5 @@
 package org.webservice.web.setup;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -40,132 +39,128 @@ import freemarker.ext.jsp.TaglibFactory;
 @ComponentScan(basePackages = { "org.webservice.web.controller" })
 public class WebSetup extends WebMvcConfigurerAdapter {
 
-    @SuppressWarnings("deprecation")
-    protected List<HttpMessageConverter<?>> getMessageConverters2() {
+	@SuppressWarnings("deprecation")
+	protected List<HttpMessageConverter<?>> getMessageConverters2() {
 
-        List<HttpMessageConverter<?>> converters = C.newArrayList();
-        MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
-        converters
-                .add(converter);
-        converter.getObjectMapper().configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,
-                false);
-        return converters;
-    }
+		List<HttpMessageConverter<?>> converters = C.newArrayList();
+		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
+		converters
+		.add(converter);
+		converter.getObjectMapper().configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,
+				false);
+		return converters;
+	}
 
-    // @Override
-    // @Bean
-    // public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
-    // List<HandlerMethodArgumentResolver> argumentResolvers = new
-    // ArrayList<HandlerMethodArgumentResolver>();
-    // addArgumentResolvers(argumentResolvers);
-    //
-    // List<HandlerMethodReturnValueHandler> returnValueHandlers = new
-    // ArrayList<HandlerMethodReturnValueHandler>();
-    // addReturnValueHandlers(returnValueHandlers);
-    //
-    // RequestMappingHandlerAdapter adapter = new
-    // RequestMappingHandlerAdapter();
-    // adapter.setContentNegotiationManager(mvcContentNegotiationManager());
-    // adapter.setMessageConverters(getMessageConverters2());
-    // adapter.setWebBindingInitializer(getConfigurableWebBindingInitializer());
-    // adapter.setCustomArgumentResolvers(argumentResolvers);
-    // adapter.setCustomReturnValueHandlers(returnValueHandlers);
-    //
-    // return adapter;
-    // }
+	// @Override
+	// @Bean
+	// public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
+	// List<HandlerMethodArgumentResolver> argumentResolvers = new
+	// ArrayList<HandlerMethodArgumentResolver>();
+	// addArgumentResolvers(argumentResolvers);
+	//
+	// List<HandlerMethodReturnValueHandler> returnValueHandlers = new
+	// ArrayList<HandlerMethodReturnValueHandler>();
+	// addReturnValueHandlers(returnValueHandlers);
+	//
+	// RequestMappingHandlerAdapter adapter = new
+	// RequestMappingHandlerAdapter();
+	// adapter.setContentNegotiationManager(mvcContentNegotiationManager());
+	// adapter.setMessageConverters(getMessageConverters2());
+	// adapter.setWebBindingInitializer(getConfigurableWebBindingInitializer());
+	// adapter.setCustomArgumentResolvers(argumentResolvers);
+	// adapter.setCustomReturnValueHandlers(returnValueHandlers);
+	//
+	// return adapter;
+	// }
 
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.favorPathExtension(true)
-                .favorParameter(false)
-                .ignoreAcceptHeader(true)
-                .useJaf(false)
-                .defaultContentType(MediaType.TEXT_HTML)
-                .mediaType("json", MediaType.APPLICATION_JSON)
-                .mediaType("xml", MediaType.APPLICATION_XML)
-                .mediaType("csv", MediaType.TEXT_PLAIN);
-    }
+	@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		configurer.favorPathExtension(true)
+		.favorParameter(false)
+		.ignoreAcceptHeader(true)
+		.useJaf(false)
+		.defaultContentType(MediaType.TEXT_HTML)
+		.mediaType("json", MediaType.APPLICATION_JSON)
+		.mediaType("xml", MediaType.APPLICATION_XML)
+		.mediaType("csv", MediaType.TEXT_PLAIN);
+	}
 
-    @Bean
-    @Autowired
-    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager,
-            @Qualifier("viewResolver") ViewResolver[] resolvers) {
-        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-        List<ViewResolver> viewResolvers = Arrays.asList(resolvers);
-        resolver.setViewResolvers(viewResolvers);
-        resolver.setContentNegotiationManager(manager);
-        return resolver;
-    }
+	@Bean
+	@Autowired
+	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager,
+			@Qualifier("viewResolver") ViewResolver[] resolvers) {
+		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+		List<ViewResolver> viewResolvers = Arrays.asList(resolvers);
+		resolver.setViewResolvers(viewResolvers);
+		resolver.setContentNegotiationManager(manager);
+		return resolver;
+	}
 
-    @Qualifier("viewResolver")
-    @Bean
-    public ViewResolver jsonViewResolver() {
-        return new ViewResolver() {
-            @Override
-            public View resolveViewName(String viewName, Locale locale) throws
-                    Exception {
-                MappingJacksonJsonView view = new MappingJacksonJsonView();
-                view.setPrettyPrint(true); // Lay the JSON out to be nicely
-                // readable
-                return view;
-            }
-        };
-    }
+	@Qualifier("viewResolver")
+	@Bean
+	public ViewResolver jsonViewResolver() {
+		return new ViewResolver() {
+			@Override
+			public View resolveViewName(String viewName, Locale locale) throws
+			Exception {
+				MappingJacksonJsonView view = new MappingJacksonJsonView();
+				view.setPrettyPrint(true); // Lay the JSON out to be nicely
+				// readable
+				return view;
+			}
+		};
+	}
 
-    @Bean
-    public FreeMarkerConfig buildFreeMarkerConfig(final WebApplicationContext ctx) {
+	@Bean
+	public FreeMarkerConfig buildFreeMarkerConfig(final WebApplicationContext ctx) {
 
-        final freemarker.template.Configuration configuration = new
-                freemarker.template.Configuration();
-        configuration.setLocalizedLookup(false);
-        configuration.setTemplateLoader(new URLTemplateLoader() {
-            @Override
-            protected URL getURL(String name) {
-                try {
-                    return new URL("templates/" + name);
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+		final freemarker.template.Configuration configuration = new
+				freemarker.template.Configuration();
+		configuration.setLocalizedLookup(false);
+		configuration.setTemplateLoader(new URLTemplateLoader() {
+			@Override
+			protected URL getURL(String name) {
+				return getClass().getResource("/templates/" + name);
+			}
+		});
 
-        return new FreeMarkerConfig() {
+		return new FreeMarkerConfig() {
 
-            @Override
-            public TaglibFactory getTaglibFactory() {
-                return new TaglibFactory(ctx.getServletContext());
-            }
+			@Override
+			public TaglibFactory getTaglibFactory() {
+				return new TaglibFactory(ctx.getServletContext());
+			}
 
-            @Override
-            public freemarker.template.Configuration getConfiguration() {
-                return configuration;
-            }
-        };
-    }
+			@Override
+			public freemarker.template.Configuration getConfiguration() {
+				return configuration;
+			}
+		};
+	}
 
-    @Qualifier("viewResolver")
-    @Bean
-    public ViewResolver freemarkerViewResolver(final WebApplicationContext ctx) {
+	@Qualifier("viewResolver")
+	@Bean
+	public ViewResolver freemarkerViewResolver(final WebApplicationContext ctx) {
 
-        return new FreeMarkerViewResolver() {
+		return new FreeMarkerViewResolver() {
 
-            {
-                setSuffix(".html");
-                setOrder(1);
-                setServletContext(ctx.getServletContext());
-                setApplicationContext(ctx);
-            }
+			{
+				setSuffix(".html");
+				setOrder(1);
+				setServletContext(ctx.getServletContext());
+				setApplicationContext(ctx);
+			}
 
-            @Override
-            public View resolveViewName(String viewName, Locale locale) throws
-                    Exception {
-                FreeMarkerView view = new FreeMarkerView();
-                view.setUrl(viewName.toLowerCase() + ".ftl");
-                view.setEncoding(Charset.defaultCharset().name());
-                view.setApplicationContext(getApplicationContext());
-                view.setServletContext(getServletContext());
-                return view;
-            }
-        };
-    }
+			@Override
+			public View resolveViewName(String viewName, Locale locale) throws
+			Exception {
+				FreeMarkerView view = new FreeMarkerView();
+				view.setUrl(viewName.toLowerCase() + ".ftl");
+				view.setEncoding(Charset.defaultCharset().name());
+				view.setApplicationContext(getApplicationContext());
+				view.setServletContext(getServletContext());
+				return view;
+			}
+		};
+	}
 }
