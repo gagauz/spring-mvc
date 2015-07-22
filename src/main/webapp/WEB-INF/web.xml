@@ -5,24 +5,19 @@
 <web-app>
 	<display-name>Application</display-name>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>org.repetitor.setup.Setup,org.repetitor.web.setup.WebSetup</param-value>
-	</context-param>
-
 	<filter>
 		<filter-name>static</filter-name>
-		<filter-class>org.repetitor.web.filter.StaticFilter</filter-class>
+		<filter-class>org.webservice.web.filter.StaticFilter</filter-class>
 	</filter>
 	
 	<filter>
 		<filter-name>global</filter-name>
-		<filter-class>org.repetitor.web.filter.GlobalFilter</filter-class>
+		<filter-class>org.webservice.web.filter.GlobalFilter</filter-class>
 	</filter>
 	
 	<filter>
 		<filter-name>hibernate</filter-name>
-		<filter-class>org.repetitor.web.filter.HibernateFilter</filter-class>
+		<filter-class>org.webservice.web.filter.HibernateFilter</filter-class>
 	</filter>
 	
 	 
@@ -45,7 +40,7 @@
 	<!-- Specify some additional Modules for two different execution modes: 
 		development and qa. Remember that the default execution mode is production -->
 	<listener>
-		<listener-class>org.repetitor.web.context.ContextLoaderListenerOverride</listener-class>
+		<listener-class>org.webservice.web.context.ContextLoaderListenerOverride</listener-class>
 	</listener>
 
 
