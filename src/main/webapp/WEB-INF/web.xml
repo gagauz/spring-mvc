@@ -40,7 +40,7 @@
 	<!-- Specify some additional Modules for two different execution modes: 
 		development and qa. Remember that the default execution mode is production -->
 	<listener>
-		<listener-class>org.webservice.web.context.ContextLoaderListenerOverride</listener-class>
+		<listener-class>org.webservice.web.context.WebContextLoaderListener</listener-class>
 	</listener>
 
 

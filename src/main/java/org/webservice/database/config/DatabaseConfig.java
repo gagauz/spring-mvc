@@ -1,4 +1,4 @@
-package org.webservice.database.setup;
+package org.webservice.database.config;
 
 import static org.hibernate.cfg.AvailableSettings.HBM2DDL_AUTO;
 
@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
+import org.webservice.database.dao.AbstractDao;
 import org.webservice.database.datasource.ProdDataSource;
 import org.webservice.database.datasource.TestDataSource;
 import org.webservice.database.utils.SessionFactoryBean;
@@ -26,8 +26,8 @@ import org.webservice.utils.SysEnv;
 @Configuration
 @EnableScheduling
 @EnableTransactionManagement(proxyTargetClass = true)
-@ComponentScan(basePackages = { "org.webservice.database.dao" })
-public class DBSetup {
+@ComponentScan(basePackageClasses = { AbstractDao.class })
+public class DatabaseConfig {
 
 	@Bean
 	public DataSource dataSource() {
@@ -37,10 +37,10 @@ public class DBSetup {
 
 	}
 
-	@Bean(autowire = Autowire.BY_NAME)
-	public LocalSessionFactoryBean sessionFactory() {
+	@Bean
+	public SessionFactoryBean sessionFactory() {
 		Properties properties = new Properties();
-		if ("true".equals(SysEnv.PRODUCTION_MODE.toString())) {
+		if (SysEnv.PRODUCTION_MODE.get().toBool()) {
 			properties.put(HBM2DDL_AUTO, "false");
 		} else {
 			properties.put(HBM2DDL_AUTO, "create");

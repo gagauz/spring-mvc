@@ -1,4 +1,4 @@
-package org.webservice.web.setup;
+package org.webservice.web.config;
 
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -29,6 +29,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.webservice.web.controller.Index;
 
 import freemarker.cache.URLTemplateLoader;
 import freemarker.ext.jsp.TaglibFactory;
@@ -36,8 +37,8 @@ import freemarker.ext.jsp.TaglibFactory;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement(proxyTargetClass = true)
-@ComponentScan(basePackages = { "org.webservice.web.controller" })
-public class WebSetup extends WebMvcConfigurerAdapter {
+@ComponentScan(basePackageClasses = { Index.class })
+public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@SuppressWarnings("deprecation")
 	protected List<HttpMessageConverter<?>> getMessageConverters2() {
@@ -45,7 +46,7 @@ public class WebSetup extends WebMvcConfigurerAdapter {
 		List<HttpMessageConverter<?>> converters = C.newArrayList();
 		MappingJacksonHttpMessageConverter converter = new MappingJacksonHttpMessageConverter();
 		converters
-		.add(converter);
+				.add(converter);
 		converter.getObjectMapper().configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,
 				false);
 		return converters;
@@ -76,13 +77,13 @@ public class WebSetup extends WebMvcConfigurerAdapter {
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		configurer.favorPathExtension(true)
-		.favorParameter(false)
-		.ignoreAcceptHeader(true)
-		.useJaf(false)
-		.defaultContentType(MediaType.TEXT_HTML)
-		.mediaType("json", MediaType.APPLICATION_JSON)
-		.mediaType("xml", MediaType.APPLICATION_XML)
-		.mediaType("csv", MediaType.TEXT_PLAIN);
+				.favorParameter(false)
+				.ignoreAcceptHeader(true)
+				.useJaf(false)
+				.defaultContentType(MediaType.TEXT_HTML)
+				.mediaType("json", MediaType.APPLICATION_JSON)
+				.mediaType("xml", MediaType.APPLICATION_XML)
+				.mediaType("csv", MediaType.TEXT_PLAIN);
 	}
 
 	@Bean
@@ -102,7 +103,7 @@ public class WebSetup extends WebMvcConfigurerAdapter {
 		return new ViewResolver() {
 			@Override
 			public View resolveViewName(String viewName, Locale locale) throws
-			Exception {
+					Exception {
 				MappingJacksonJsonView view = new MappingJacksonJsonView();
 				view.setPrettyPrint(true); // Lay the JSON out to be nicely
 				// readable
@@ -153,7 +154,7 @@ public class WebSetup extends WebMvcConfigurerAdapter {
 
 			@Override
 			public View resolveViewName(String viewName, Locale locale) throws
-			Exception {
+					Exception {
 				FreeMarkerView view = new FreeMarkerView();
 				view.setUrl(viewName.toLowerCase() + ".ftl");
 				view.setEncoding(Charset.defaultCharset().name());

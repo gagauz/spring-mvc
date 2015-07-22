@@ -22,7 +22,7 @@ public class AbstractDao<I extends Serializable, E> {
 
 	public static final Map<Class<?>, AbstractDao<?, ?>> daoMap = new HashMap<Class<?>, AbstractDao<?, ?>>();
 
-	@Autowired
+	@Autowired(required = true)
 	private SessionFactory sessionFactory;
 
 	protected Class<E> entityClass;

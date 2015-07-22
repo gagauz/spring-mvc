@@ -1,31 +1,28 @@
 package org.webservice.test.scenarios;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
-import org.webservice.utils.HibernateSessionManager;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class TestDataInitializer extends HibernateSessionManager {
+@DependsOn("sessionFactory")
+public class TestDataInitializer /* extends HibernateSessionManager */{
 
-    private final SessionFactory sessionFactory;
+	@Autowired
+	private DataBaseScenario[] scenarios;
 
-    @Autowired
-    public TestDataInitializer(DataBaseScenario[] scenarios, SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-        execute(scenarios);
-    }
+	@Transactional
+	public void execute() {
+		// openSession();
+		for (DataBaseScenario scenario : scenarios) {
+			scenario.run();
+		}
+		// closeSession();
+	}
 
-    public void execute(DataBaseScenario[] scenarios) {
-        openSession();
-        for (DataBaseScenario scenario : scenarios) {
-            scenario.run();
-        }
-        closeSession();
-    }
-
-    @Override
-    protected SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+	// @Override
+	// protected SessionFactory getSessionFactory() {
+	// return sessionFactory;
+	// }
 }
