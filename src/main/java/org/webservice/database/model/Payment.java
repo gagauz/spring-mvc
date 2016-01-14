@@ -1,49 +1,33 @@
 package org.webservice.database.model;
 
-import java.math.BigDecimal;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import org.webservice.database.model.base.UpdatableModel;
 import org.webservice.database.model.enums.PaymentStatus;
+
+import javax.persistence.*;
+
+import java.math.BigDecimal;
+import java.util.Currency;
 
 @Entity
 @Table(name = "PAYMENT")
 public class Payment extends UpdatableModel {
 
     private static final long serialVersionUID = 2820814378379992398L;
-    private Repetitor repetitor;
+    private Shop shop;
     private Order order;
-    private Manager manager;
     private String subject;
     private BigDecimal amount = BigDecimal.ZERO;
+    private Currency currency;
     private PaymentStatus status = PaymentStatus.PENDING;
     private String externalId;
 
-    // private ChronopayPaymentType paymentType;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    public Repetitor getRepetitor() {
-        return repetitor;
+    public Shop getShop() {
+        return shop;
     }
 
-    public void setRepetitor(Repetitor repetitor) {
-        this.repetitor = repetitor;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    public Manager getManager() {
-        return manager;
-    }
-
-    public void setManager(Manager manager) {
-        this.manager = manager;
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
@@ -71,6 +55,15 @@ public class Payment extends UpdatableModel {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    @Column(nullable = false)
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     @Column(nullable = false)

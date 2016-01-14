@@ -1,0 +1,23 @@
+package org.webservice.database.model;
+
+import org.webservice.database.model.base.UpdatableModel;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "SHOP_CATEGORY")
+public class ShopCategory extends UpdatableModel {
+    private static final long serialVersionUID = 673683659400164414L;
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+}

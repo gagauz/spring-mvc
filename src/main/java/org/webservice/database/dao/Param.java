@@ -1,11 +1,11 @@
 package org.webservice.database.dao;
 
 import org.hibernate.Query;
-import org.webservice.database.model.Repetitor;
+import org.webservice.database.model.Order;
 
 public class Param {
 
-    private static final String modelPackage = Repetitor.class.getPackage().getName();
+    private static final String modelPackage = Order.class.getPackage().getName();
 
     private final String name;
     private final Object value;

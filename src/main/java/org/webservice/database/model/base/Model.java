@@ -7,6 +7,7 @@ import javax.persistence.MappedSuperclass;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 @MappedSuperclass
 public abstract class Model implements Serializable {
     protected int id;

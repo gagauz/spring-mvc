@@ -1,35 +1,14 @@
 package org.webservice.database.dao;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Service;
 import org.webservice.database.model.Order;
-import org.webservice.database.model.Repetitor;
-import org.webservice.database.model.Subject;
 import org.webservice.database.model.enums.OrderStatus;
 
 import java.util.List;
 
-import static org.hibernate.criterion.Restrictions.*;
-import static org.webservice.database.model.enums.OrderStatus.*;
-
 @Service
 public class OrderDao extends AbstractDao<Integer, Order> {
-    public List<Order> findUnassigned(Subject subject, Repetitor repetitor) {
-        Criteria criteria = createCriteria();
-        criteria.createAlias("owner", "owner", JoinType.LEFT_OUTER_JOIN);
-        if (null != subject) {
-            criteria.createAlias("subject", "sb", JoinType.INNER_JOIN).add(eq("subject", subject));
-        }
-
-        criteria.add(or(
-                and(isNull("owner"), in("status", new OrderStatus[] {OPEN, CONFIRMED_PUPIL})),
-                and(eq("owner", repetitor), eq("status", ACCEPTED))
-                ));
-
-        return criteria.list();
-    }
 
     public List<Order> findAssigned() {
         String hql = "select o from Order o where o.owner is not null";

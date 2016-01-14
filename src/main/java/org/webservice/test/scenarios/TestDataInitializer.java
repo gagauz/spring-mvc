@@ -1,28 +1,35 @@
 package org.webservice.test.scenarios;
 
+import org.webservice.database.dao.TransactionWrapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.PostConstruct;
 
 @Service
-@DependsOn("sessionFactory")
-public class TestDataInitializer /* extends HibernateSessionManager */{
+public class TestDataInitializer {
 
-	@Autowired
-	private DataBaseScenario[] scenarios;
+    @Autowired
+    private DataBaseScenario[] scenarios;
 
-	@Transactional
-	public void execute() {
-		// openSession();
-		for (DataBaseScenario scenario : scenarios) {
-			scenario.run();
-		}
-		// closeSession();
-	}
+    @Autowired
+    private TransactionWrapper transactionWrapper;
 
-	// @Override
-	// protected SessionFactory getSessionFactory() {
-	// return sessionFactory;
-	// }
+    @PostConstruct
+    public void init() {
+        transactionWrapper.wrap(new Runnable() {
+            @Override
+            public void run() {
+                execute();
+            }
+        });
+    }
+
+    public void execute() {
+        for (DataBaseScenario scenario : scenarios) {
+            scenario.run();
+        }
+    }
+
 }

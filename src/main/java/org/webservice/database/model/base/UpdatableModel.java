@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import java.util.Date;
 
+@SuppressWarnings("serial")
 @MappedSuperclass
 public abstract class UpdatableModel extends Model {
     protected Date created = new Date();

@@ -11,7 +11,7 @@ public class Message extends UpdatableModel {
     private MessageType type;
     private String subject;
     private String body;
-    private Repetitor repetitor;
+    private Buyer buyer;
     private Order order;
 
     public Message() {
@@ -46,12 +46,12 @@ public class Message extends UpdatableModel {
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    public Repetitor getRepetitor() {
-        return repetitor;
+    public Buyer getRepetitor() {
+        return buyer;
     }
 
-    public void setRepetitor(Repetitor repetitor) {
-        this.repetitor = repetitor;
+    public void setRepetitor(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
