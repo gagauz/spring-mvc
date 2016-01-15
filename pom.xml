@@ -195,7 +195,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>repetitor</finalName>
+		<finalName>project</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

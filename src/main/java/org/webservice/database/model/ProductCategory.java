@@ -13,6 +13,7 @@ public class ProductCategory extends UpdatableModel {
 
     private ShopCategory shopCategory;
     private String name;
+    private String externalId;
     private ProductCategory parent;
     private List<ProductCategory> children;
 
@@ -32,6 +33,15 @@ public class ProductCategory extends UpdatableModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(nullable = true)
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)

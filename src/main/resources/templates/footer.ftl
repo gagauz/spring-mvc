@@ -1,27 +1,3 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<link rel="stylesheet" href="/static/bootstrap-3.3.6-dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="/static/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css" />
-		<style>
-			.mainmenu{clear:both;height:30px;}
-			.template{display:none}
-		</style>
-	</head>
-	<body>
-		<div class="mainmenu" data-get="mainMenu" data-get-template="#mainMenu-template">
-			<div class="template" id="mainMenu-template">
-				{{#list}}
-				<a class="" href="{{url}}">{{name}}</a>
-				{{/list}}
-			</div>
-		</div>
-		<div class="">
-			<div class="leftmenu" data-get="leftMenu" data-get-list="list" data-get-item="item">
-			</div>
-			<div class="content" data-get="content" data-get-param="">
-			</div>
-		</div>
 		<script type="text/javascript" src="/static/jquery/jquery-2.1.4.js"></script>
 		<script type="text/javascript" src="/static/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/static/handlebars/handlebars-v4.0.5.js"></script>

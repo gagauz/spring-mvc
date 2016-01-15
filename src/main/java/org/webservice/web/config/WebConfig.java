@@ -117,7 +117,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         configuration.setTemplateLoader(new URLTemplateLoader() {
             @Override
             protected URL getURL(String name) {
-                return getClass().getResource("/templates/" + name);
+                return getClass().getResource("/" + name);
             }
         });
 

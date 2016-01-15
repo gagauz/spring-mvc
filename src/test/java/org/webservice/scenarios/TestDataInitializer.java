@@ -1,4 +1,4 @@
-package org.webservice.test.scenarios;
+package org.webservice.scenarios;
 
 import org.webservice.database.dao.TransactionWrapper;
 

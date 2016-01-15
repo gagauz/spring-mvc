@@ -11,6 +11,7 @@ public class ShopCategory extends UpdatableModel {
     private static final long serialVersionUID = 673683659400164414L;
 
     private String name;
+    private String externalId;
 
     public String getName() {
         return name;
@@ -18,6 +19,14 @@ public class ShopCategory extends UpdatableModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
 
 }

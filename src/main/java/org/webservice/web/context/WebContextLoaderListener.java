@@ -1,12 +1,13 @@
 package org.webservice.web.context;
 
+import org.webservice.config.ScenariosConfig;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.webservice.database.config.DatabaseConfig;
-import org.webservice.test.config.ScenariosConfig;
 import org.webservice.utils.SysEnv;
 import org.webservice.web.config.WebConfig;
 import org.webservice.web.config.WebSecurityConfig;

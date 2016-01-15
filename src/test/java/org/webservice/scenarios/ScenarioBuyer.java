@@ -1,4 +1,4 @@
-package org.webservice.test.scenarios;
+package org.webservice.scenarios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,12 @@
-package org.webservice.test.config;
+package org.webservice.config;
+
+import org.webservice.scenarios.ScenarioShop;
+import org.webservice.scenarios.TestDataInitializer;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.webservice.test.scenarios.ScenarioShop;
-import org.webservice.test.scenarios.TestDataInitializer;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
