@@ -1,9 +1,6 @@
 package org.webservice.utils;
 
 public enum SysEnv implements Config {
-    JDBC_USERNAME("b4f"),
-    JDBC_PASSWORD("office"),
-    JDBC_URL("jdbc:mysql://localhost:3306/shop?autoReconnect=true"),
     PRODUCTION_MODE("false");
 
     private ConfigValue value;

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @ComponentScan(basePackageClasses = {ScenarioShop.class})
-public class ScenariosConfig {
+public class TestConfig {
 
     @Bean
     public TestDataInitializer testDataInitializer() {

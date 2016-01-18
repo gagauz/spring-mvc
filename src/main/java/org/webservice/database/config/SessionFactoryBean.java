@@ -1,11 +1,10 @@
 package org.webservice.database.config;
 
-import org.webservice.database.utils.MySQL5InnoDBDialect2;
-
+import org.gagauz.hibernate.utils.MySQL5InnoDBDialect2;
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.type.StringType;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
-import org.webservice.database.model.Manager;
+import org.webservice.database.model.Buyer;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -14,8 +13,8 @@ import static org.hibernate.cfg.AvailableSettings.*;
 
 public class SessionFactoryBean extends LocalSessionFactoryBean {
     public SessionFactoryBean(Properties properties) {
-        setPackagesToScan(Manager.class.getPackage().getName());
-        setAnnotatedPackages(new String[] {Manager.class.getPackage().getName()});
+        setPackagesToScan(Buyer.class.getPackage().getName());
+        setAnnotatedPackages(new String[] {Buyer.class.getPackage().getName()});
         properties.put(DIALECT, MySQL5InnoDBDialect2.class.getName());
         properties.put(SHOW_SQL, false);
         properties.put(FORMAT_SQL, false);
