@@ -1,0 +1,8 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<nav>
+		<ul class="nav navbar-nav navbar-left">
+			<li><a>Мои данные</a></li>
+			<li><a>Мои магазины</a></li>
+		</ul>
+	</nav>
+</t:container>

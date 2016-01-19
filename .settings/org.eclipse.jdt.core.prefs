@@ -1,5 +1,5 @@
-#Tue Jan 19 05:28:03 VET 2016
-org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.7
+#Tue Jan 19 21:11:05 MSK 2016
+org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
 eclipse.preferences.version=1
-org.eclipse.jdt.core.compiler.source=1.7
-org.eclipse.jdt.core.compiler.compliance=1.7
+org.eclipse.jdt.core.compiler.source=1.8
+org.eclipse.jdt.core.compiler.compliance=1.8

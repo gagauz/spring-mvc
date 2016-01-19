@@ -1,15 +1,19 @@
 <t:MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
-	<t:form t:id="registrationForm" class="form-horizontal">
-		<div class="form-group">
-			<label class="control-label col-sm-3">Label</label>
-			<div class="col-sm-9">
-				<input type="text" class="form-control" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-3 col-sm-9">
-				<t:submit class="btn btn-success" />
-			</div>
-		</div>
-	</t:form>
+
+<div class="col-sm-6">
+	
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#c-buyer" aria-controls="c-buyer" role="tab" data-toggle="tab">Регистрация покупателя</a></li>
+    <li role="presentation"><a href="#c-seller" aria-controls="c-seller" role="tab" data-toggle="tab">Регистрация продавца</a></li>
+</ul>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="c-buyer">
+    	<t:beaneditform t:id="buyerForm" object="buyer" exclude="id,created,updated,enabled" />
+    </div>
+    <div role="tabpanel" class="tab-pane" id="c-seller">
+    	<t:beaneditform t:id="sellerForm" object="seller" exclude="id,created,updated,enabled" />
+    </div>
+</div>
+
+</div>
 </t:MainTemplate>
