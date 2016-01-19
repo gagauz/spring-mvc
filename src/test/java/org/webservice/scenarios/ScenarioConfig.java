@@ -1,20 +1,13 @@
 package org.webservice.scenarios;
 
-import static org.webservice.services.ConfigConstant.CHRONOPAY_CLIENT_ID;
-import static org.webservice.services.ConfigConstant.CHRONOPAY_SECRET;
-import static org.webservice.services.ConfigConstant.MAIL_SMTP_HOST;
-import static org.webservice.services.ConfigConstant.MAIL_SMTP_PORT;
-import static org.webservice.services.ConfigConstant.SMS_PASS;
-import static org.webservice.services.ConfigConstant.SMS_SUBJECT;
-import static org.webservice.services.ConfigConstant.SMS_URL;
-import static org.webservice.services.ConfigConstant.SMS_USER;
-
+import org.gagauz.shop.database.dao.ConfigDao;
+import org.gagauz.shop.database.model.Config;
+import org.gagauz.shop.services.ConfigConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.webservice.database.dao.ConfigDao;
-import org.webservice.database.model.Config;
-import org.webservice.services.ConfigConstant;
+
+import static org.gagauz.shop.services.ConfigConstant.*;
 
 @Service
 public class ScenarioConfig extends DataBaseScenario {

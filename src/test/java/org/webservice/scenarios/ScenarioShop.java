@@ -1,10 +1,10 @@
 package org.webservice.scenarios;
 
+import org.gagauz.shop.database.dao.*;
+import org.gagauz.shop.database.model.*;
+import org.gagauz.shop.database.model.enums.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.webservice.database.dao.*;
-import org.webservice.database.model.*;
-import org.webservice.database.model.enums.Gender;
 
 import java.io.BufferedReader;
 import java.io.IOException;

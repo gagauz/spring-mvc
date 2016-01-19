@@ -1,10 +1,10 @@
 package org.webservice.scenarios;
 
+import org.gagauz.shop.database.dao.BuyerDao;
+import org.gagauz.shop.database.model.Buyer;
+import org.gagauz.shop.database.model.enums.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.webservice.database.dao.BuyerDao;
-import org.webservice.database.model.Buyer;
-import org.webservice.database.model.enums.Gender;
 
 @Service
 public class ScenarioBuyer extends DataBaseScenario {

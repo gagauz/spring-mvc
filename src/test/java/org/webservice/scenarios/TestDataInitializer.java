@@ -1,7 +1,6 @@
 package org.webservice.scenarios;
 
-import org.webservice.database.dao.TransactionWrapper;
-
+import org.gagauz.shop.database.dao.TransactionWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
