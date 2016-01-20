@@ -12,8 +12,11 @@ import org.gagauz.shop.database.model.Admin;
 import org.gagauz.shop.database.model.Buyer;
 import org.gagauz.shop.database.model.Seller;
 import org.gagauz.shop.web.services.security.AccessAttributeImpl;
-import org.gagauz.shop.web.services.security.LoginFormCreadentials2;
+import org.gagauz.shop.web.services.security.AdminCredentials;
+import org.gagauz.shop.web.services.security.BuyerCredentials;
+import org.gagauz.shop.web.services.security.CredentialsImpl;
 import org.gagauz.shop.web.services.security.Secured;
+import org.gagauz.shop.web.services.security.SellerCredentials;
 import org.gagauz.tapestry.security.AccessDeniedException;
 import org.gagauz.tapestry.security.UserSet;
 import org.gagauz.tapestry.security.api.AccessAttributeExtractorChecker;
@@ -62,22 +65,22 @@ public class AppModule {
     }
 
     public static UserProvider buildUserProvider(final SellerDao sellerDao, final BuyerDao buyerDao, final AdminDao adminDao) {
-        return new UserProvider<AbstractUser, LoginFormCreadentials2>() {
+        return new UserProvider<AbstractUser, CredentialsImpl>() {
             @Override
-            public AbstractUser findByCredentials(LoginFormCreadentials2 arg0) {
-                if (arg0.getUserClass().equals(Seller.class)) {
+            public AbstractUser findByCredentials(CredentialsImpl arg0) {
+                if (arg0 instanceof SellerCredentials) {
                     Seller seller = sellerDao.findByEmail(arg0.getUsername());
                     if (null != seller && seller.checkPassword(arg0.getPassword())) {
                         return seller;
                     }
                     return null;
-                } else if (arg0.getUserClass().equals(Admin.class)) {
+                } else if (arg0 instanceof AdminCredentials) {
                     Admin seller = adminDao.findByEmail(arg0.getUsername());
                     if (null != seller && seller.checkPassword(arg0.getPassword())) {
                         return seller;
                     }
                     return null;
-                } else if (arg0.getUserClass().equals(Buyer.class)) {
+                } else if (arg0 instanceof BuyerCredentials) {
                     Buyer seller = buyerDao.findByEmail(arg0.getUsername());
                     if (null != seller && seller.checkPassword(arg0.getPassword())) {
                         return seller;
