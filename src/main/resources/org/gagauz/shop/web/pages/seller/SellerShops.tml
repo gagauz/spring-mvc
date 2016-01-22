@@ -1,5 +1,6 @@
 <t:MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
-<t:beaneditform t:id="loginForm" />
+<t:beaneditform t:id="shopForm" cancel="true" />
 
+<t:grid t:id="shopGrid" />
 </t:MainTemplate>

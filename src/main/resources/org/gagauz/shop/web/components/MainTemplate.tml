@@ -12,11 +12,23 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div id="navbar" class="navbar-collapse collapse">
-					<t:seller.MainMenu />
-					<t:buyer.MainMenu />
+					<t:IfSeller>
+						<t:seller.MainMenu />
+					</t:IfSeller>
+					<t:IfBuyer>
+						<t:buyer.MainMenu />
+					</t:IfBuyer>
+					<t:IfUser>
 					<div class="navbar-form navbar-right">
 						<a>Выйти</a>
 					</div>
+					<p:else>
+						<div class="navbar-form navbar-right">
+							<a t:type="pagelink" page="login">Войти</a>
+						</div>
+					</p:else>
+					
+					</t:IfUser>
 				</div>
 				
 			</div>

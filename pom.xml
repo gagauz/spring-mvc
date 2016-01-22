@@ -112,12 +112,17 @@
 			<version>2.3.19</version>
 		</dependency>
 
+
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
 		<dependency>
 			<groupId>org.gagauz</groupId>
 			<artifactId>tapestry-webapp-core</artifactId>
 			<version>1.0</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<finalName>project</finalName>

@@ -11,7 +11,12 @@ import org.gagauz.shop.database.model.Admin;
 import org.gagauz.shop.database.model.Buyer;
 import org.gagauz.shop.database.model.Seller;
 import org.gagauz.shop.utils.CryptoUtils;
-import org.gagauz.shop.web.services.security.*;
+import org.gagauz.shop.web.services.security.AccessAttributeImpl;
+import org.gagauz.shop.web.services.security.AdminCredentials;
+import org.gagauz.shop.web.services.security.BuyerCredentials;
+import org.gagauz.shop.web.services.security.CredentialsImpl;
+import org.gagauz.shop.web.services.security.Secured;
+import org.gagauz.shop.web.services.security.SellerCredentials;
 import org.gagauz.tapestry.security.UserSet;
 import org.gagauz.tapestry.security.api.AccessAttributeExtractorChecker;
 import org.gagauz.tapestry.security.api.Credentials;
@@ -19,10 +24,10 @@ import org.gagauz.tapestry.security.api.User;
 import org.gagauz.tapestry.security.api.UserProvider;
 import org.gagauz.tapestry.security.impl.CookieCredentials;
 import org.gagauz.tapestry.web.services.CoreWebappModule;
-import org.gagauz.tapestry.web.services.security.CookieEncryptorDecryptor;
 
 @ImportModule({CoreWebappModule.class})
 public class AppModule {
+
     public static AccessAttributeExtractorChecker buildAccessAttributeExtractorChecker() {
         return new AccessAttributeExtractorChecker<AccessAttributeImpl>() {
 
@@ -60,7 +65,7 @@ public class AppModule {
         };
     }
 
-    public static UserProvider buildUserProvider(final SellerDao sellerDao, final BuyerDao buyerDao, final AdminDao adminDao, final CookieEncryptorDecryptor cookieEncryptorDecryptor) {
+    public static UserProvider buildUserProvider(final SellerDao sellerDao, final BuyerDao buyerDao, final AdminDao adminDao) {
         return new UserProvider() {
             @Override
             public <U extends User, C extends Credentials> U fromCredentials(C arg0) {
@@ -85,9 +90,21 @@ public class AppModule {
                 } else if (arg0 instanceof CookieCredentials) {
                     try {
                         String[] tokens = CryptoUtils.decryptArrayAES(((CookieCredentials) arg0).getValue());
-                        if ()
+                        CredentialsImpl cred = null;
+                        if (tokens[2].equals(Seller.class.getSimpleName())) {
+                            cred = new SellerCredentials();
+                        } else if (tokens[2].equals(Admin.class.getSimpleName())) {
+                            cred = new AdminCredentials();
+                        } else if (tokens[2].equals(Buyer.class.getSimpleName())) {
+                            cred = new BuyerCredentials();
+                        }
+                        if (null != cred) {
+                            cred.setUsername(tokens[0]);
+                            cred.setPassword(tokens[1]);
+                            return fromCredentials(cred);
+                        }
                     } catch (Exception e) {
-
+                        e.printStackTrace();
                     }
 
                 }

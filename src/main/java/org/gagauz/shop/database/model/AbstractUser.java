@@ -1,5 +1,13 @@
 package org.gagauz.shop.database.model;
 
+import java.util.EnumSet;
+
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 import org.gagauz.hibernate.types.CollectionType;
 import org.gagauz.hibernate.types.EnumSetType;
 import org.gagauz.shop.database.model.base.UpdatableModel;
@@ -12,15 +20,12 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.*;
-
-import java.util.EnumSet;
-
 @SuppressWarnings("serial")
 @MappedSuperclass
 @TypeDefs({
         @TypeDef(name = "enumSetOf.AccessRole", typeClass = EnumSetType.class, parameters = {
-                @Parameter(name = CollectionType.CLASS, value = "org.gagauz.shop.database.model.enums.AccessRole")
+                @Parameter(name = CollectionType.CLASS, value = "org.gagauz.shop.database.model.enums.AccessRole"),
+                @Parameter(name = CollectionType.SERIALIZER, value = "org.gagauz.hibernate.model.base.EnumSerializer")
         })})
 public class AbstractUser extends UpdatableModel implements User {
 

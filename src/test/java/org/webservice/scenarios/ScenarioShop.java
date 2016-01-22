@@ -1,17 +1,23 @@
 package org.webservice.scenarios;
 
-import org.gagauz.shop.database.dao.*;
-import org.gagauz.shop.database.model.*;
-import org.gagauz.shop.database.model.enums.Gender;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.gagauz.shop.database.dao.ProductCategoryDao;
+import org.gagauz.shop.database.dao.ProductDao;
+import org.gagauz.shop.database.dao.SellerDao;
+import org.gagauz.shop.database.dao.ShopDao;
+import org.gagauz.shop.database.model.Product;
+import org.gagauz.shop.database.model.ProductCategory;
+import org.gagauz.shop.database.model.Seller;
+import org.gagauz.shop.database.model.Shop;
+import org.gagauz.shop.database.model.enums.Gender;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ScenarioShop extends DataBaseScenario {
@@ -21,8 +27,6 @@ public class ScenarioShop extends DataBaseScenario {
     @Autowired
     private SellerDao sellerDao;
     @Autowired
-    private ShopCategoryDao shopCategoryDao;
-    @Autowired
     private ProductCategoryDao productCategoryDao;
     @Autowired
     private ProductDao productDao;
@@ -30,11 +34,10 @@ public class ScenarioShop extends DataBaseScenario {
     @Override
     protected void execute() {
 
-        final InputStream in = getClass().getResourceAsStream("/scenarios/taxonomy-with-ids.ru-RU.csv");
+        final InputStream in = getClass().getResourceAsStream("/scenarios/market_categories.csv");
 
         System.out.println(in);
 
-        Map<String, ShopCategory> shopCats = new HashMap<>();
         Map<String, Map<String, ProductCategory>> productCats = new HashMap<>();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -42,34 +45,31 @@ public class ScenarioShop extends DataBaseScenario {
         try {
 
             while ((l = reader.readLine()) != null) {
-                String[] ids = l.split(";");
-                ShopCategory shopCat = shopCats.get(ids[1]);
-                if (null == shopCat) {
-                    shopCat = createShopCategory(ids[1].replace("\"", ""), ids[0]);
-                    shopCats.put(ids[1], shopCat);
+                String[] ids = l.split("/");
+
+                Map<String, ProductCategory> map = productCats.get(ids[0]);
+                if (null == map) {
+                    map = new HashMap<>();
+                    productCats.put(ids[0], map);
                 }
+                for (int i = 0; i < ids.length; i++) {
 
-                if (null != shopCat && ids.length > 2) {
-                    Map<String, ProductCategory> map = productCats.get(shopCat.getExternalId());
-                    if (null == map) {
-                        map = new HashMap<>();
-                        productCats.put(shopCat.getExternalId(), map);
-                    }
-                    for (int i = 2; i < ids.length; i++) {
-
-                        ProductCategory pc = map.get(ids[i]);
-                        if (null == pc) {
-                            ProductCategory pa = null;
-                            if (i > 2) {
-                                pa = map.get(ids[i - 1]);
-                            }
-                            pc = createCategory(ids[i].replace("\"", ""), ids[0], shopCat, pa);
-                            map.put(ids[i], pc);
+                    ProductCategory pc = map.get(ids[i]);
+                    if (null == pc) {
+                        ProductCategory pa = null;
+                        if (i > 1) {
+                            pa = map.get(ids[i - 1]);
                         }
+                        pc = createCategory(ids[i], pa);
+                        map.put(ids[i], pc);
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (
+
+        IOException e)
+
+        {
             e.printStackTrace();
         }
 
@@ -87,7 +87,6 @@ public class ScenarioShop extends DataBaseScenario {
         Shop shop = new Shop();
         shop.setName("IvegaSementi");
         shop.setHost("http://ivegasementi.com");
-        shop.setCategory(shopCats.get("\"Дом и сад\""));
         shop.setSeller(seller);
 
         shopDao.save(shop);
@@ -95,31 +94,17 @@ public class ScenarioShop extends DataBaseScenario {
         Shop shop1 = new Shop();
         shop1.setName("Karenminllen");
         shop1.setHost("http://karenminllen.com");
-        shop1.setCategory(shopCats.get("\"Предметы одежды и принадлежности\""));
         shop1.setSeller(seller);
 
         shopDao.save(shop1);
 
-        shopCategoryDao.flush();
         productCategoryDao.flush();
 
     }
 
-    private ShopCategory createShopCategory(String name, String extId) {
-        ShopCategory pc = new ShopCategory();
-        pc.setName(name);
-        pc.setExternalId(extId);
-
-        shopCategoryDao.saveNoCommit(pc);
-
-        return pc;
-    }
-
-    private ProductCategory createCategory(String name, String extId, ShopCategory category, ProductCategory parents) {
+    private ProductCategory createCategory(String name, ProductCategory parents) {
         ProductCategory pc = new ProductCategory();
-        pc.setShopCategory(category);
         pc.setName(name);
-        pc.setExternalId(extId);
         if (null != parents) {
             pc.setParent(parents);
         }

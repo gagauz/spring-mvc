@@ -1,8 +1,12 @@
 package org.gagauz.shop.database.model;
 
-import org.gagauz.shop.database.model.base.UpdatableModel;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import org.gagauz.shop.database.model.base.UpdatableModel;
 
 @Entity
 @Table(name = "SHOP")
@@ -10,7 +14,6 @@ public class Shop extends UpdatableModel {
     private String name;
     private String description;
     private String host;
-    private ShopCategory category;
     private Seller seller;
 
     @Column(nullable = false)
@@ -38,15 +41,6 @@ public class Shop extends UpdatableModel {
 
     public void setHost(String host) {
         this.host = host;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    public ShopCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ShopCategory category) {
-        this.category = category;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

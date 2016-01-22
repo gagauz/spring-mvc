@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class SellerDao extends AbstractDao<Integer, Seller> {
 
     public Seller findByEmail(String username) {
-        return (Seller) createQuery("select a from Seller a where email=:email").setParameter("email", username).uniqueResult();
+        return (Seller) createQuery("select a from Seller a where a.email=:email").setParameter("email", username).uniqueResult();
     }
 
 }

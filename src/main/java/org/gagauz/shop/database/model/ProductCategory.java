@@ -1,30 +1,25 @@
 package org.gagauz.shop.database.model;
 
-import org.gagauz.shop.database.model.base.UpdatableModel;
-
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.gagauz.shop.database.model.base.UpdatableModel;
 
 @Entity
 @Table(name = "PRODUCT_CATEGORY")
 public class ProductCategory extends UpdatableModel {
     private static final long serialVersionUID = -14458707898267529L;
 
-    private ShopCategory shopCategory;
     private String name;
     private String externalId;
     private ProductCategory parent;
     private List<ProductCategory> children;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    public ShopCategory getShopCategory() {
-        return shopCategory;
-    }
-
-    public void setShopCategory(ShopCategory shopCategory) {
-        this.shopCategory = shopCategory;
-    }
 
     @Column(nullable = false)
     public String getName() {
