@@ -7,8 +7,13 @@ import org.gagauz.shop.database.model.enums.AccessRole;
 import org.gagauz.shop.web.services.security.Secured;
 
 @Secured(AccessRole.SELLER)
-public class MainMenu {
-    @Parameter(autoconnect = true, principal = true)
+public class ShopMenu {
+    @Parameter(principal = true)
     @Property
     private Shop shop;
+
+    boolean setupRender() {
+        return shop != null;
+    }
+
 }

@@ -2,5 +2,15 @@
 
 <t:beaneditform t:id="shopForm" cancel="true" />
 
-<t:grid t:id="shopGrid" />
+<t:grid t:id="shopGrid" add="edit" row="row">
+	<p:editCell>
+		<t:eventlink event="edit" context="row.id" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></t:eventlink>
+		&nbsp;
+		<t:eventlink event="drop" context="row.id" class="btn btn-danger" onclick="return confirm()"><i class="glyphicon glyphicon-remove"></i></t:eventlink>
+		&nbsp;
+		<t:pagelink page="seller/shop/products" context="row" class="btn btn-info"><i class="glyphicon glyphicon-th"></i></t:pagelink>
+		&nbsp;
+		<t:pagelink page="seller/shop/categories" context="row" class="btn btn-info"><i class="glyphicon glyphicon-align-justify"></i></t:pagelink>
+	</p:editCell>
+</t:grid>
 </t:MainTemplate>

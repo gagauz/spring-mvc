@@ -1,19 +1,29 @@
 package org.gagauz.shop.database.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.gagauz.shop.database.model.base.Model;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.gagauz.hibernate.model.Model;
 import org.gagauz.shop.database.model.enums.RegionType;
 
-import javax.persistence.*;
-
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "REGION")
 public class Region extends Model {
     private static final long serialVersionUID = -7982792659372409041L;
     public static final Region DEFAULT = new Region();
+
     static {
         DEFAULT.setId(0);
         DEFAULT.setName("Регион не найден");

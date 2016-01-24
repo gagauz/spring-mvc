@@ -1,2 +1,25 @@
 <t:MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+
+<t:if test="success">
+	<div class="alert-dismissable alert alert-success">
+		<button data-dismiss="alert" class="close" type="button">×</button>
+		<h4>Ваши данные были сохранены!</h4>
+	</div>
+</t:if>
+<div t:id="sellerForm" cancel="true">
+	<p:newpassword1>
+		<t:label for="passwordField1" class="col-sm-3"/>
+		<div class="col-sm-9">
+			<input t:id="passwordField1" class="form-control" />
+		</div>
+	</p:newpassword1>
+	<p:newpassword2>
+		<t:label for="passwordField2" class="col-sm-3"/>
+		<div class="col-sm-9">
+			<input t:id="passwordField2" class="form-control" />
+			<t:error for="passwordField2" />
+		</div>
+	</p:newpassword2>
+</div>
+
 </t:MainTemplate>

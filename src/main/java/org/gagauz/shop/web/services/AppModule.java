@@ -1,6 +1,9 @@
 package org.gagauz.shop.web.services;
 
+import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.annotations.ImportModule;
+import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.plastic.PlasticClass;
 import org.apache.tapestry5.plastic.PlasticMethod;
 import org.gagauz.shop.database.dao.AdminDao;
@@ -25,8 +28,23 @@ import org.gagauz.tapestry.security.api.UserProvider;
 import org.gagauz.tapestry.security.impl.CookieCredentials;
 import org.gagauz.tapestry.web.services.CoreWebappModule;
 
-@ImportModule({CoreWebappModule.class})
+@ImportModule({CoreWebappModule.class, ValueEncoderModule.class})
 public class AppModule {
+
+    @ApplicationDefaults
+    public static void contributeApplicationDefaults(MappedConfiguration<String, Object> configuration) {
+        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "ru");
+        configuration.add(SymbolConstants.MINIFICATION_ENABLED, true);
+        configuration.add(SymbolConstants.ENABLE_HTML5_SUPPORT, true);
+        configuration.add(SymbolConstants.COMBINE_SCRIPTS, true);
+        configuration.add(SymbolConstants.FORM_CLIENT_LOGIC_ENABLED, false);
+        configuration.add(SymbolConstants.SECURE_ENABLED, true);
+        configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
+        configuration.add(SymbolConstants.FORM_FIELD_CSS_CLASS, "form-control");
+        configuration.add(SymbolConstants.ENCODE_LOCALE_INTO_PATH, false);
+        configuration.add(SymbolConstants.CHARSET, "utf-8");
+        configuration.add(SymbolConstants.EXCEPTION_REPORT_PAGE, "Error500");
+    }
 
     public static AccessAttributeExtractorChecker buildAccessAttributeExtractorChecker() {
         return new AccessAttributeExtractorChecker<AccessAttributeImpl>() {

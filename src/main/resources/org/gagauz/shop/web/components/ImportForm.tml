@@ -1,0 +1,15 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<t:form t:id="form">
+		<t:loop source="inputs" value="input">
+		<div class="form-group">
+			<t:label for="input" class="input-label">Колонка</t:label>
+			
+			
+			
+		</div>
+		</t:loop>
+		<div class="form-group">
+		
+		</div>
+	</t:form>
+</t:container>

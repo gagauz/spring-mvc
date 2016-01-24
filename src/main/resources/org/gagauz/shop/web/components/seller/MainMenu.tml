@@ -4,7 +4,9 @@
 			<t:IfSeller>
 				<li><a t:type="pagelink" t:page="seller/index">Index</a></li>
 				<li><a t:type="pagelink" t:page="seller/settings">Мои данные</a></li>
-				<li><a t:type="pagelink" t:page="seller/shops">Мои магазины</a></li>
+				<li>
+					<a t:type="pagelink" t:page="seller/shops">Мои магазины</a>
+				</li>
 			</t:IfSeller>
 		</ul>
 	</nav>

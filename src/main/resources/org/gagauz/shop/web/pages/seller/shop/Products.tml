@@ -1,0 +1,18 @@
+<t:MainTemplate shop="shop" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<t:seller.ShopMenu shop="shop" />
+	<div class="row">
+		<div class="col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+			<t:beaneditform t:id="form" cancel="true">
+				<p:parent>
+					<t:label for="parent" class="col-sm-3" />
+					<div class="col-sm-9">
+						<t:select t:id="parent" />
+					</div>
+				</p:parent>
+			</t:beaneditform>
+		</div>
+	</div>
+	<div class="row">
+		<t:grid t:id="grid" />
+	</div>
+</t:MainTemplate>
