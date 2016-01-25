@@ -1,7 +1,6 @@
-<t:MainTemplate shop="shop" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
-	<t:seller.ShopMenu shop="shop" />
+<t:seller.ShopTemplate shop="shop" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="row">
-		<div class="col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+		<div class="col-sm-12 col-md-10 col-lg-10">
 			<t:beaneditform t:id="form" cancel="true">
 				<p:parent>
 					<t:label for="parent" class="col-sm-3" />
@@ -15,4 +14,4 @@
 	<div class="row">
 		<t:grid t:id="grid" />
 	</div>
-</t:MainTemplate>
+</t:seller.ShopTemplate>

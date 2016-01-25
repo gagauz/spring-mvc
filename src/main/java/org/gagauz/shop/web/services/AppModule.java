@@ -2,10 +2,12 @@ package org.gagauz.shop.web.services;
 
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.ImportModule;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.plastic.PlasticClass;
 import org.apache.tapestry5.plastic.PlasticMethod;
+import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
 import org.gagauz.shop.database.dao.AdminDao;
 import org.gagauz.shop.database.dao.BuyerDao;
 import org.gagauz.shop.database.dao.SellerDao;
@@ -14,12 +16,7 @@ import org.gagauz.shop.database.model.Admin;
 import org.gagauz.shop.database.model.Buyer;
 import org.gagauz.shop.database.model.Seller;
 import org.gagauz.shop.utils.CryptoUtils;
-import org.gagauz.shop.web.services.security.AccessAttributeImpl;
-import org.gagauz.shop.web.services.security.AdminCredentials;
-import org.gagauz.shop.web.services.security.BuyerCredentials;
-import org.gagauz.shop.web.services.security.CredentialsImpl;
-import org.gagauz.shop.web.services.security.Secured;
-import org.gagauz.shop.web.services.security.SellerCredentials;
+import org.gagauz.shop.web.services.security.*;
 import org.gagauz.tapestry.security.UserSet;
 import org.gagauz.tapestry.security.api.AccessAttributeExtractorChecker;
 import org.gagauz.tapestry.security.api.Credentials;
@@ -30,6 +27,11 @@ import org.gagauz.tapestry.web.services.CoreWebappModule;
 
 @ImportModule({CoreWebappModule.class, ValueEncoderModule.class})
 public class AppModule {
+
+    @Decorate(serviceInterface = JavaScriptStackSource.class)
+    public JavaScriptStackSource decorateJavaScriptStackSource(JavaScriptStackSource original) {
+        return new JavaScriptStackSourceWrapper(original);
+    }
 
     @ApplicationDefaults
     public static void contributeApplicationDefaults(MappedConfiguration<String, Object> configuration) {

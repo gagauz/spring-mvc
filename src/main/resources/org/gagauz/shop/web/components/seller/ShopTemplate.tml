@@ -1,0 +1,8 @@
+<t:MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="col-sm-4 col-md-3 col-lg-2 sidebar">
+		<t:seller.ShopMenu shop="shop" />
+	</div>
+	<div class="col-sm-offset-4 col-sm-8 col-md-offset-3 col-md-9 col-lg-offset-2 col-lg-10 main">
+		<t:body />
+	</div>
+</t:MainTemplate>
