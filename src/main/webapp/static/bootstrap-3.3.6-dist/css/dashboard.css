@@ -111,3 +111,12 @@ body {
     border-radius: 8px;
     background-color: #f0f0f0;
 }
+
+.form-inline {
+    border: 1px solid silver;
+    padding: 20px 20px 5px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+

@@ -1,22 +1,23 @@
 package org.gagauz.shop.services;
 
-import org.apache.commons.lang3.math.NumberUtils;
-import org.gagauz.shop.database.dao.ManufacturerDao;
-import org.gagauz.shop.database.dao.ProductCategoryDao;
-import org.gagauz.shop.database.dao.ProductDao;
-import org.gagauz.shop.database.model.*;
-import org.gagauz.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.math.NumberUtils;
+import org.gagauz.shop.database.dao.ManufacturerDao;
+import org.gagauz.shop.database.dao.ProductCategoryDao;
+import org.gagauz.shop.database.dao.ProductDao;
+import org.gagauz.shop.database.model.Manufacturer;
+import org.gagauz.shop.database.model.Product;
+import org.gagauz.shop.database.model.ProductAttribute;
+import org.gagauz.shop.database.model.ProductCategory;
+import org.gagauz.shop.database.model.Shop;
+import org.gagauz.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ProductsImporter extends AbstractCsvImporter {
@@ -36,65 +37,21 @@ public class ProductsImporter extends AbstractCsvImporter {
     private Map<String, Product> idToProduct;
     private Map<String, Manufacturer> nameToManufacturer;
 
-    public void importProducts(Shop shop, InputStream stream) {
+    private int index = 0;
 
-        Map<String, Map<String, ProductCategory>> productCats = new HashMap<>();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        String l;
-        try {
-
-            while ((l = reader.readLine()) != null) {
-                String[] ids = l.split("\t|/");
-                if (ids.length < 2) {
-                    throw new IllegalStateException("Неправильный формат файла");
-                }
-
-                Map<String, ProductCategory> map = productCats.get(ids[1]);
-                if (null == map) {
-                    map = new HashMap<>();
-                    productCats.put(ids[1], map);
-                }
-                for (int i = 1; i < ids.length; i++) {
-
-                    ProductCategory pc = map.get(ids[i]);
-                    if (null == pc) {
-                        ProductCategory pa = null;
-                        if (i > 1) {
-                            pa = map.get(ids[i - 1]);
-                        }
-                        pc = createCategory(ids[i], ids[0], pa, shop);
-                        map.put(ids[i], pc);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        productCategoryDao.flush();
-    }
-
-    private ProductCategory createCategory(String name, String shopId, ProductCategory parent, Shop shop) {
-        ProductCategory pc = new ProductCategory();
-        pc.setName(name);
-        pc.setExternalId(shopId);
-        pc.setShop(shop);
-        if (null != parent) {
-            pc.setParent(parent);
-        }
-        productCategoryDao.saveNoCommit(pc);
-        //        productCategoryDao.save(pc);
-
-        return pc;
+    public synchronized void importProducts(Shop shop, InputStream stream) {
+        this.shop = shop;
+        importFile(stream, "\"?;\"?");
     }
 
     @Override
     void init() {
+        index = 0;
         idToProduct = new HashMap<>();
         nameToCategory = new HashMap<>();
         idToCategory = new HashMap<>();
         nameToManufacturer = new HashMap<>();
-        for (ProductCategory c : productCategoryDao.findAllByShop(shop)) {
+        for (ProductCategory c : productCategoryDao.findByShop(shop)) {
             nameToCategory.put(c.getHierarchyName(), c);
             idToCategory.put(c.getExternalId(), c);
         }
@@ -110,6 +67,10 @@ public class ProductsImporter extends AbstractCsvImporter {
 
     @Override
     void process(String[] ids) {
+        index++;
+        if (index == 1) {
+            return;
+        }
         Product p = idToProduct.get(ids[0]);
         if (null == p) {
             p = new Product();
@@ -131,6 +92,11 @@ public class ProductsImporter extends AbstractCsvImporter {
     @Override
     void commit() {
         productDao.save(idToProduct.values());
+        idToCategory = null;
+        nameToCategory = null;
+        nameToManufacturer = null;
+        idToProduct = null;
+        shop = null;
     }
 
     private ProductCategory parseCategory(String string) {

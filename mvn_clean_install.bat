@@ -1,4 +1,4 @@
-rem set JAVA_HOME=c:\Program Files\Java\jdk1.8.0_65
+set JAVA_HOME=c:\Program Files\Java\jdk1.8.0_65
 
-call mvn -e clean source:jar install
+call mvn -e clean  install
 pause

@@ -1,9 +1,13 @@
 package org.gagauz.shop.web.pages.seller.shop;
 
+import java.util.List;
+import java.util.function.Function;
+
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
@@ -13,6 +17,7 @@ import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
 import org.apache.tapestry5.upload.services.UploadedFile;
+import org.gagauz.hibernate.utils.EntityFilter;
 import org.gagauz.shop.database.dao.ProductCategoryDao;
 import org.gagauz.shop.database.dao.ShopDao;
 import org.gagauz.shop.database.model.ProductCategory;
@@ -21,11 +26,9 @@ import org.gagauz.shop.database.model.Shop;
 import org.gagauz.shop.database.model.enums.AccessRole;
 import org.gagauz.shop.services.CategoriesImporter;
 import org.gagauz.shop.web.pages.seller.SellerShops;
+import org.gagauz.shop.web.services.filter.Filter;
 import org.gagauz.shop.web.services.security.Secured;
 import org.gagauz.tapestry.web.services.model.CollectionGridDataSourceRowTypeFix;
-
-import java.util.List;
-import java.util.function.Function;
 
 @Secured(AccessRole.SELLER)
 public class Categories {
@@ -40,6 +43,10 @@ public class Categories {
 
     @Property
     private ProductCategory category;
+
+    @Persist
+    @Property
+    private Filter filter;
 
     @Property
     private ProductCategory row;
@@ -96,7 +103,17 @@ public class Categories {
 
     @Cached
     public GridDataSource getGridDataSource() {
-        return new CollectionGridDataSourceRowTypeFix<>(getCategories(), ProductCategory.class);
+        EntityFilter entityFilter = new EntityFilter();
+        entityFilter.addAlias("shop", "shop");
+        entityFilter.eq("shop", shop);
+        if (null != filter) {
+            if (null != filter.string1)
+                entityFilter.like("name", "%" + filter.string1 + "%");
+            if (null != filter.string2)
+                entityFilter.like("externalId", filter.string2);
+        }
+        List<ProductCategory> list = productCategoryDao.findByFilter(entityFilter);
+        return new CollectionGridDataSourceRowTypeFix<>(list, ProductCategory.class);
     }
 
     @Cached
@@ -122,5 +139,8 @@ public class Categories {
                 return null;
             }
         };
+    }
+
+    void onSubmitFromFilterForm() {
     }
 }

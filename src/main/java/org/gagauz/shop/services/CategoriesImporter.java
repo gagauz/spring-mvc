@@ -1,73 +1,90 @@
 package org.gagauz.shop.services;
 
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.gagauz.shop.database.dao.ProductCategoryDao;
 import org.gagauz.shop.database.model.ProductCategory;
 import org.gagauz.shop.database.model.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-
 @Service
-public class CategoriesImporter {
+public class CategoriesImporter extends AbstractCsvImporter {
     @Autowired
     private ProductCategoryDao productCategoryDao;
 
-    public void importCategories(Shop shop, InputStream stream) {
+    private Map<String, ProductCategory> idToCategory;
+    private Map<String, Map<String, ProductCategory>> productCats;
+    private Shop shop;
 
-        Map<String, Map<String, ProductCategory>> productCats = new HashMap<>();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        String l;
-        try {
-
-            while ((l = reader.readLine()) != null) {
-                String[] ids = l.split("\t|/");
-                if (ids.length < 2) {
-                    throw new IllegalStateException("Неправильный формат файла, кол-во колонок меньше 2-х.");
-                }
-
-                Map<String, ProductCategory> map = productCats.get(ids[1]);
-                if (null == map) {
-                    map = new HashMap<>();
-                    productCats.put(ids[1], map);
-                }
-                for (int i = 1; i < ids.length; i++) {
-
-                    ProductCategory pc = map.get(ids[i]);
-                    if (null == pc) {
-                        ProductCategory pa = null;
-                        if (i > 1) {
-                            pa = map.get(ids[i - 1]);
-                        }
-                        pc = createCategory(ids[i], ids[0], pa, shop);
-                        map.put(ids[i], pc);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        productCategoryDao.flush();
+    public synchronized void importCategories(Shop shop, InputStream stream) {
+        this.shop = shop;
+        importFile(stream, "\t|/");
     }
 
     private ProductCategory createCategory(String name, String shopId, ProductCategory parent, Shop shop) {
-        ProductCategory pc = new ProductCategory();
+        ProductCategory pc = idToCategory.get(shopId);
+        if (null == pc) {
+            pc = new ProductCategory();
+            pc.setExternalId(shopId);
+            pc.setShop(shop);
+            productCategoryDao.saveNoCommit(pc);
+            idToCategory.put(shopId, pc);
+        }
         pc.setName(name);
-        pc.setExternalId(shopId);
-        pc.setShop(shop);
         if (null != parent) {
             pc.setParent(parent);
         }
-        productCategoryDao.saveNoCommit(pc);
-        //        productCategoryDao.save(pc);
 
         return pc;
+    }
+
+    @Override
+    void init() {
+        idToCategory = new HashMap<>();
+        productCats = new HashMap<>();
+        if (null != shop) {
+            for (ProductCategory c : productCategoryDao.findByShop(shop)) {
+                idToCategory.put(c.getExternalId(), c);
+            }
+        }
+
+    }
+
+    @Override
+    void process(String[] ids) {
+        if (ids.length < 2) {
+            throw new IllegalStateException("Неправильный формат файла, кол-во колонок меньше 2-х.");
+        }
+
+        Map<String, ProductCategory> map = productCats.get(ids[1]);
+        if (null == map) {
+            map = new HashMap<>();
+            productCats.put(ids[1], map);
+        }
+        for (int i = 1; i < ids.length; i++) {
+
+            ProductCategory pc = map.get(ids[i]);
+            if (null == pc) {
+                ProductCategory pa = null;
+                if (i > 1) {
+                    pa = map.get(ids[i - 1]);
+                }
+                pc = createCategory(ids[i], ids[0], pa, shop);
+                map.put(ids[i], pc);
+            }
+        }
+
+    }
+
+    @Override
+    void commit() {
+        productCategoryDao.save(idToCategory.values());
+        idToCategory = null;
+        productCats = null;
+        shop = null;
     }
 
 }

@@ -1,9 +1,7 @@
 <t:seller.ShopTemplate shop="shop" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="row">
 		<h4>Default currency is: ${shop.defaultCurrency}</h4>
-		<div class="col-sm-12 col-md-10 col-lg-10">
-			<t:beaneditform t:id="form" cancel="true" />
-		</div>
+		<t:beaneditform t:id="form" cancel="true" />
 	</div>
 	<div class="row">
 		<t:grid t:id="grid" add="edit">

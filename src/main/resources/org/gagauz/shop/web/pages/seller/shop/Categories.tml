@@ -16,6 +16,10 @@
 		</t:ImportForm>
 	</div>
 	<div class="row">
+		<h3>Фильтр</h3>
+		<t:beaneditform t:id="filterform" object="filter" include="string1,string2" submitLabel="Применить" cancel="true" />
+	</div>
+	<div class="row">
 		<t:grid t:id="grid">
 			<p:editCell>
 				<t:EditLinks row="row" />
