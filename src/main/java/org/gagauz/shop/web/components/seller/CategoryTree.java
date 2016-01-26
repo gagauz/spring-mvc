@@ -1,11 +1,11 @@
 package org.gagauz.shop.web.components.seller;
 
-import java.util.List;
-
 import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.gagauz.shop.database.model.ProductCategory;
+
+import java.util.List;
 
 public class CategoryTree {
     @Parameter
@@ -40,4 +40,5 @@ public class CategoryTree {
 
         writer.writeRaw("</li>");
     }
+
 }

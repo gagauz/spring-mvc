@@ -1,15 +1,17 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
-	<t:form t:id="form">
-		<t:loop source="inputs" value="input">
+	<t:form t:id="importForm" class="form-horizontal">
 		<div class="form-group">
-			<t:label for="input" class="input-label">Колонка</t:label>
-			
-			
-			
-		</div>
-		</t:loop>
-		<div class="form-group">
-		
+			<t:label class="col-sm-3 input-label" for="file">
+				<t:body />
+			</t:label>
+			<div class="col-sm-9">
+				<div class="input-group">
+					<t:upload t:id="file" value="fileValue" class="form-control" />
+					<span class="input-group-btn">
+						<t:submit class="btn btn-success" value="Загрузить" />
+					</span>
+				</div> 
+			</div>
 		</div>
 	</t:form>
 </t:container>

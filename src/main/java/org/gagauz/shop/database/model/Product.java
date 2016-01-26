@@ -1,38 +1,31 @@
 package org.gagauz.shop.database.model;
 
+import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.gagauz.shop.database.model.base.UpdatableModel;
-
 @Entity
 @Table(name = "PRODUCT")
-public class Product extends UpdatableModel {
+public class Product extends ShopEntity {
     private static final long serialVersionUID = 5735037622492024586L;
-    private Shop shop;
+    private Manufacturer manufacturer;
     private ProductCategory category;
     private String name;
+    private String article;
     private String description;
+    private String images;
     private List<ProductAttribute> attributes;
     private BigDecimal price;
     private int discount = 0;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    public Shop getShop() {
-        return shop;
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    public Manufacturer getManufacturer() {
+        return manufacturer;
     }
 
-    public void setShop(Shop shop) {
-        this.shop = shop;
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -53,6 +46,15 @@ public class Product extends UpdatableModel {
         this.name = name;
     }
 
+    @Column(nullable = false)
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
+    }
+
     @Lob
     public String getDescription() {
         return description;
@@ -60,6 +62,15 @@ public class Product extends UpdatableModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(nullable = false)
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -89,4 +100,5 @@ public class Product extends UpdatableModel {
     public void setDiscount(int discount) {
         this.discount = discount;
     }
+
 }

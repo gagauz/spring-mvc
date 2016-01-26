@@ -10,7 +10,7 @@ import org.gagauz.shop.database.model.Seller;
 import org.gagauz.shop.database.model.Shop;
 import org.gagauz.shop.database.model.enums.Currency;
 import org.gagauz.shop.database.model.enums.Gender;
-import org.gagauz.shop.services.ShopCategoriesImporter;
+import org.gagauz.shop.services.CategoriesImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class ScenarioShop extends DataBaseScenario {
     @Autowired
     private ProductDao productDao;
     @Autowired
-    private ShopCategoriesImporter shopCategoriesImporter;
+    private CategoriesImporter shopCategoriesImporter;
 
     @Override
     protected void execute() {

@@ -1,0 +1,5 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+<t:eventlink event="edit" context="row" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-pencil"></i></t:eventlink>
+&nbsp;
+<t:eventlink event="drop" context="row" class="btn btn-danger btn-xs" onclick="return confirm()"><i class="glyphicon glyphicon-remove"></i></t:eventlink>
+</t:container>

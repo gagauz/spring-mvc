@@ -1,12 +1,11 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<ul class="nav nav-sidebar">
 		<t:IfSeller>
-			<li>${shop.name}</li>
-			<li><a t:type="pagelink" t:page="seller/shops">Вернуться к магазинам</a></li>
-			<li><a t:type="pagelink" t:page="seller/shop/categories" context="shop.id">Категории</a></li>
-			<li><a t:type="pagelink" t:page="seller/shop/products" context="shop.id">Товары</a></li>
-			<li><a t:type="pagelink" t:page="seller/shop/products" context="shop.id">Резервы</a></li>
-			<li><a t:type="pagelink" t:page="seller/shop/currencyrates" context="shop.id">Конвертация валют</a></li>
+			<li><a t:type="pagelink" t:page="seller/shops"><i class="glyphicon glyphicon-share-alt"></i> Вернуться к магазинам</a></li>
+			<li><a t:type="pagelink" t:page="seller/shop/categories" context="shop.id"><i class="glyphicon glyphicon-align-justify"></i> Категории</a></li>
+			<li><a t:type="pagelink" t:page="seller/shop/products" context="shop.id"><i class="glyphicon glyphicon-th"></i> Товары</a></li>
+			<li><a t:type="pagelink" t:page="seller/shop/products" context="shop.id"><i class="glyphicon glyphicon-tasks"></i> Резервы</a></li>
+			<li><a t:type="pagelink" t:page="seller/shop/currencyrates" context="shop.id"><i class="glyphicon glyphicon-usd"></i> Конвертация валют</a></li>
 		</t:IfSeller>
 	</ul>
 </t:container>

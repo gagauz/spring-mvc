@@ -7,8 +7,16 @@ public class TreeIterator<T extends Parent<T>> implements Iterator<T> {
     private IteratorWrapper<T> wrapper;
     private T next;
 
-    TreeIterator(Iterator<T> original) {
+    protected TreeIterator(Iterator<T> original) {
         this.wrapper = new IteratorWrapper<>(original, null);
+    }
+
+    public void enter() {
+
+    }
+
+    public void exit() {
+
     }
 
     @Override
@@ -16,6 +24,7 @@ public class TreeIterator<T extends Parent<T>> implements Iterator<T> {
         boolean b = wrapper.current.hasNext();
         while (!b && wrapper.parent != null) {
             wrapper = wrapper.parent;
+            exit();
             b = wrapper.current.hasNext();
         }
         return b;
@@ -26,6 +35,7 @@ public class TreeIterator<T extends Parent<T>> implements Iterator<T> {
         next = wrapper.current.next();
         if (next.getChildren().size() > 0) {
             wrapper = new IteratorWrapper<>(next.getChildren().iterator(), wrapper);
+            enter();
         }
         return next;
     }

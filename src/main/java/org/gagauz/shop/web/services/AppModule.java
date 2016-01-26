@@ -1,12 +1,17 @@
 package org.gagauz.shop.web.services;
 
-import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.*;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.ImportModule;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.plastic.PlasticClass;
 import org.apache.tapestry5.plastic.PlasticMethod;
+import org.apache.tapestry5.services.Environment;
+import org.apache.tapestry5.services.MarkupRenderer;
+import org.apache.tapestry5.services.MarkupRendererFilter;
 import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
 import org.gagauz.shop.database.dao.AdminDao;
 import org.gagauz.shop.database.dao.BuyerDao;
@@ -23,6 +28,7 @@ import org.gagauz.tapestry.security.api.Credentials;
 import org.gagauz.tapestry.security.api.User;
 import org.gagauz.tapestry.security.api.UserProvider;
 import org.gagauz.tapestry.security.impl.CookieCredentials;
+import org.gagauz.tapestry.web.components.BigDecimalField;
 import org.gagauz.tapestry.web.services.CoreWebappModule;
 
 @ImportModule({CoreWebappModule.class, ValueEncoderModule.class})
@@ -142,5 +148,29 @@ public class AppModule {
             }
 
         };
+    }
+
+    @Contribute(MarkupRenderer.class)
+    public void contributeMarkupRenderer(final OrderedConfiguration<MarkupRendererFilter> configuration, final Environment environment) {
+
+        MarkupRendererFilter validationDecorator = new MarkupRendererFilter() {
+            @Override
+            public void renderMarkup(final MarkupWriter markupWriter, MarkupRenderer renderer) {
+                ValidationDecorator decorator = new BaseValidationDecorator() {
+                    @Override
+                    public void insideField(Field field) {
+                        String c = field.getClass().getName();
+                        if (BigDecimalField.class.getName().equals(c)) {
+                            markupWriter.getElement().forceAttributes("type", "text");
+                        }
+                    }
+                };
+                environment.push(ValidationDecorator.class, decorator);
+                renderer.renderMarkup(markupWriter);
+                environment.pop(ValidationDecorator.class);
+            }
+        };
+
+        configuration.override("ValidationDecorator", validationDecorator);
     }
 }

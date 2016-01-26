@@ -1,5 +1,11 @@
 package org.gagauz.shop.services;
 
+import org.gagauz.shop.database.dao.ProductCategoryDao;
+import org.gagauz.shop.database.model.ProductCategory;
+import org.gagauz.shop.database.model.Shop;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,14 +13,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.gagauz.shop.database.dao.ProductCategoryDao;
-import org.gagauz.shop.database.model.ProductCategory;
-import org.gagauz.shop.database.model.Shop;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 @Service
-public class ShopCategoriesImporter {
+public class CategoriesImporter {
     @Autowired
     private ProductCategoryDao productCategoryDao;
 
@@ -28,6 +28,9 @@ public class ShopCategoriesImporter {
 
             while ((l = reader.readLine()) != null) {
                 String[] ids = l.split("\t|/");
+                if (ids.length < 2) {
+                    throw new IllegalStateException("Неправильный формат файла, кол-во колонок меньше 2-х.");
+                }
 
                 Map<String, ProductCategory> map = productCats.get(ids[1]);
                 if (null == map) {

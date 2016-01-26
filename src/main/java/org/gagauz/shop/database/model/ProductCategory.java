@@ -1,41 +1,21 @@
 package org.gagauz.shop.database.model;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
-
-import org.gagauz.shop.database.model.base.UpdatableModel;
 import org.gagauz.shop.utils.Parent;
+
+import javax.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCT_CATEGORY", uniqueConstraints = @UniqueConstraint(columnNames = {"shop_id", "externalId"}) )
-public class ProductCategory extends UpdatableModel implements Parent<ProductCategory> {
+public class ProductCategory extends ShopEntity implements Parent<ProductCategory> {
     private static final long serialVersionUID = -14458707898267529L;
 
-    private Shop shop;
     private String name;
     private transient String hierarchyName;
     private String externalId;
     private ProductCategory parent;
     private List<ProductCategory> children;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(updatable = false)
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
 
     @Column(nullable = false)
     public String getName() {

@@ -1,16 +1,16 @@
 package org.gagauz.shop.database.dao;
 
-import java.util.List;
-
 import org.gagauz.shop.database.model.ProductCategory;
 import org.gagauz.shop.database.model.Shop;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ProductCategoryDao extends AbstractDao<Integer, ProductCategory> {
+import java.util.List;
 
-    public List<ProductCategory> findByShop(Shop shop) {
-        return createQuery("select distinct c from ProductCategory c left join fetch c.children cs where c.shop=:shop")
+@Service
+public class ProductCategoryDao extends ShopEntityDao<Integer, ProductCategory> {
+
+    public List<ProductCategory> findAllByShop(Shop shop) {
+        return createQuery("select c from ProductCategory c where c.shop=:shop")
                 .setEntity("shop", shop)
                 .list();
     }

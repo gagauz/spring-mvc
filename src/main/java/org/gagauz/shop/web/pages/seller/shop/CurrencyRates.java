@@ -64,9 +64,13 @@ public class CurrencyRates {
     }
 
     void onSuccessFromForm() {
-        rate.setShop(shop);
-        currencyRateDao.save(rate);
-        rate = null;
+        if (shop.getDefaultCurrency().equals(rate.getCurrency())) {
+            form.recordError(shop.getDefaultCurrency() + " установлена в качестве основной валюты магазина");
+        } else {
+            rate.setShop(shop);
+            currencyRateDao.save(rate);
+            rate = null;
+        }
     }
 
 }

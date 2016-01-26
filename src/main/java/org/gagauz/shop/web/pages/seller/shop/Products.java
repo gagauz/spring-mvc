@@ -1,7 +1,6 @@
 package org.gagauz.shop.web.pages.seller.shop;
 
-import java.util.List;
-
+import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.Component;
@@ -12,14 +11,20 @@ import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.corelib.components.Select;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.SelectModelFactory;
+import org.apache.tapestry5.upload.services.UploadedFile;
+import org.gagauz.shop.database.dao.ManufacturerDao;
 import org.gagauz.shop.database.dao.ProductCategoryDao;
 import org.gagauz.shop.database.dao.ProductDao;
 import org.gagauz.shop.database.model.Product;
 import org.gagauz.shop.database.model.Seller;
 import org.gagauz.shop.database.model.Shop;
 import org.gagauz.shop.database.model.enums.AccessRole;
+import org.gagauz.shop.services.ProductsImporter;
 import org.gagauz.shop.web.pages.seller.SellerShops;
 import org.gagauz.shop.web.services.security.Secured;
+
+import java.util.List;
+import java.util.function.Function;
 
 @Secured(AccessRole.SELLER)
 public class Products {
@@ -29,7 +34,10 @@ public class Products {
     @Component(parameters = {"model=parentsModel", "value=product.category", "blankOption=ALWAYS", "validate=required"})
     private Select parent;
 
-    @Component(parameters = {"source=products", "row=row"})
+    @Component(parameters = {"model=manufacturerModel", "value=product.manufacturer", "blankOption=ALWAYS"})
+    private Select manufacturer;
+
+    @Component(parameters = {"source=products", "row=row", "add=edit"})
     private Grid grid;
 
     @Property
@@ -48,21 +56,44 @@ public class Products {
     private ProductCategoryDao productCategoryDao;
 
     @Inject
+    private ManufacturerDao manufacturerDao;
+
+    @Inject
     private SelectModelFactory selectModelFactory;
+
+    @Inject
+    private ProductsImporter productsImporter;
 
     @SessionState
     private Seller seller;
 
-    Object onActivate(final Shop shop0) {
+    Object onActivate(EventContext ctx) {
+        if (ctx.getCount() == 0) {
+            return SellerShops.class;
+        }
+        Shop shop0 = ctx.get(Shop.class, 0);
         if (null == shop0 || !shop0.getSeller().equals(seller)) {
             return SellerShops.class;
         }
         shop = shop0;
+
+        if (ctx.getCount() > 1) {
+            product = ctx.get(Product.class, 1);
+        }
+
         return null;
     }
 
     Object onPassivate() {
         return shop;
+    }
+
+    void onEdit(Product product) {
+        this.product = product;
+    }
+
+    void onDrop(Product product) {
+        productDao.delete(product);
     }
 
     @Cached
@@ -74,9 +105,24 @@ public class Products {
         return selectModelFactory.create(productCategoryDao.findByShop(shop), "hierarchyName");
     }
 
+    public SelectModel getManufacturerModel() {
+        return selectModelFactory.create(manufacturerDao.findByShop(shop), "name");
+    }
+
     void onSuccessFromForm() {
         product.setShop(shop);
         productDao.save(product);
+    }
+
+    @Cached
+    public Function<UploadedFile, Void> getImporter() {
+        return new Function<UploadedFile, Void>() {
+            @Override
+            public Void apply(UploadedFile t) {
+                productsImporter.importProducts(shop, t.getStream());
+                return null;
+            }
+        };
     }
 
 }
