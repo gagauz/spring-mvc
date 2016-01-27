@@ -28,7 +28,7 @@ import java.util.function.Function;
 
 @Secured(AccessRole.SELLER)
 public class Products {
-    @Component(parameters = {"object=product", "exclude=id,created,updated", "add=parent"})
+    @Component(parameters = {"object=product", "exclude=id,created,updated", "add=parent,manufacturer"})
     private BeanEditForm form;
 
     @Component(parameters = {"model=parentsModel", "value=product.category", "blankOption=ALWAYS", "validate=required"})
@@ -85,7 +85,7 @@ public class Products {
     }
 
     Object onPassivate() {
-        return shop;
+        return new Object[] {shop, product};
     }
 
     void onEdit(Product product) {

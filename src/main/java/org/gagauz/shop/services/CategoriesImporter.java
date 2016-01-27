@@ -1,14 +1,15 @@
 package org.gagauz.shop.services;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.gagauz.shop.database.dao.ProductCategoryDao;
 import org.gagauz.shop.database.model.ProductCategory;
 import org.gagauz.shop.database.model.Shop;
+import org.gagauz.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class CategoriesImporter extends AbstractCsvImporter {
@@ -16,41 +17,72 @@ public class CategoriesImporter extends AbstractCsvImporter {
     private ProductCategoryDao productCategoryDao;
 
     private Map<String, ProductCategory> idToCategory;
-    private Map<String, Map<String, ProductCategory>> productCats;
+    private Map<String, ProductCategory> nameToCategory;
     private Shop shop;
 
     public synchronized void importCategories(Shop shop, InputStream stream) {
         this.shop = shop;
-        importFile(stream, "\t|/");
+        importFile(stream, "\t");
     }
 
     private ProductCategory createCategory(String name, String shopId, ProductCategory parent, Shop shop) {
         ProductCategory pc = idToCategory.get(shopId);
+
         if (null == pc) {
             pc = new ProductCategory();
             pc.setExternalId(shopId);
             pc.setShop(shop);
-            productCategoryDao.saveNoCommit(pc);
             idToCategory.put(shopId, pc);
         }
+
         pc.setName(name);
         if (null != parent) {
             pc.setParent(parent);
         }
-
+        productCategoryDao.saveNoCommit(pc);
         return pc;
     }
 
     @Override
     void init() {
         idToCategory = new HashMap<>();
-        productCats = new HashMap<>();
+        nameToCategory = new HashMap<>();
         if (null != shop) {
             for (ProductCategory c : productCategoryDao.findByShop(shop)) {
                 idToCategory.put(c.getExternalId(), c);
+                nameToCategory.put(c.getHierarchyName(), c);
             }
         }
 
+    }
+
+    private ProductCategory createCategoryFromName(String id, String name) {
+        ProductCategory category = null;
+        if (null != id) {
+            category = idToCategory.get(id);
+        } else {
+            category = nameToCategory.get(name);
+        }
+        int i = name.lastIndexOf('/');
+        if (null == category) {
+            category = new ProductCategory();
+            if (i > 0) {
+                category.setName(name.substring(i + 1));
+            } else {
+                category.setName(name);
+            }
+            category.setExternalId(id);
+            category.setShop(shop);
+        }
+        ProductCategory parent = null;
+        if (i > 0) {
+            String parentName = name.substring(0, i);
+            parent = createCategoryFromName(null, parentName);
+        }
+        category.setParent(parent);
+        productCategoryDao.saveNoCommit(category);
+        nameToCategory.put(name, category);
+        return category;
     }
 
     @Override
@@ -58,32 +90,17 @@ public class CategoriesImporter extends AbstractCsvImporter {
         if (ids.length < 2) {
             throw new IllegalStateException("Неправильный формат файла, кол-во колонок меньше 2-х.");
         }
-
-        Map<String, ProductCategory> map = productCats.get(ids[1]);
-        if (null == map) {
-            map = new HashMap<>();
-            productCats.put(ids[1], map);
+        if (StringUtils.isEmpty(ids[1])) {
+            throw new IllegalStateException("Пустое имя для категории :" + ids[1]);
         }
-        for (int i = 1; i < ids.length; i++) {
-
-            ProductCategory pc = map.get(ids[i]);
-            if (null == pc) {
-                ProductCategory pa = null;
-                if (i > 1) {
-                    pa = map.get(ids[i - 1]);
-                }
-                pc = createCategory(ids[i], ids[0], pa, shop);
-                map.put(ids[i], pc);
-            }
-        }
-
+        createCategoryFromName(ids[0], ids[1]);
     }
 
     @Override
     void commit() {
-        productCategoryDao.save(idToCategory.values());
+        productCategoryDao.flush();
         idToCategory = null;
-        productCats = null;
+        nameToCategory = null;
         shop = null;
     }
 

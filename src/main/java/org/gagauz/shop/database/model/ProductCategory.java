@@ -43,7 +43,7 @@ public class ProductCategory extends ShopEntity implements Parent<ProductCategor
     }
 
     public void setParent(ProductCategory parent) {
-        if (null != parent) {
+        if (null != parent && parent.getId() > 0) {
             if (parent.equals(this)) {
                 throw new IllegalStateException("ProductCategory cannot be parent to itself.");
             }

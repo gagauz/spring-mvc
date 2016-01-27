@@ -1,23 +1,19 @@
 package org.gagauz.shop.services;
 
+import org.apache.commons.lang3.math.NumberUtils;
+import org.gagauz.shop.database.dao.ManufacturerDao;
+import org.gagauz.shop.database.dao.ProductCategoryDao;
+import org.gagauz.shop.database.dao.ProductDao;
+import org.gagauz.shop.database.model.*;
+import org.gagauz.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.math.NumberUtils;
-import org.gagauz.shop.database.dao.ManufacturerDao;
-import org.gagauz.shop.database.dao.ProductCategoryDao;
-import org.gagauz.shop.database.dao.ProductDao;
-import org.gagauz.shop.database.model.Manufacturer;
-import org.gagauz.shop.database.model.Product;
-import org.gagauz.shop.database.model.ProductAttribute;
-import org.gagauz.shop.database.model.ProductCategory;
-import org.gagauz.shop.database.model.Shop;
-import org.gagauz.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ProductsImporter extends AbstractCsvImporter {
@@ -84,8 +80,12 @@ public class ProductsImporter extends AbstractCsvImporter {
         p.setPrice(new BigDecimal(ids[4]));
         p.setDiscount(NumberUtils.toInt(ids[5]));
         p.setDescription(ids[6]);
-        p.setImages(ids[7]);
-        p.setAttributes(parseAttributes(ids[8]));
+        if (ids.length > 7) {
+            p.setImages(ids[7]);
+            if (ids.length > 8) {
+                p.setAttributes(parseAttributes(ids[8]));
+            }
+        }
 
     }
 
@@ -114,7 +114,10 @@ public class ProductsImporter extends AbstractCsvImporter {
         if (!StringUtils.isEmpty(string)) {
             Manufacturer pc = nameToManufacturer.get(string);
             if (null == pc) {
-                throw new RuntimeException("Неизвестный идентификатор производителя :" + string);
+                pc = new Manufacturer();
+                pc.setName(string);
+                pc.setShop(shop);
+                manufacturerDao.save(pc);
             }
             return pc;
         }
