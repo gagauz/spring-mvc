@@ -147,9 +147,6 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
 					<downloadSources>true</downloadSources>
-					<classpathExcludes>
-						<exclude>jtidy:jtidy</exclude>
-					</classpathExcludes>
 				</configuration>
 			</plugin>
 		</plugins>

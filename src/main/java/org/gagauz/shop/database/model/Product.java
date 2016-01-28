@@ -18,6 +18,7 @@ public class Product extends ShopEntity {
     private List<ProductAttribute> attributes;
     private BigDecimal price;
     private int discount = 0;
+    private transient String[] imageUrls;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     public Manufacturer getManufacturer() {
@@ -99,6 +100,14 @@ public class Product extends ShopEntity {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    @Transient
+    public String[] getImageUrls() {
+        if (null == imageUrls) {
+            imageUrls = images.split(",");
+        }
+        return imageUrls;
     }
 
 }

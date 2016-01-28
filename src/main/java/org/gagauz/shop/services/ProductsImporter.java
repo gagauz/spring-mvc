@@ -37,7 +37,7 @@ public class ProductsImporter extends AbstractCsvImporter {
 
     public synchronized void importProducts(Shop shop, InputStream stream) {
         this.shop = shop;
-        importFile(stream, "\"?;\"?");
+        importFile(stream, "\"?\t\"?");
     }
 
     @Override
@@ -80,6 +80,7 @@ public class ProductsImporter extends AbstractCsvImporter {
         p.setPrice(new BigDecimal(ids[4]));
         p.setDiscount(NumberUtils.toInt(ids[5]));
         p.setDescription(ids[6]);
+        p.setShop(shop);
         if (ids.length > 7) {
             p.setImages(ids[7]);
             if (ids.length > 8) {
@@ -97,6 +98,7 @@ public class ProductsImporter extends AbstractCsvImporter {
         nameToManufacturer = null;
         idToProduct = null;
         shop = null;
+        manufacturerDao.flush();
     }
 
     private ProductCategory parseCategory(String string) {
@@ -111,15 +113,16 @@ public class ProductsImporter extends AbstractCsvImporter {
     }
 
     private Manufacturer parseManufacturer(String string) {
-        if (!StringUtils.isEmpty(string)) {
-            Manufacturer pc = nameToManufacturer.get(string);
-            if (null == pc) {
-                pc = new Manufacturer();
-                pc.setName(string);
-                pc.setShop(shop);
-                manufacturerDao.save(pc);
+        if (!StringUtils.isBlank(string)) {
+            Manufacturer manufacturer = nameToManufacturer.get(string);
+            if (null == manufacturer) {
+                manufacturer = new Manufacturer();
+                manufacturer.setName(string);
+                manufacturer.setShop(shop);
+                manufacturerDao.saveNoCommit(manufacturer);
+                nameToManufacturer.put(string, manufacturer);
             }
-            return pc;
+            return manufacturer;
         }
         return null;
     }
