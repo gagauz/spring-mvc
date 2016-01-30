@@ -10,18 +10,26 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div id="navbar" class="navbar-collapse collapse">
-					<t:IfUser>
-						<div class="navbar-form navbar-right">
-							<a>Выйти</a>
+					<div class="navbar-form navbar-right">
+						<div class="btn-group">
+							<a t:type="pagelink" t:page="shop/basket" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart" id="basket-icon"></i> Корзина <span class="badge">0</span></a>
+							<t:IfUser>
+								<a class="btn btn-default">Выйти</a>
+								<p:else>
+									<a t:type="pagelink" t:page="login" class="btn btn-default">Войти</a>
+								</p:else>
+							</t:IfUser>
 						</div>
-						<p:else>
-							<div class="navbar-form navbar-right">
-								<a t:type="pagelink" page="login">Войти</a>
-							</div>
-						</p:else>
-					</t:IfUser>
+					</div>
 				</div>
-				
+				<div class="hide" id="add-basket-popover" data-delay="5000" data-placement="bottom" data-container="body">
+					<div>
+						<h3>Popover Popover </h3>
+						<div> 
+						PopoverPopover Popover Popover Popover Popover  
+						</div>
+					</div>
+				</div>			
 			</div>
 		</nav>
 		<div id="site-wrapper" class="container-fluid">

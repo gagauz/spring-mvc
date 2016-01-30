@@ -11,6 +11,7 @@ import org.gagauz.shop.database.model.Shop;
 import org.gagauz.shop.database.model.enums.Currency;
 import org.gagauz.shop.database.model.enums.Gender;
 import org.gagauz.shop.services.CategoriesImporter;
+import org.gagauz.shop.services.ProductsImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +27,16 @@ public class ScenarioShop extends DataBaseScenario {
     @Autowired
     private ProductDao productDao;
     @Autowired
-    private CategoriesImporter shopCategoriesImporter;
+    private CategoriesImporter categoriesImporter;
+    @Autowired
+    private ProductsImporter productsImporter;
 
     @Override
     protected void execute() {
 
         final InputStream in = getClass().getResourceAsStream("/scenarios/market_categories.csv");
 
-        shopCategoriesImporter.importCategories(null, in);
+        categoriesImporter.importCategories(null, in);
 
         Seller seller = new Seller();
         seller.setEnabled(true);
@@ -63,8 +66,10 @@ public class ScenarioShop extends DataBaseScenario {
         shopDao.save(shop1);
 
         final InputStream in1 = getClass().getResourceAsStream("/scenarios/market_categories1.csv");
+        final InputStream in2 = getClass().getResourceAsStream("/scenarios/market_products1.csv");
 
-        shopCategoriesImporter.importCategories(shop1, in1);
+        categoriesImporter.importCategories(shop1, in1);
+        productsImporter.importProducts(shop1, in2);
 
     }
 

@@ -1,14 +1,12 @@
 <t:buyer.MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 <t:loop source="products" value="product">
-	<div class="col-xs-12 col-sm-6 col-md-4 col-md-3" style="height:510px">
-		<div>
-		<t:foreach source="product.imageUrls" value="image" limit="1">
-			<img src="/static/images/${image}" alt="" style="width:300px;"/>
-		</t:foreach>
-		</div>
-	${product.name}<br/>
-	${product.price}<br/>
-	${product.discount}%
-	</div>
+	<t:shop.ProductCard product="product" zone="zoomIn"/>
 </t:loop>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="zoomIn-modal">
+	<t:zone t:id="zoomIn">
+		<t:shop.ProductDetails product="zoomProduct" />
+	</t:zone>
+</div>
+
 </t:buyer.MainTemplate>

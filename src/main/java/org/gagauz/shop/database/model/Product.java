@@ -1,9 +1,20 @@
 package org.gagauz.shop.database.model;
 
-import javax.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.gagauz.shop.database.model.enums.Currency;
+import org.gagauz.shop.database.model.enums.ProductUnit;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -16,8 +27,10 @@ public class Product extends ShopEntity {
     private String description;
     private String images;
     private List<ProductAttribute> attributes;
+    private ProductUnit unit;
     private BigDecimal price;
     private int discount = 0;
+    private Currency currency;
     private transient String[] imageUrls;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
@@ -84,7 +97,16 @@ public class Product extends ShopEntity {
         this.attributes = attributes;
     }
 
-    @Column(nullable = false, scale = 2)
+    @Column(nullable = false)
+    public ProductUnit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(ProductUnit unit) {
+        this.unit = unit;
+    }
+
+    @Column(nullable = false, precision = 10, scale = 2)
     public BigDecimal getPrice() {
         return price;
     }
@@ -100,6 +122,15 @@ public class Product extends ShopEntity {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    @Column(nullable = false)
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     @Transient

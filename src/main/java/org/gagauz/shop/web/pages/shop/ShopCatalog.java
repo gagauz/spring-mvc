@@ -1,5 +1,7 @@
 package org.gagauz.shop.web.pages.shop;
 
+import java.util.List;
+
 import org.apache.tapestry5.annotations.Cached;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -9,8 +11,6 @@ import org.gagauz.shop.database.model.Product;
 import org.gagauz.shop.database.model.ProductCategory;
 import org.gagauz.shop.database.model.Shop;
 import org.gagauz.tapestry.web.services.annotation.GetParam;
-
-import java.util.List;
 
 public class ShopCatalog {
 
@@ -26,8 +26,8 @@ public class ShopCatalog {
     @Property
     private ProductCategory category;
 
-    @Property
-    private String image;
+    @Property(write = false)
+    private Product zoomProduct;
 
     @Inject
     private ProductDao productDao;
@@ -46,5 +46,9 @@ public class ShopCatalog {
     @Cached
     public List<Product> getProducts() {
         return productDao.findByFilter(getFilter());
+    }
+
+    public void setZoomProduct(Product product2) {
+        this.zoomProduct = product2;
     }
 }

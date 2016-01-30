@@ -23,7 +23,7 @@
 					</div>
 					<p:else>
 						<div class="navbar-form navbar-right">
-							<a t:type="pagelink" page="login">Войти</a>
+							<a t:type="pagelink" page="login" class="btn btn-default">Войти</a>
 						</div>
 					</p:else>
 					

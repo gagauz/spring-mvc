@@ -1,5 +1,8 @@
 package org.gagauz.shop.web.pages.seller.shop;
 
+import java.util.List;
+import java.util.function.Function;
+
 import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Cached;
@@ -23,9 +26,6 @@ import org.gagauz.shop.services.ProductsImporter;
 import org.gagauz.shop.web.pages.seller.SellerShops;
 import org.gagauz.shop.web.services.security.Secured;
 
-import java.util.List;
-import java.util.function.Function;
-
 @Secured(AccessRole.SELLER)
 public class Products {
     @Component(parameters = {"object=product", "exclude=id,created,updated", "add=parent,manufacturer"})
@@ -37,7 +37,7 @@ public class Products {
     @Component(parameters = {"model=manufacturerModel", "value=product.manufacturer", "blankOption=ALWAYS"})
     private Select manufacturer;
 
-    @Component(parameters = {"source=products", "row=row", "add=edit"})
+    @Component(parameters = {"source=products", "row=row", "add=category,edit"})
     private Grid grid;
 
     @Property

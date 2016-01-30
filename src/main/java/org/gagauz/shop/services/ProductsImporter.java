@@ -1,19 +1,25 @@
 package org.gagauz.shop.services;
 
-import org.apache.commons.lang3.math.NumberUtils;
-import org.gagauz.shop.database.dao.ManufacturerDao;
-import org.gagauz.shop.database.dao.ProductCategoryDao;
-import org.gagauz.shop.database.dao.ProductDao;
-import org.gagauz.shop.database.model.*;
-import org.gagauz.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.math.NumberUtils;
+import org.gagauz.shop.database.dao.ManufacturerDao;
+import org.gagauz.shop.database.dao.ProductCategoryDao;
+import org.gagauz.shop.database.dao.ProductDao;
+import org.gagauz.shop.database.model.Manufacturer;
+import org.gagauz.shop.database.model.Product;
+import org.gagauz.shop.database.model.ProductAttribute;
+import org.gagauz.shop.database.model.ProductCategory;
+import org.gagauz.shop.database.model.Shop;
+import org.gagauz.shop.database.model.enums.Currency;
+import org.gagauz.shop.database.model.enums.ProductUnit;
+import org.gagauz.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ProductsImporter extends AbstractCsvImporter {
@@ -78,13 +84,15 @@ public class ProductsImporter extends AbstractCsvImporter {
         p.setCategory(parseCategory(ids[2]));
         p.setManufacturer(parseManufacturer(ids[3]));
         p.setPrice(new BigDecimal(ids[4]));
-        p.setDiscount(NumberUtils.toInt(ids[5]));
-        p.setDescription(ids[6]);
+        p.setCurrency(Currency.valueOf(ids[5].toUpperCase()));
+        p.setUnit(ProductUnit.valueOf(ids[6].toUpperCase()));
+        p.setDiscount(NumberUtils.toInt(ids[7]));
+        p.setDescription(ids[8]);
         p.setShop(shop);
-        if (ids.length > 7) {
-            p.setImages(ids[7]);
-            if (ids.length > 8) {
-                p.setAttributes(parseAttributes(ids[8]));
+        if (ids.length > 9) {
+            p.setImages(ids[9]);
+            if (ids.length > 10) {
+                p.setAttributes(parseAttributes(ids[10]));
             }
         }
 

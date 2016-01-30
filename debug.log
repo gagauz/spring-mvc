@@ -1,0 +1,543 @@
+Apache Maven 3.2.5 (12a6b3acb947671f09b81f49094c53f426d8cea1; 2014-12-14T20:29:23+03:00)
+Maven home: R:\maven\bin\..
+Java version: 1.8.0_65, vendor: Oracle Corporation
+Java home: c:\Program Files\Java\jdk1.8.0_65\jre
+Default locale: ru_RU, platform encoding: Cp1251
+OS name: "windows 7", version: "6.1", arch: "amd64", family: "dos"
+[INFO] Error stacktraces are turned on.
+[DEBUG] Reading global settings from R:\maven\bin\..\conf\settings.xml
+[DEBUG] Reading user settings from C:\Users\Wolf\.m2\settings.xml
+[DEBUG] Using local repository at r:\maven_repo
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10.0 for r:\maven_repo
+[INFO] Scanning for projects...
+[DEBUG] Extension realms for project com.gagauz:shop:war:1.0-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging war from ClassRealm[plexus.core, parent: null]
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.gagauz:shop:war:1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 129, column 12
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-war-plugin is missing. @ line 138, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[DEBUG] Resolving plugin prefix eclipse from [org.apache.maven.plugins, org.codehaus.mojo]
+[DEBUG] Resolved plugin prefix eclipse to org.apache.maven.plugins:maven-eclipse-plugin from POM com.gagauz:shop:war:1.0-SNAPSHOT
+[DEBUG] Resolving plugin prefix eclipse from [org.apache.maven.plugins, org.codehaus.mojo]
+[DEBUG] Resolved plugin prefix eclipse to org.apache.maven.plugins:maven-eclipse-plugin from POM com.gagauz:shop:war:1.0-SNAPSHOT
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: com.gagauz:shop:war:1.0-SNAPSHOT
+[DEBUG] Tasks:   [eclipse:clean, eclipse:eclipse]
+[DEBUG] Style:   Regular
+[DEBUG] =======================================================================
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Application 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Resolving plugin prefix eclipse from [org.apache.maven.plugins, org.codehaus.mojo]
+[DEBUG] Resolved plugin prefix eclipse to org.apache.maven.plugins:maven-eclipse-plugin from POM com.gagauz:shop:war:1.0-SNAPSHOT
+[DEBUG] Resolving plugin prefix eclipse from [org.apache.maven.plugins, org.codehaus.mojo]
+[DEBUG] Resolved plugin prefix eclipse to org.apache.maven.plugins:maven-eclipse-plugin from POM com.gagauz:shop:war:1.0-SNAPSHOT
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       com.gagauz:shop:1.0-SNAPSHOT
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): []
+[DEBUG] Repositories (dependencies): [central (https://repo.maven.apache.org/maven2, default, releases)]
+[DEBUG] Repositories (plugins)     : [central (https://repo.maven.apache.org/maven2, default, releases)]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-eclipse-plugin:2.5:clean (default-cli)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir>${basedir}</basedir>
+  <packaging>${project.packaging}</packaging>
+  <skip default-value="false">${eclipse.skip}</skip>
+</configuration>
+[DEBUG] --- init fork of com.gagauz:shop:1.0-SNAPSHOT for org.apache.maven.plugins:maven-eclipse-plugin:2.5:eclipse (default-cli) ---
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): []
+[DEBUG] --- exit fork of com.gagauz:shop:1.0-SNAPSHOT for org.apache.maven.plugins:maven-eclipse-plugin:2.5:eclipse (default-cli) ---
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-eclipse-plugin:2.5:eclipse (default-cli)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <addGroupIdToProjectName default-value="false">${eclipse.addGroupIdToProjectName}</addGroupIdToProjectName>
+  <addVersionToProjectName default-value="false">${eclipse.addVersionToProjectName}</addVersionToProjectName>
+  <buildOutputDirectory default-value="${project.build.outputDirectory}">${outputDirectory}</buildOutputDirectory>
+  <downloadJavadocs>${downloadJavadocs}</downloadJavadocs>
+  <downloadSources>true</downloadSources>
+  <eclipseDownloadSources>${eclipse.downloadSources}</eclipseDownloadSources>
+  <eclipseProjectDir>${eclipse.projectDir}</eclipseProjectDir>
+  <executedProject>${executedProject}</executedProject>
+  <limitProjectReferencesToWorkspace default-value="false">${eclipse.limitProjectReferencesToWorkspace}</limitProjectReferencesToWorkspace>
+  <localRepository>${localRepository}</localRepository>
+  <manifest default-value="${basedir}/META-INF/MANIFEST.MF">${eclipse.manifest}</manifest>
+  <packaging>${project.packaging}</packaging>
+  <pde default-value="false">${eclipse.pde}</pde>
+  <project>${project}</project>
+  <projectNameTemplate>${eclipse.projectNameTemplate}</projectNameTemplate>
+  <reactorProjects>${reactorProjects}</reactorProjects>
+  <remoteArtifactRepositories>${project.remoteArtifactRepositories}</remoteArtifactRepositories>
+  <skip default-value="false">${eclipse.skip}</skip>
+  <useProjectReferences default-value="true">${eclipse.useProjectReferences}</useProjectReferences>
+  <workspace>${eclipse.workspace}</workspace>
+  <wtpContextName>${wtpContextName}</wtpContextName>
+  <wtpapplicationxml default-value="false">${eclipse.wtpapplicationxml}</wtpapplicationxml>
+  <wtpdefaultserver>${eclipse.wtpdefaultserver}</wtpdefaultserver>
+  <wtpmanifest default-value="false">${eclipse.wtpmanifest}</wtpmanifest>
+  <wtpversion default-value="none">${wtpversion}</wtpversion>
+</configuration>
+[DEBUG] =======================================================================
+[INFO] 
+[INFO] --- maven-eclipse-plugin:2.5:clean (default-cli) @ shop ---
+[DEBUG] Created new class realm maven.api
+[DEBUG] Importing foreign packages into class realm maven.api
+[DEBUG]   Imported: org.apache.maven.cli < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.internal.impl < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
+[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
+[DEBUG]   Imported: org.apache.maven.repository < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
+[DEBUG]   Imported: org.apache.maven.usability < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
+[DEBUG]   Imported: javax.enterprise.inject.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.project < plexus.core
+[DEBUG]   Imported: org.apache.maven.exception < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.spi < plexus.core
+[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.collection < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
+[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.transfer < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution.scope < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.impl < plexus.core
+[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.graph < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.metadata < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
+[DEBUG]   Imported: javax.inject.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.model < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.deployment < plexus.core
+[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.resolution < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
+[DEBUG]   Imported: org.apache.maven.settings < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
+[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.repository < plexus.core
+[DEBUG]   Imported: org.slf4j.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
+[DEBUG]   Imported: javax.enterprise.util.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
+[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.* < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.version < plexus.core
+[DEBUG]   Imported: org.eclipse.aether.installation < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
+[DEBUG] Populating class realm maven.api
+[DEBUG] Dependency collection stats: {ConflictMarker.analyzeTime=1, ConflictMarker.markTime=1, ConflictMarker.nodeCount=105, ConflictIdSorter.graphTime=1, ConflictIdSorter.topsortTime=0, ConflictIdSorter.conflictIdCount=23, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=5, ConflictResolver.conflictItemCount=52, DefaultDependencyCollector.collectTime=183, DefaultDependencyCollector.transformTime=10}
+[DEBUG] org.apache.maven.plugins:maven-eclipse-plugin:jar:2.5:
+[DEBUG]    org.codehaus.plexus:plexus-archiver:jar:1.0-alpha-7:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-8:compile
+[DEBUG]          junit:junit:jar:3.8.1:compile
+[DEBUG]          classworlds:classworlds:jar:1.1-alpha-2:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.8:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.8:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.8:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.8:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.8:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.0.8:compile
+[DEBUG]    org.apache.maven:maven-artifact-manager:jar:2.0.8:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.8:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.8:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:1.4.5:compile
+[DEBUG]    org.codehaus.plexus:plexus-interactivity-jline:jar:1.0-alpha-5:compile
+[DEBUG]       jline:jline:jar:0.9.1:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-5:compile
+[DEBUG]    org.apache.maven:maven-archiver:jar:2.2:compile
+[DEBUG]    org.codehaus.plexus:plexus-resources:jar:1.0-alpha-4:compile
+[DEBUG]    biz.aQute:bndlib:jar:0.0.145:compile
+[DEBUG]    org.apache.maven.shared:maven-osgi:jar:0.2.0:compile
+[DEBUG]    org.eclipse.core:resources:jar:3.3.0-v20070604:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-eclipse-plugin:2.5
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-eclipse-plugin:2.5
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-eclipse-plugin:2.5
+[DEBUG]   Included: org.apache.maven.plugins:maven-eclipse-plugin:jar:2.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:1.0-alpha-7
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:1.4.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-jline:jar:1.0-alpha-5
+[DEBUG]   Included: jline:jline:jar:0.9.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-5
+[DEBUG]   Included: org.apache.maven:maven-archiver:jar:2.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-resources:jar:1.0-alpha-4
+[DEBUG]   Included: biz.aQute:bndlib:jar:0.0.145
+[DEBUG]   Included: org.apache.maven.shared:maven-osgi:jar:0.2.0
+[DEBUG]   Included: org.eclipse.core:resources:jar:3.3.0-v20070604
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-8
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1-alpha-2
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.8
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.8
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-eclipse-plugin:2.5:clean from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-eclipse-plugin:2.5, parent: sun.misc.Launcher$AppClassLoader@70dea4e]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-eclipse-plugin:2.5:clean' with basic configurator -->
+[DEBUG]   (s) basedir = R:\projects-my\spring-mvc
+[DEBUG]   (s) packaging = war
+[DEBUG]   (f) skip = false
+[DEBUG] -- end configuration --
+[INFO] Deleting file: .project
+[INFO] Deleting file: .classpath
+[INFO] Deleting file: .wtpmodules
+[DEBUG] No .wtpmodules file found
+[INFO] Deleting file: .component
+[DEBUG] No .component file found
+[INFO] Deleting file: org.eclipse.wst.common.component
+[DEBUG] No org.eclipse.wst.common.component file found
+[INFO] Deleting file: org.eclipse.wst.common.project.facet.core.xml
+[DEBUG] No org.eclipse.wst.common.project.facet.core.xml file found
+[INFO] Deleting file: org.eclipse.jdt.core.prefs
+[INFO] 
+[INFO] >>> maven-eclipse-plugin:2.5:eclipse (default-cli) > generate-resources @ shop >>>
+[INFO] 
+[INFO] <<< maven-eclipse-plugin:2.5:eclipse (default-cli) < generate-resources @ shop <<<
+[INFO] 
+[INFO] --- maven-eclipse-plugin:2.5:eclipse (default-cli) @ shop ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-eclipse-plugin:2.5:eclipse from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-eclipse-plugin:2.5, parent: sun.misc.Launcher$AppClassLoader@70dea4e]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-eclipse-plugin:2.5:eclipse' with basic configurator -->
+[DEBUG]   (s) addGroupIdToProjectName = false
+[DEBUG]   (s) addVersionToProjectName = false
+[DEBUG]   (s) buildOutputDirectory = R:\projects-my\spring-mvc\target\classes
+[DEBUG]   (s) downloadSources = true
+[DEBUG]   (s) executedProject = MavenProject: com.gagauz:shop:1.0-SNAPSHOT @ R:\projects-my\spring-mvc\pom.xml
+[DEBUG]   (f) limitProjectReferencesToWorkspace = false
+[DEBUG]   (s) localRepository =       id: local
+      url: file:///r:/maven_repo/
+   layout: default
+snapshots: [enabled => true, update => always]
+ releases: [enabled => true, update => always]
+
+[DEBUG]   (f) manifest = R:\projects-my\spring-mvc\META-INF\MANIFEST.MF
+[DEBUG]   (f) packaging = war
+[DEBUG]   (f) pde = false
+[DEBUG]   (s) project = MavenProject: com.gagauz:shop:1.0-SNAPSHOT @ R:\projects-my\spring-mvc\pom.xml
+[DEBUG]   (s) reactorProjects = [MavenProject: com.gagauz:shop:1.0-SNAPSHOT @ R:\projects-my\spring-mvc\pom.xml]
+[DEBUG]   (s) remoteArtifactRepositories = [      id: central
+      url: https://repo.maven.apache.org/maven2
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+]
+[DEBUG]   (f) skip = false
+[DEBUG]   (s) useProjectReferences = true
+[DEBUG]   (f) wtpapplicationxml = false
+[DEBUG]   (f) wtpmanifest = false
+[DEBUG]   (s) wtpversion = none
+[DEBUG] -- end configuration --
+[INFO] Using as WTP server : null
+[INFO] Adding default classpath contaigner: org.eclipse.jdt.launching.JRE_CONTAINER
+[DEBUG] com.gagauz:shop:war:1.0-SNAPSHOT (selected for null)
+[DEBUG]   antlr:antlr:jar:2.7.7:compile (selected for compile)
+[DEBUG]   com.fasterxml.jackson.core:jackson-databind:jar:2.7.0:compile (selected for compile)
+[DEBUG]     com.fasterxml.jackson.core:jackson-annotations:jar:2.7.0:compile (selected for compile)
+[DEBUG]     com.fasterxml.jackson.core:jackson-core:jar:2.7.0:compile (selected for compile)
+[DEBUG]   com.zaxxer:HikariCP-java6:jar:2.3.8:compile (selected for compile)
+[DEBUG]     org.javassist:javassist:jar:3.18.2-GA:compile (selected for compile)
+[DEBUG]   commons-codec:commons-codec:jar:1.5:compile (selected for compile)
+[DEBUG]   commons-io:commons-io:jar:2.2:compile (selected for compile)
+[DEBUG]   dumbster:dumbster:jar:1.6:compile (selected for compile)
+[DEBUG]     javax.activation:activation:jar:1.0.2:compile (selected for compile)
+[DEBUG]     javax.mail:mail:jar:1.3.2:compile (selected for compile)
+[DEBUG]   javax.activation:activation:jar:1.0.2:compile (removed - nearer found: 1.1.1)
+[DEBUG]   javax.activation:activation:jar:1.1.1:compile (selected for compile)
+[DEBUG]   javax.mail:mail:jar:1.3.2:compile (removed - nearer found: 1.4.7)
+[DEBUG]   javax.mail:mail:jar:1.4.7:compile (selected for compile)
+[DEBUG]     javax.activation:activation:jar:1.1:compile (removed - nearer found: 1.1.1)
+[DEBUG]   javax.servlet:javax.servlet-api:jar:3.1.0:provided (selected for provided)
+[DEBUG]   mysql:mysql-connector-java:jar:5.1.24:compile (selected for compile)
+[DEBUG]   org.apache.lucene:lucene-analyzers-common:jar:5.1.0:compile (selected for compile)
+[DEBUG]     org.apache.lucene:lucene-core:jar:5.1.0:compile (selected for compile)
+[DEBUG]   org.apache.lucene:lucene-backward-codecs:jar:5.1.0:runtime (selected for runtime)
+[DEBUG]   org.apache.lucene:lucene-core:jar:5.1.0:compile (selected for compile)
+[DEBUG]   org.apache.lucene:lucene-queryparser:jar:5.1.0:compile (selected for compile)
+[DEBUG]     org.apache.lucene:lucene-queries:jar:5.1.0:compile (selected for compile)
+[DEBUG]     org.apache.lucene:lucene-sandbox:jar:5.1.0:compile (selected for compile)
+[DEBUG]   org.freemarker:freemarker:jar:2.3.19:compile (selected for compile)
+[DEBUG]   org.gagauz:tapestry-webapp-core:jar:1.0:compile (selected for compile)
+[DEBUG]     org.apache.tapestry:tapestry-core:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       org.apache.tapestry:tapestry-json:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       org.apache.tapestry:tapestry-ioc:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]         org.slf4j:slf4j-api:jar:1.7.12:compile (selected for compile)
+[DEBUG]         org.apache.tapestry:tapestry-func:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]         org.apache.tapestry:beanmodel:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]           org.antlr:antlr-runtime:jar:3.5.2:compile (selected for compile)
+[DEBUG]           org.apache.tapestry:tapestry5-annotations:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]           org.apache.tapestry:commons:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]             org.apache.tapestry:plastic:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]           org.apache.tapestry:plastic:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]         javax.inject:javax.inject:jar:1:compile (selected for compile)
+[DEBUG]         org.apache.tapestry:tapestry5-annotations:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]         org.apache.tapestry:plastic:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       commons-codec:commons-codec:jar:1.10:compile (removed - nearer found: 1.5)
+[DEBUG]       org.apache.tapestry:beanmodel:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]         org.antlr:antlr-runtime:jar:3.5.2:compile (selected for compile)
+[DEBUG]         org.apache.tapestry:commons:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]     org.apache.tapestry:tapestry-ioc:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       org.apache.tapestry:tapestry-func:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       javax.inject:javax.inject:jar:1:compile (selected for compile)
+[DEBUG]       org.apache.tapestry:tapestry5-annotations:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       org.apache.tapestry:plastic:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]     org.apache.tapestry:tapestry-upload:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       commons-io:commons-io:jar:2.4:compile (removed - nearer found: 2.2)
+[DEBUG]       commons-fileupload:commons-fileupload:jar:1.3.1:compile (selected for compile)
+[DEBUG]     org.apache.commons:commons-lang3:jar:3.4:compile (selected for compile)
+[DEBUG]     org.apache.tapestry:tapestry-spring:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       org.springframework:spring-web:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]         aopalliance:aopalliance:jar:1.0:compile (selected for compile)
+[DEBUG]         org.springframework:spring-beans:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]           org.springframework:spring-core:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]             org.springframework:spring-asm:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]             commons-logging:commons-logging:jar:1.1.1:compile (selected for compile)
+[DEBUG]         org.springframework:spring-context:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]           org.springframework:spring-aop:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]           org.springframework:spring-expression:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]           org.springframework:spring-asm:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]         org.springframework:spring-core:jar:3.1.0.RELEASE:compile (selected for compile)
+[DEBUG]           commons-logging:commons-logging:jar:1.1.1:compile (selected for compile)
+[DEBUG]     org.apache.tapestry:tapestry-webresources:jar:5.4-rc-1:compile (selected for compile)
+[DEBUG]       org.mozilla:rhino:jar:1.7.7:compile (selected for compile)
+[DEBUG]       com.github.sommeri:less4j:jar:1.12.0:compile (selected for compile)
+[DEBUG]         commons-io:commons-io:jar:2.3:compile (removed - nearer found: 2.2)
+[DEBUG]         commons-beanutils:commons-beanutils:jar:1.8.3:compile (selected for compile)
+[DEBUG]         org.json:json:jar:20090211:compile (selected for compile)
+[DEBUG]         com.google.protobuf:protobuf-java:jar:2.5.0:compile (selected for compile)
+[DEBUG]       com.google.javascript:closure-compiler:jar:v20131014:compile (selected for compile)
+[DEBUG]         args4j:args4j:jar:2.0.16:compile (selected for compile)
+[DEBUG]         com.google.guava:guava:jar:15.0:compile (selected for compile)
+[DEBUG]         com.google.protobuf:protobuf-java:jar:2.4.1:compile (removed - nearer found: 2.5.0)
+[DEBUG]         com.google.code.findbugs:jsr305:jar:1.3.9:compile (selected for compile)
+[DEBUG]     org.hibernate:hibernate-core:jar:4.2.19.Final:compile (selected for compile)
+[DEBUG]       org.jboss.logging:jboss-logging:jar:3.1.0.GA:compile (selected for compile)
+[DEBUG]       dom4j:dom4j:jar:1.6.1:compile (selected for compile)
+[DEBUG]       org.javassist:javassist:jar:3.18.1-GA:compile (removed - nearer found: 3.18.2-GA)
+[DEBUG]       org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:jar:1.0.1.Final:compile (selected for compile)
+[DEBUG]       org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.1.Final:compile (selected for compile)
+[DEBUG]       org.hibernate.common:hibernate-commons-annotations:jar:4.0.2.Final:compile (selected for compile)
+[DEBUG]         org.jboss.logging:jboss-logging:jar:3.1.0.CR2:compile (removed - nearer found: 3.1.0.GA)
+[DEBUG]     org.springframework:spring-core:jar:3.1.0.RELEASE:compile (removed - nearer found: 4.0.2.RELEASE)
+[DEBUG]     org.springframework:spring-core:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]     org.springframework:spring-context:jar:3.1.0.RELEASE:compile (removed - nearer found: 4.0.2.RELEASE)
+[DEBUG]     org.springframework:spring-context:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-aop:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]         org.springframework:spring-beans:jar:4.0.2.RELEASE:compile (removed - nearer found: 3.1.0.RELEASE)
+[DEBUG]       org.springframework:spring-beans:jar:3.1.0.RELEASE:compile (removed - nearer found: 4.0.2.RELEASE)
+[DEBUG]       org.springframework:spring-beans:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-expression:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]     org.springframework:spring-beans:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]     org.springframework:spring-orm:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-jdbc:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]         org.springframework:spring-tx:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-tx:jar:4.0.2.RELEASE:compile (selected for compile)
+[DEBUG]     org.codehaus.jackson:jackson-mapper-asl:jar:1.8.5:compile (selected for compile)
+[DEBUG]       org.codehaus.jackson:jackson-core-asl:jar:1.8.5:compile (selected for compile)
+[DEBUG]     org.javassist:javassist:jar:3.18.1-GA:compile (removed - nearer found: 3.18.2-GA)
+[DEBUG]     org.slf4j:slf4j-log4j12:jar:1.7.12:compile (selected for compile)
+[DEBUG]       org.slf4j:slf4j-api:jar:1.7.12:compile (selected for compile)
+[DEBUG]       log4j:log4j:jar:1.2.17:compile (selected for compile)
+[DEBUG]     org.slf4j:jul-to-slf4j:jar:1.7.12:compile (selected for compile)
+[DEBUG]     org.slf4j:jcl-over-slf4j:jar:1.7.12:compile (selected for compile)
+[DEBUG]   org.slf4j:jcl-over-slf4j:jar:1.7.12:compile (selected for compile)
+[DEBUG]     org.slf4j:slf4j-api:jar:1.7.12:compile (selected for compile)
+[DEBUG]   org.slf4j:jul-to-slf4j:jar:1.7.12:compile (selected for compile)
+[DEBUG]   org.slf4j:slf4j-log4j12:jar:1.7.12:compile (selected for compile)
+[DEBUG]     log4j:log4j:jar:1.2.17:compile (selected for compile)
+[INFO] Using source status cache: R:\projects-my\spring-mvc\target\mvn-eclipse-cache.properties
+[DEBUG] Searching for sources for antlr:antlr:2.7.7:null at antlr:antlr:2.7.7:sources
+[DEBUG] Searching for sources for com.fasterxml.jackson.core:jackson-databind:2.7.0:null at com.fasterxml.jackson.core:jackson-databind:2.7.0:sources
+[DEBUG] Searching for sources for com.fasterxml.jackson.core:jackson-annotations:2.7.0:null at com.fasterxml.jackson.core:jackson-annotations:2.7.0:sources
+[DEBUG] Searching for sources for com.fasterxml.jackson.core:jackson-core:2.7.0:null at com.fasterxml.jackson.core:jackson-core:2.7.0:sources
+[DEBUG] Searching for sources for com.zaxxer:HikariCP-java6:2.3.8:null at com.zaxxer:HikariCP-java6:2.3.8:sources
+[DEBUG] Searching for sources for org.javassist:javassist:3.18.2-GA:null at org.javassist:javassist:3.18.2-GA:sources
+[DEBUG] Searching for sources for commons-codec:commons-codec:1.5:null at commons-codec:commons-codec:1.5:sources
+[DEBUG] Searching for sources for commons-io:commons-io:2.2:null at commons-io:commons-io:2.2:sources
+[DEBUG] Searching for sources for dumbster:dumbster:1.6:null at dumbster:dumbster:1.6:sources
+[DEBUG] Searching for sources for javax.activation:activation:1.1.1:null at javax.activation:activation:1.1.1:sources
+[DEBUG] Searching for sources for javax.mail:mail:1.4.7:null at javax.mail:mail:1.4.7:sources
+[DEBUG] Searching for sources for javax.servlet:javax.servlet-api:3.1.0:null at javax.servlet:javax.servlet-api:3.1.0:sources
+[DEBUG] Searching for sources for mysql:mysql-connector-java:5.1.24:null at mysql:mysql-connector-java:5.1.24:sources
+[DEBUG] Searching for sources for org.apache.lucene:lucene-analyzers-common:5.1.0:null at org.apache.lucene:lucene-analyzers-common:5.1.0:sources
+[DEBUG] Searching for sources for org.apache.lucene:lucene-core:5.1.0:null at org.apache.lucene:lucene-core:5.1.0:sources
+[DEBUG] Searching for sources for org.apache.lucene:lucene-backward-codecs:5.1.0:null at org.apache.lucene:lucene-backward-codecs:5.1.0:sources
+[DEBUG] Searching for sources for org.apache.lucene:lucene-queryparser:5.1.0:null at org.apache.lucene:lucene-queryparser:5.1.0:sources
+[DEBUG] Searching for sources for org.apache.lucene:lucene-queries:5.1.0:null at org.apache.lucene:lucene-queries:5.1.0:sources
+[DEBUG] Searching for sources for org.apache.lucene:lucene-sandbox:5.1.0:null at org.apache.lucene:lucene-sandbox:5.1.0:sources
+[DEBUG] Searching for sources for org.freemarker:freemarker:2.3.19:null at org.freemarker:freemarker:2.3.19:sources
+[DEBUG] Searching for sources for org.gagauz:tapestry-webapp-core:1.0:null at org.gagauz:tapestry-webapp-core:1.0:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-core:5.4-rc-1:null at org.apache.tapestry:tapestry-core:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-json:5.4-rc-1:null at org.apache.tapestry:tapestry-json:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-ioc:5.4-rc-1:null at org.apache.tapestry:tapestry-ioc:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.slf4j:slf4j-api:1.7.12:null at org.slf4j:slf4j-api:1.7.12:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-func:5.4-rc-1:null at org.apache.tapestry:tapestry-func:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.apache.tapestry:beanmodel:5.4-rc-1:null at org.apache.tapestry:beanmodel:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.antlr:antlr-runtime:3.5.2:null at org.antlr:antlr-runtime:3.5.2:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry5-annotations:5.4-rc-1:null at org.apache.tapestry:tapestry5-annotations:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.apache.tapestry:commons:5.4-rc-1:null at org.apache.tapestry:commons:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.apache.tapestry:plastic:5.4-rc-1:null at org.apache.tapestry:plastic:5.4-rc-1:sources
+[DEBUG] Searching for sources for javax.inject:javax.inject:1:null at javax.inject:javax.inject:1:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-upload:5.4-rc-1:null at org.apache.tapestry:tapestry-upload:5.4-rc-1:sources
+[DEBUG] Searching for sources for commons-fileupload:commons-fileupload:1.3.1:null at commons-fileupload:commons-fileupload:1.3.1:sources
+[DEBUG] Searching for sources for org.apache.commons:commons-lang3:3.4:null at org.apache.commons:commons-lang3:3.4:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-spring:5.4-rc-1:null at org.apache.tapestry:tapestry-spring:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.springframework:spring-web:3.1.0.RELEASE:null at org.springframework:spring-web:3.1.0.RELEASE:sources
+[DEBUG] Searching for sources for aopalliance:aopalliance:1.0:null at aopalliance:aopalliance:1.0:sources
+[DEBUG] Searching for sources for org.springframework:spring-beans:4.0.2.RELEASE:null at org.springframework:spring-beans:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.springframework:spring-core:4.0.2.RELEASE:null at org.springframework:spring-core:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.springframework:spring-context:4.0.2.RELEASE:null at org.springframework:spring-context:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.springframework:spring-aop:4.0.2.RELEASE:null at org.springframework:spring-aop:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.springframework:spring-expression:4.0.2.RELEASE:null at org.springframework:spring-expression:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-webresources:5.4-rc-1:null at org.apache.tapestry:tapestry-webresources:5.4-rc-1:sources
+[DEBUG] Searching for sources for org.mozilla:rhino:1.7.7:null at org.mozilla:rhino:1.7.7:sources
+[DEBUG] Searching for sources for com.github.sommeri:less4j:1.12.0:null at com.github.sommeri:less4j:1.12.0:sources
+[DEBUG] Searching for sources for commons-beanutils:commons-beanutils:1.8.3:null at commons-beanutils:commons-beanutils:1.8.3:sources
+[DEBUG] Searching for sources for org.json:json:20090211:null at org.json:json:20090211:sources
+[DEBUG] Searching for sources for com.google.protobuf:protobuf-java:2.5.0:null at com.google.protobuf:protobuf-java:2.5.0:sources
+[DEBUG] Searching for sources for com.google.javascript:closure-compiler:v20131014:null at com.google.javascript:closure-compiler:v20131014:sources
+[DEBUG] Searching for sources for args4j:args4j:2.0.16:null at args4j:args4j:2.0.16:sources
+[DEBUG] Searching for sources for com.google.guava:guava:15.0:null at com.google.guava:guava:15.0:sources
+[DEBUG] Searching for sources for com.google.code.findbugs:jsr305:1.3.9:null at com.google.code.findbugs:jsr305:1.3.9:sources
+[DEBUG] Searching for sources for org.hibernate:hibernate-core:4.2.19.Final:null at org.hibernate:hibernate-core:4.2.19.Final:sources
+[DEBUG] Searching for sources for org.jboss.logging:jboss-logging:3.1.0.GA:null at org.jboss.logging:jboss-logging:3.1.0.GA:sources
+[DEBUG] Searching for sources for dom4j:dom4j:1.6.1:null at dom4j:dom4j:1.6.1:sources
+[DEBUG] Searching for sources for org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final:null at org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final:sources
+[DEBUG] Searching for sources for org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final:null at org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final:sources
+[DEBUG] Searching for sources for org.hibernate.common:hibernate-commons-annotations:4.0.2.Final:null at org.hibernate.common:hibernate-commons-annotations:4.0.2.Final:sources
+[DEBUG] Searching for sources for org.springframework:spring-orm:4.0.2.RELEASE:null at org.springframework:spring-orm:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.springframework:spring-jdbc:4.0.2.RELEASE:null at org.springframework:spring-jdbc:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.springframework:spring-tx:4.0.2.RELEASE:null at org.springframework:spring-tx:4.0.2.RELEASE:sources
+[DEBUG] Searching for sources for org.codehaus.jackson:jackson-mapper-asl:1.8.5:null at org.codehaus.jackson:jackson-mapper-asl:1.8.5:sources
+[DEBUG] Searching for sources for org.codehaus.jackson:jackson-core-asl:1.8.5:null at org.codehaus.jackson:jackson-core-asl:1.8.5:sources
+[DEBUG] Searching for sources for org.slf4j:slf4j-log4j12:1.7.12:null at org.slf4j:slf4j-log4j12:1.7.12:sources
+[DEBUG] Searching for sources for log4j:log4j:1.2.17:null at log4j:log4j:1.2.17:sources
+[DEBUG] Searching for sources for org.slf4j:jul-to-slf4j:1.7.12:null at org.slf4j:jul-to-slf4j:1.7.12:sources
+[DEBUG] Searching for sources for org.slf4j:jcl-over-slf4j:1.7.12:null at org.slf4j:jcl-over-slf4j:1.7.12:sources
+[DEBUG] Searching for sources for antlr:antlr:2.7.7:null at antlr:antlr:2.7.7:javadoc
+[DEBUG] Searching for sources for com.fasterxml.jackson.core:jackson-databind:2.7.0:null at com.fasterxml.jackson.core:jackson-databind:2.7.0:javadoc
+[DEBUG] Searching for sources for com.fasterxml.jackson.core:jackson-annotations:2.7.0:null at com.fasterxml.jackson.core:jackson-annotations:2.7.0:javadoc
+[DEBUG] Searching for sources for com.fasterxml.jackson.core:jackson-core:2.7.0:null at com.fasterxml.jackson.core:jackson-core:2.7.0:javadoc
+[DEBUG] Searching for sources for com.zaxxer:HikariCP-java6:2.3.8:null at com.zaxxer:HikariCP-java6:2.3.8:javadoc
+[DEBUG] Searching for sources for org.javassist:javassist:3.18.2-GA:null at org.javassist:javassist:3.18.2-GA:javadoc
+[DEBUG] Searching for sources for commons-codec:commons-codec:1.5:null at commons-codec:commons-codec:1.5:javadoc
+[DEBUG] Searching for sources for commons-io:commons-io:2.2:null at commons-io:commons-io:2.2:javadoc
+[DEBUG] Searching for sources for dumbster:dumbster:1.6:null at dumbster:dumbster:1.6:javadoc
+[DEBUG] Searching for sources for javax.activation:activation:1.1.1:null at javax.activation:activation:1.1.1:javadoc
+[DEBUG] Searching for sources for javax.mail:mail:1.4.7:null at javax.mail:mail:1.4.7:javadoc
+[DEBUG] Searching for sources for javax.servlet:javax.servlet-api:3.1.0:null at javax.servlet:javax.servlet-api:3.1.0:javadoc
+[DEBUG] Searching for sources for mysql:mysql-connector-java:5.1.24:null at mysql:mysql-connector-java:5.1.24:javadoc
+[DEBUG] Searching for sources for org.apache.lucene:lucene-analyzers-common:5.1.0:null at org.apache.lucene:lucene-analyzers-common:5.1.0:javadoc
+[DEBUG] Searching for sources for org.apache.lucene:lucene-core:5.1.0:null at org.apache.lucene:lucene-core:5.1.0:javadoc
+[DEBUG] Searching for sources for org.apache.lucene:lucene-backward-codecs:5.1.0:null at org.apache.lucene:lucene-backward-codecs:5.1.0:javadoc
+[DEBUG] Searching for sources for org.apache.lucene:lucene-queryparser:5.1.0:null at org.apache.lucene:lucene-queryparser:5.1.0:javadoc
+[DEBUG] Searching for sources for org.apache.lucene:lucene-queries:5.1.0:null at org.apache.lucene:lucene-queries:5.1.0:javadoc
+[DEBUG] Searching for sources for org.apache.lucene:lucene-sandbox:5.1.0:null at org.apache.lucene:lucene-sandbox:5.1.0:javadoc
+[DEBUG] Searching for sources for org.freemarker:freemarker:2.3.19:null at org.freemarker:freemarker:2.3.19:javadoc
+[DEBUG] Searching for sources for org.gagauz:tapestry-webapp-core:1.0:null at org.gagauz:tapestry-webapp-core:1.0:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-core:5.4-rc-1:null at org.apache.tapestry:tapestry-core:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-json:5.4-rc-1:null at org.apache.tapestry:tapestry-json:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-ioc:5.4-rc-1:null at org.apache.tapestry:tapestry-ioc:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.slf4j:slf4j-api:1.7.12:null at org.slf4j:slf4j-api:1.7.12:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-func:5.4-rc-1:null at org.apache.tapestry:tapestry-func:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:beanmodel:5.4-rc-1:null at org.apache.tapestry:beanmodel:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.antlr:antlr-runtime:3.5.2:null at org.antlr:antlr-runtime:3.5.2:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry5-annotations:5.4-rc-1:null at org.apache.tapestry:tapestry5-annotations:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:commons:5.4-rc-1:null at org.apache.tapestry:commons:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:plastic:5.4-rc-1:null at org.apache.tapestry:plastic:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for javax.inject:javax.inject:1:null at javax.inject:javax.inject:1:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-upload:5.4-rc-1:null at org.apache.tapestry:tapestry-upload:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for commons-fileupload:commons-fileupload:1.3.1:null at commons-fileupload:commons-fileupload:1.3.1:javadoc
+[DEBUG] Searching for sources for org.apache.commons:commons-lang3:3.4:null at org.apache.commons:commons-lang3:3.4:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-spring:5.4-rc-1:null at org.apache.tapestry:tapestry-spring:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-web:3.1.0.RELEASE:null at org.springframework:spring-web:3.1.0.RELEASE:javadoc
+[DEBUG] Searching for sources for aopalliance:aopalliance:1.0:null at aopalliance:aopalliance:1.0:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-beans:4.0.2.RELEASE:null at org.springframework:spring-beans:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-core:4.0.2.RELEASE:null at org.springframework:spring-core:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-context:4.0.2.RELEASE:null at org.springframework:spring-context:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-aop:4.0.2.RELEASE:null at org.springframework:spring-aop:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-expression:4.0.2.RELEASE:null at org.springframework:spring-expression:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.apache.tapestry:tapestry-webresources:5.4-rc-1:null at org.apache.tapestry:tapestry-webresources:5.4-rc-1:javadoc
+[DEBUG] Searching for sources for org.mozilla:rhino:1.7.7:null at org.mozilla:rhino:1.7.7:javadoc
+[DEBUG] Searching for sources for com.github.sommeri:less4j:1.12.0:null at com.github.sommeri:less4j:1.12.0:javadoc
+[DEBUG] Searching for sources for commons-beanutils:commons-beanutils:1.8.3:null at commons-beanutils:commons-beanutils:1.8.3:javadoc
+[DEBUG] Searching for sources for org.json:json:20090211:null at org.json:json:20090211:javadoc
+[DEBUG] Searching for sources for com.google.protobuf:protobuf-java:2.5.0:null at com.google.protobuf:protobuf-java:2.5.0:javadoc
+[DEBUG] Searching for sources for com.google.javascript:closure-compiler:v20131014:null at com.google.javascript:closure-compiler:v20131014:javadoc
+[DEBUG] Searching for sources for args4j:args4j:2.0.16:null at args4j:args4j:2.0.16:javadoc
+[DEBUG] Searching for sources for com.google.guava:guava:15.0:null at com.google.guava:guava:15.0:javadoc
+[DEBUG] Searching for sources for com.google.code.findbugs:jsr305:1.3.9:null at com.google.code.findbugs:jsr305:1.3.9:javadoc
+[DEBUG] Searching for sources for org.hibernate:hibernate-core:4.2.19.Final:null at org.hibernate:hibernate-core:4.2.19.Final:javadoc
+[DEBUG] Searching for sources for org.jboss.logging:jboss-logging:3.1.0.GA:null at org.jboss.logging:jboss-logging:3.1.0.GA:javadoc
+[DEBUG] Searching for sources for dom4j:dom4j:1.6.1:null at dom4j:dom4j:1.6.1:javadoc
+[DEBUG] Searching for sources for org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final:null at org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final:javadoc
+[DEBUG] Searching for sources for org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final:null at org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final:javadoc
+[DEBUG] Searching for sources for org.hibernate.common:hibernate-commons-annotations:4.0.2.Final:null at org.hibernate.common:hibernate-commons-annotations:4.0.2.Final:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-orm:4.0.2.RELEASE:null at org.springframework:spring-orm:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-jdbc:4.0.2.RELEASE:null at org.springframework:spring-jdbc:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.springframework:spring-tx:4.0.2.RELEASE:null at org.springframework:spring-tx:4.0.2.RELEASE:javadoc
+[DEBUG] Searching for sources for org.codehaus.jackson:jackson-mapper-asl:1.8.5:null at org.codehaus.jackson:jackson-mapper-asl:1.8.5:javadoc
+[DEBUG] Searching for sources for org.codehaus.jackson:jackson-core-asl:1.8.5:null at org.codehaus.jackson:jackson-core-asl:1.8.5:javadoc
+[DEBUG] Searching for sources for org.slf4j:slf4j-log4j12:1.7.12:null at org.slf4j:slf4j-log4j12:1.7.12:javadoc
+[DEBUG] Searching for sources for log4j:log4j:1.2.17:null at log4j:log4j:1.2.17:javadoc
+[DEBUG] Searching for sources for org.slf4j:jul-to-slf4j:1.7.12:null at org.slf4j:jul-to-slf4j:1.7.12:javadoc
+[DEBUG] Searching for sources for org.slf4j:jcl-over-slf4j:1.7.12:null at org.slf4j:jcl-over-slf4j:1.7.12:javadoc
+[DEBUG] Processing resource dir: R:\projects-my\spring-mvc\src\main\resources
+[DEBUG] Making relative and fixing separator: { R:\projects-my\spring-mvc, R:\projects-my\spring-mvc\target\classes, false }.
+[DEBUG] Adding eclipse source dir: { src/main/resources, target/classes, true, false, null, null }.
+[DEBUG] testOutput toRelativeAndFixSeparator R:\projects-my\spring-mvc , R:\projects-my\spring-mvc\target\test-classes
+[DEBUG] testOutput after toRelative : target/test-classes
+[DEBUG] Processing resource dir: R:\projects-my\spring-mvc\src\test\resources
+[DEBUG] Making relative and fixing separator: { R:\projects-my\spring-mvc, R:\projects-my\spring-mvc\target\test-classes, false }.
+[DEBUG] Adding eclipse source dir: { src/test/resources, target/test-classes, true, true, null, null }.
+[INFO] Wrote settings to R:\projects-my\spring-mvc\.settings\org.eclipse.jdt.core.prefs
+[DEBUG] Processing source src/main/java: output=null; default output=target/classes
+[DEBUG] Processing resource src/main/resources: output=target/classes; default output=target/classes
+[DEBUG] Processing source src/test/java: output=target/test-classes; default output=target/classes
+[DEBUG] Processing resource src/test/resources: output=target/test-classes; default output=target/classes
+[INFO] Wrote Eclipse project for "shop" to R:\projects-my\spring-mvc.
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.235 s
+[INFO] Finished at: 2016-01-30T14:57:20+03:00
+[INFO] Final Memory: 9M/227M
+[INFO] ------------------------------------------------------------------------

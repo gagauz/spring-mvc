@@ -23,6 +23,9 @@
 	</div>
 	<div class="row">
 		<t:grid t:id="grid">
+			<p:categoryCell>
+			${row.category.id} ${row.category.name}
+			</p:categoryCell>
 			<p:editCell>
 				<t:EditLinks row="row" />
 			</p:editCell>

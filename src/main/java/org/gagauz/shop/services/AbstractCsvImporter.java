@@ -13,7 +13,7 @@ public abstract class AbstractCsvImporter {
 
     abstract void commit();
 
-    public <T> void importFile(InputStream stream, String separator) {
+    protected <T> void importFile(InputStream stream, String separator) {
 
         init();
 

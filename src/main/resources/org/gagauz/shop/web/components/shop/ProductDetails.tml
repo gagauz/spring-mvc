@@ -1,0 +1,46 @@
+<div class="modal-dialog modal-lg"  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="photo">
+						<div class="top carousel slide" id="product-zoom-${product.id}" onmouseenter="$(this).carousel()" data-interval="false">
+							<div class="carousel-inner" role="listbox">
+								<t:foreach source="product.imageUrls" value="image" index="var:i">
+									<div class="item ${cond:var:i,,active}">
+										<img src="/static/images/${image}" alt="" />
+									</div>
+								</t:foreach>
+							</div>
+						</div>
+						<a href="#product-zoom-${product.id}" role="button" data-slide="prev" class="carousel-control left">
+							<i class="glyphicon glyphicon-chevron-left"></i>
+						</a>
+						<a href="#product-zoom-${product.id}" role="button" data-slide="next" class="carousel-control right">
+							<i class="glyphicon glyphicon-chevron-right"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<h3>${product.name}</h3>
+					<div>
+					${product.description}
+					</div>
+					<t:if test="product.discount">
+						<div class="discount">-${product.discount}%</div>
+					</t:if>
+					<div class="price"><t:price value="product.price"/></div>
+					<div class="btn-group">
+						<t:eventlink t:event="buy" t:context="product" class="btn btn-success" async="true"><i class="glyphicon glyphicon-shopping-cart"></i> В корзину</t:eventlink>
+						<t:eventlink t:event="favorite" t:context="product" class="btn btn-default" async="true"><i class="glyphicon glyphicon-heart-empty"></i> В избранное</t:eventlink>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
