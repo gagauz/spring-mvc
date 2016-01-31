@@ -22,7 +22,7 @@ public class CategoriesImporter extends AbstractCsvImporter {
 
     public synchronized void importCategories(Shop shop, InputStream stream) {
         this.shop = shop;
-        importFile(stream, "\t");
+        importCsvFile(stream, "\t");
     }
 
     private ProductCategory createCategory(String name, String shopId, ProductCategory parent, Shop shop) {

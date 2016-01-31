@@ -1,5 +1,9 @@
 package org.gagauz.shop.web.pages.seller.shop;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Function;
 
@@ -119,7 +123,18 @@ public class Products {
         return new Function<UploadedFile, Void>() {
             @Override
             public Void apply(UploadedFile t) {
-                productsImporter.importProducts(shop, t.getStream());
+                Path file;
+                try {
+                    file = Files.createTempFile("tmp_", t.getFilePath());
+                    File f = file.toFile();
+                    t.write(f);
+                    productsImporter.importProducts(shop, f);
+                    f.delete();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
                 return null;
             }
         };

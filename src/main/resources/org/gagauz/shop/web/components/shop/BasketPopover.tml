@@ -1,0 +1,26 @@
+<div xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="basket-popover">
+		<button type="button" class="close" data-dismiss="popover" aria-label="Close">
+			<span aria-hidden="true">×</span>
+		</button>
+		<div class="">
+			<div class="row">
+				<div class="col-sm-5">
+					<div class="photo">
+						<img src="/static/images/${product.imageUrl}" alt="" />
+					</div>
+				</div>
+				<div class="col-sm-7">
+					<b>${product.name}</b>
+					<t:if test="product.discount">
+						<div class="discount">-${product.discount}%</div>
+					</t:if>
+					<div class="price"><t:price value="product.price" currency="product.currency"/></div>
+					<div >
+						<a t:type="pagelink" t:page="shop/basket" class="btn btn-default btn-sm">Оформить заказ</a> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

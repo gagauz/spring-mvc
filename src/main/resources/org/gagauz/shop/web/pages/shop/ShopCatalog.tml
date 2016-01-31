@@ -3,10 +3,11 @@
 	<t:shop.ProductCard product="product" zone="zoomIn"/>
 </t:loop>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="zoomIn-modal">
-	<t:zone t:id="zoomIn">
+
+<t:zone t:id="zoomIn">
+	<t:Modal id="zoomIn-modal">
 		<t:shop.ProductDetails product="zoomProduct" />
-	</t:zone>
-</div>
+	</t:Modal>
+</t:zone>
 
 </t:buyer.MainTemplate>

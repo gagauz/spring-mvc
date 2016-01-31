@@ -1,17 +1,29 @@
 package org.gagauz.shop.web.services;
 
-import org.apache.tapestry5.*;
+import java.util.List;
+import java.util.Locale;
+
+import org.apache.tapestry5.BaseValidationDecorator;
+import org.apache.tapestry5.Field;
+import org.apache.tapestry5.MarkupWriter;
+import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.ValidationDecorator;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Decorate;
 import org.apache.tapestry5.ioc.annotations.ImportModule;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.plastic.PlasticClass;
 import org.apache.tapestry5.plastic.PlasticMethod;
+import org.apache.tapestry5.services.ApplicationStateContribution;
+import org.apache.tapestry5.services.ApplicationStateCreator;
+import org.apache.tapestry5.services.Cookies;
 import org.apache.tapestry5.services.Environment;
 import org.apache.tapestry5.services.MarkupRenderer;
 import org.apache.tapestry5.services.MarkupRendererFilter;
+import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.javascript.JavaScriptStackSource;
 import org.gagauz.shop.database.dao.AdminDao;
 import org.gagauz.shop.database.dao.BuyerDao;
@@ -20,8 +32,15 @@ import org.gagauz.shop.database.model.AbstractUser;
 import org.gagauz.shop.database.model.Admin;
 import org.gagauz.shop.database.model.Buyer;
 import org.gagauz.shop.database.model.Seller;
+import org.gagauz.shop.database.model.enums.Currency;
 import org.gagauz.shop.utils.CryptoUtils;
-import org.gagauz.shop.web.services.security.*;
+import org.gagauz.shop.web.services.security.AccessAttributeImpl;
+import org.gagauz.shop.web.services.security.AdminCredentials;
+import org.gagauz.shop.web.services.security.BuyerCredentials;
+import org.gagauz.shop.web.services.security.CredentialsImpl;
+import org.gagauz.shop.web.services.security.Secured;
+import org.gagauz.shop.web.services.security.SellerCredentials;
+import org.gagauz.shop.web.services.shop.BasketService;
 import org.gagauz.tapestry.security.UserSet;
 import org.gagauz.tapestry.security.api.AccessAttributeExtractorChecker;
 import org.gagauz.tapestry.security.api.Credentials;
@@ -33,6 +52,10 @@ import org.gagauz.tapestry.web.services.CoreWebappModule;
 
 @ImportModule({CoreWebappModule.class, ValueEncoderModule.class})
 public class AppModule {
+
+    public static void bind(ServiceBinder binder) {
+        binder.bind(BasketService.class);
+    }
 
     @Decorate(serviceInterface = JavaScriptStackSource.class)
     public JavaScriptStackSource decorateJavaScriptStackSource(JavaScriptStackSource original) {
@@ -172,5 +195,36 @@ public class AppModule {
         };
 
         configuration.override("ValidationDecorator", validationDecorator);
+    }
+
+    public static void contributeApplicationStateManager(final Request request, final Cookies cookies, MappedConfiguration<Class<?>, ApplicationStateContribution> configuration) {
+        configuration.add(Currency.class,
+                new ApplicationStateContribution("session",
+                        new ApplicationStateCreator<Currency>() {
+
+                            @Override
+                            public Currency create() {
+                                Currency currency = null;
+                                String cc = cookies.readCookieValue("currency");
+                                if (null != cc) {
+                                    try {
+                                        currency = Currency.valueOf(cc);
+                                    } catch (Exception e) {
+                                        cookies.removeCookieValue("currency");
+                                    }
+                                }
+                                if (null == currency) {
+                                    String accept = request.getHeader("Accept-Language");
+                                    if (null != accept) {
+                                        List<Locale.LanguageRange> languageRanges = Locale.LanguageRange.parse(accept);
+                                        String locale = Locale.lookupTag(languageRanges, Currency.getTags());
+                                        if (null != locale) {
+                                            currency = Currency.findByCountry(locale);
+                                        }
+                                    }
+                                }
+                                return null == currency ? Currency.RUR : currency;
+                            }
+                        }));
     }
 }

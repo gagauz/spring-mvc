@@ -6,13 +6,27 @@
 		<link href="/static/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" />
 		<link href="/static/bootstrap-3.3.6-dist/css/dashboard.css" rel="stylesheet" />
 	</head>
-	<body>
+	<body class="currency-${currentCurrency}">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div id="navbar" class="navbar-collapse collapse">
 					<div class="navbar-form navbar-right">
-						<div class="btn-group">
-							<a t:type="pagelink" t:page="shop/basket" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart" id="basket-icon"></i> Корзина <span class="badge">0</span></a>
+						<div class="btn-group " role="group">
+							<a t:type="pagelink" t:page="shop/basket" class="btn btn-default">
+								<i class="glyphicon glyphicon-shopping-cart" id="basket-icon" 
+									data-delay="5000" data-placement="bottom" data-container="body"></i> Корзина <span id="basket-item-count" class="badge">${getItemCount()}</span>
+							</a>
+							<div class="btn-group" role="group">
+								<a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									${currentCurrency}
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu currency" aria-labelledby="dropdownMenu1">
+									<t:foreach source="currencies" value="currency">
+									<li><a href="#" class="${cond:current,disabled,}" t:type="eventlink" t:event="setCurrency" t:context="currency">${currency}</a></li>
+									</t:foreach>
+								</ul>
+							</div>
 							<t:IfUser>
 								<a class="btn btn-default">Выйти</a>
 								<p:else>
@@ -22,14 +36,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="hide" id="add-basket-popover" data-delay="5000" data-placement="bottom" data-container="body">
-					<div>
-						<h3>Popover Popover </h3>
-						<div> 
-						PopoverPopover Popover Popover Popover Popover  
-						</div>
-					</div>
-				</div>			
+				<div class="hide" id="add-basket-popover"></div>			
 			</div>
 		</nav>
 		<div id="site-wrapper" class="container-fluid">

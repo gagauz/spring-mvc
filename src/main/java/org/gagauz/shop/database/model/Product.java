@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.gagauz.shop.database.model.enums.Currency;
-import org.gagauz.shop.database.model.enums.ProductUnit;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -27,7 +26,7 @@ public class Product extends ShopEntity {
     private String description;
     private String images;
     private List<ProductAttribute> attributes;
-    private ProductUnit unit;
+    private String unit;
     private BigDecimal price;
     private int discount = 0;
     private Currency currency;
@@ -97,12 +96,12 @@ public class Product extends ShopEntity {
         this.attributes = attributes;
     }
 
-    @Column(nullable = false)
-    public ProductUnit getUnit() {
+    @Column(nullable = true, length = 50)
+    public String getUnit() {
         return unit;
     }
 
-    public void setUnit(ProductUnit unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
     }
 
@@ -131,6 +130,11 @@ public class Product extends ShopEntity {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    @Transient
+    public String getImageUrl() {
+        return getImageUrls().length > 0 ? getImageUrls()[0] : "no_image.jpg";
     }
 
     @Transient

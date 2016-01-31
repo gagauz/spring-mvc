@@ -1,5 +1,6 @@
 package org.webservice.scenarios;
 
+import java.io.File;
 import java.io.InputStream;
 
 import org.gagauz.shop.database.dao.ProductCategoryDao;
@@ -66,10 +67,10 @@ public class ScenarioShop extends DataBaseScenario {
         shopDao.save(shop1);
 
         final InputStream in1 = getClass().getResourceAsStream("/scenarios/market_categories1.csv");
-        final InputStream in2 = getClass().getResourceAsStream("/scenarios/market_products1.csv");
+        final File f2 = new File(getClass().getResource("/scenarios/market_products1.csv").getFile());
 
         categoriesImporter.importCategories(shop1, in1);
-        productsImporter.importProducts(shop1, in2);
+        productsImporter.importProducts(shop1, f2);
 
     }
 

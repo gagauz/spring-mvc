@@ -1,2 +1,50 @@
 <t:buyer.MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+			<th>Image</th>
+			<th>Name</th>
+			<th>Qty</th>
+			<th>Price</th>
+			<th>Sub total</th>
+			<th>Remove</th>
+			</tr>
+		</thead>
+		<tbody>
+			<t:foreach source="basketItems" value="item">
+			<tr>
+				<td class="" width="7%">
+					<div class="photo"><img src="/static/images/${item.product.imageUrl}" /></div> 
+				</td>
+				<td class="col-sm-4">${item.product.name}</td>
+				<td class="" width="8%">
+					<div class="input-group input-group-sm" role="group">
+						<span class="input-group-btn">
+							<t:eventlink t:event="decQty" t:context="item.product" class="btn btn-default"><i class="glyphicon glyphicon-minus"></i></t:eventlink>
+						</span>
+						<input type="text" value="${item.count}" class="form-control" />
+						<span class="input-group-btn">
+							<t:eventlink t:event="incQty" t:context="item.product" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></t:eventlink>
+						</span>
+					</div>
+				</td>
+				<td class="col-sm-1"><div class="price"><t:price value="item.product.price" currency="item.product.currency" /></div></td>
+				<td class="col-sm-1"><div class="price"><t:price value="subtotal" currency="item.product.currency" /></div></td>
+				<td class="col-sm-1">
+					<t:eventlink t:event="remove" t:context="item.product" class="btn btn-default input-sm text-danger">
+						<i class="glyphicon glyphicon-remove"></i>
+					</t:eventlink>
+					&nbsp;
+					<t:eventlink t:event="toFav" t:context="item.product" class="btn btn-default input-sm text-info">
+						<i class="glyphicon glyphicon-share-alt"></i>
+						<i class="glyphicon glyphicon-heart-empty"></i>
+					</t:eventlink>
+				</td>
+			</tr>
+			</t:foreach>
+		</tbody>
+	</table>
+</div>
 </t:buyer.MainTemplate>

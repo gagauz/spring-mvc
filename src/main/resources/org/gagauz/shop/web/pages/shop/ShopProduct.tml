@@ -1,2 +1,5 @@
 <t:buyer.MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+
+<t:shop.ProductDetails product="product" />
+
 </t:buyer.MainTemplate>

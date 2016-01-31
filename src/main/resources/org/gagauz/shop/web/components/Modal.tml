@@ -1,0 +1,10 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="${id}" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<a href="#" class="close glyphicon glyphicon-remove" data-dismiss="modal"></a>
+			<div class="modal-body">
+				<t:body />
+			</div>
+		</div>
+	</div>
+</div>

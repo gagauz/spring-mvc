@@ -1,11 +1,14 @@
 package org.gagauz.shop.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.gagauz.shop.database.dao.ManufacturerDao;
 import org.gagauz.shop.database.dao.ProductCategoryDao;
@@ -16,7 +19,6 @@ import org.gagauz.shop.database.model.ProductAttribute;
 import org.gagauz.shop.database.model.ProductCategory;
 import org.gagauz.shop.database.model.Shop;
 import org.gagauz.shop.database.model.enums.Currency;
-import org.gagauz.shop.database.model.enums.ProductUnit;
 import org.gagauz.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,9 +43,21 @@ public class ProductsImporter extends AbstractCsvImporter {
 
     private int index = 0;
 
-    public synchronized void importProducts(Shop shop, InputStream stream) {
+    public synchronized void importProducts(Shop shop, File file) {
         this.shop = shop;
-        importFile(stream, "\"?\t\"?");
+        if (file.getName().toLowerCase().endsWith(".csv")) {
+            InputStream is = null;
+            try {
+                is = new FileInputStream(file);
+                importCsvFile(is, "\"?\t\"?");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                IOUtils.closeQuietly(is);
+            }
+        } else if (file.getName().toLowerCase().endsWith(".xlsx")) {
+            importXlsFile(file);
+        }
     }
 
     @Override
@@ -85,7 +99,7 @@ public class ProductsImporter extends AbstractCsvImporter {
         p.setManufacturer(parseManufacturer(ids[3]));
         p.setPrice(new BigDecimal(ids[4]));
         p.setCurrency(Currency.valueOf(ids[5].toUpperCase()));
-        p.setUnit(ProductUnit.valueOf(ids[6].toUpperCase()));
+        p.setUnit(ids[6]);
         p.setDiscount(NumberUtils.toInt(ids[7]));
         p.setDescription(ids[8]);
         p.setShop(shop);

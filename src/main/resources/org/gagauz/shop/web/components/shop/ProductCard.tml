@@ -2,6 +2,7 @@
 	<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 product-card">
 		<div class="top carousel slide" id="product-card-${product.id}" onmouseenter="$(this).carousel()" data-interval="false">
 			<div class="photo">
+				<a t:type="pagelink" t:page="shop/product" t:context="product">
 				<div class="carousel-inner" role="listbox">
 					<t:foreach source="product.imageUrls" value="image" limit="2" index="var:i">
 						<div class="item ${cond:var:i,,active}">
@@ -9,6 +10,7 @@
 						</div>
 					</t:foreach>
 				</div>
+				</a>
 				<a t:type="eventlink" t:event="zoomIn" t:async="true" t:context="product" class="zoom-in"><i class="glyphicon glyphicon-zoom-in"></i> Zoom in</a>
 			</div>
 			<a href="#product-card-${product.id}" role="button" data-slide="prev" class="carousel-control left">
@@ -24,7 +26,7 @@
 		<div class="bottom">
 			<div class="name">${product.name}</div>
 			<div class="description">${product.description}</div>
-			<div class="price"><t:price value="product.price"/></div>
+			<div class="price"><t:price value="product.price" currency="product.currency"/></div>
 		</div>
 		
 	</div>		
