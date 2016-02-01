@@ -1,22 +1,15 @@
 package org.gagauz.shop.database.model;
 
+import org.gagauz.shop.database.model.enums.Currency;
+import org.gagauz.shop.database.model.enums.ProductUnit;
+
+import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.gagauz.shop.database.model.enums.Currency;
-
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "PRODUCT", uniqueConstraints = @UniqueConstraint(columnNames = {"shop_id", "article"}) )
 public class Product extends ShopEntity {
     private static final long serialVersionUID = 5735037622492024586L;
     private Manufacturer manufacturer;
@@ -26,7 +19,9 @@ public class Product extends ShopEntity {
     private String description;
     private String images;
     private List<ProductAttribute> attributes;
-    private String unit;
+    //    private List<ProductGroup> groups;
+    private List<ProductVariant> variants;
+    private ProductUnit unit;
     private BigDecimal price;
     private int discount = 0;
     private Currency currency;
@@ -87,7 +82,7 @@ public class Product extends ShopEntity {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "PRODUCT_2_ATTRIBUTE")
+    @JoinTable(name = "PRODUCT_TO_ATTRIBUTE", joinColumns = @JoinColumn(name = "productId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "attributeId", referencedColumnName = "id") )
     public List<ProductAttribute> getAttributes() {
         return attributes;
     }
@@ -96,12 +91,32 @@ public class Product extends ShopEntity {
         this.attributes = attributes;
     }
 
-    @Column(nullable = true, length = 50)
-    public String getUnit() {
+    //    @ManyToMany(fetch = FetchType.LAZY)
+    //    @JoinTable(name = "PRODUCT_TO_GROUP", joinColumns = @JoinColumn(name = "productId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "groupId", referencedColumnName = "id") )
+    //    public List<ProductGroup> getGroups() {
+    //        return groups;
+    //    }
+    //
+    //    public void setGroups(List<ProductGroup> groups) {
+    //        this.groups = groups;
+    //    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.product", cascade = CascadeType.ALL)
+    public List<ProductVariant> getVariants() {
+        return variants;
+    }
+
+    public void setVariants(List<ProductVariant> variants) {
+        this.variants = variants;
+    }
+
+    @Column(nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    public ProductUnit getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(ProductUnit unit) {
         this.unit = unit;
     }
 

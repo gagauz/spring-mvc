@@ -9,6 +9,8 @@ import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 import org.apache.tapestry5.services.ajax.JavaScriptCallback;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.gagauz.shop.database.model.Product;
+import org.gagauz.shop.database.model.ProductAttribute;
+import org.gagauz.shop.database.model.ProductVariant;
 import org.gagauz.shop.web.services.shop.BasketService;
 
 public class ProductDetails {
@@ -25,6 +27,12 @@ public class ProductDetails {
 
     @Property
     private String image;
+
+    @Property
+    private ProductVariant variant;
+
+    @Property
+    private ProductAttribute attribute;
 
     @Inject
     private BasketService basketService;

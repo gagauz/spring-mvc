@@ -23,6 +23,17 @@
 		<div>
 		${product.description}
 		</div>
+		<div>
+			<t:foreach source="product.variants" value="variant">
+				<div>
+				<t:foreach source="variant.group" value="variant">
+					<div class="">
+						${variant.group.name}: ${variant.name}
+					</div>
+				</t:foreach>
+				</div>
+			</t:foreach>
+		</div>
 		<t:if test="product.discount">
 			<div class="discount">-${product.discount}%</div>
 		</t:if>

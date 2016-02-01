@@ -1,10 +1,10 @@
 package org.gagauz.shop.database.dao;
 
-import java.util.List;
-
 import org.gagauz.shop.database.model.Product;
 import org.gagauz.shop.database.model.Shop;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductDao extends ShopEntityDao<Integer, Product> {

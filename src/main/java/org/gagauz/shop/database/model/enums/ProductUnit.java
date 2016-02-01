@@ -5,15 +5,10 @@ public enum ProductUnit {
     GRAM,
     KILOGRAM,
     TON,
-    POUND,
-    OUNCE,
     CENTIMETER,
     METER,
-    FOOT,
-    SQUARE_METER,
-    SQUARE_FOOT,
-    CUBIC_METER,
-    CUBIC_FOOT,
+    METER_2,
     MILLILITER,
-    LITER;
+    LITER,
+    METER_3;
 }

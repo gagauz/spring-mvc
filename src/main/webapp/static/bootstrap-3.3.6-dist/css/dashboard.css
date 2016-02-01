@@ -123,7 +123,7 @@ body {
 .modal .close{font-size:20px;z-index:1000;padding:5px;
 /*position:absolute;right:-13px;top:-13px;background:#fff;border-radius:50%;opacity:1;text-shadow:none;*/}
 
-.product-card {height:390px;position:relative;padding:0;border:1px solid transparent;overflow:hidden;}
+.product-card {height:420px;position:relative;padding:0;border:1px solid transparent;overflow:hidden;}
 .product-card:hover {border:1px solid #ddd;box-shadow:0 0 6px 1px #d0d0d0}
 .product-card .top {margin:0 auto;clear:both;position:relative;}
 .product-card .top .photo {padding:15px 15px 0;}
@@ -133,9 +133,9 @@ body {
 .product-card .bottom {position:absolute;bottom:0px;margin:15px;font-size:14px;}
 .product-card .bottom .name {font-weight:bold;}
 .product-card .bottom .price {}
-.product-card .discount {position:absolute;top:0;right:0;padding:5px;color:white;background:red;border-radius:50%;}
+.product-card .discount {position:absolute;top:2px;right:2px;text-align:center;width:40px;line-height:40px;color:white;background:red;border-radius:50%;box-shadow:0 0 2px 0px #000}
 .product-card .bottom .name {}
-.product-card .zoom-in {position:absolute;bottom:0;left:0;right:0;text-align:center;display:none;opacity:0.5;background:#fff}
+.product-card .zoom-in {position:absolute;bottom:0;left:15px;right:15px;text-align:center;line-height:30px;display:none;opacity:0.5;background:#fff}
 .product-card .zoom-in i {opacity:1;}
 .product-card:hover .zoom-in{display:block}
 

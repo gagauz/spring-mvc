@@ -3,25 +3,15 @@ package org.gagauz.shop.database.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import org.gagauz.hibernate.model.Model;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "PRODUCT_ATTRIBUTE")
-public class ProductAttribute extends Model {
-    private String key;
+@Table(name = "PRODUCT_ATTRIBUTE", uniqueConstraints = @UniqueConstraint(columnNames = {"shop_id", "name"}) )
+public class ProductAttribute extends ShopEntity {
+    private static final long serialVersionUID = 4110258121797070663L;
     private String name;
     private String description;
     private String data;
-
-    @Column(nullable = false)
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String name) {
-        this.key = name;
-    }
 
     @Column(nullable = false)
     public String getName() {
