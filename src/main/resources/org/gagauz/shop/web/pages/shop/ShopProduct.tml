@@ -1,5 +1,11 @@
 <t:buyer.MainTemplate xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
+<ol class="breadcrumb">
+  <li><a t:type="pagelink" t:page="shop/catalog">Home</a></li>
+  <li><a t:type="pagelink" t:page="shop/catalog">${product.category.hierarchyName}</a></li>
+  <li class="active">${product.name}</li>
+</ol>
+
 <t:shop.ProductDetails product="product" />
 
 </t:buyer.MainTemplate>

@@ -1,8 +1,15 @@
 package org.gagauz.shop.database.model;
 
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "PRODUCT_GROUP", uniqueConstraints = @UniqueConstraint(columnNames = {"shop_id", "name"}) )
@@ -21,7 +28,7 @@ public class ProductGroup extends ShopEntity {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "PRODUCT_VARIANT", joinColumns = @JoinColumn(name = "groupId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "productId", referencedColumnName = "id") )
+    @JoinTable(name = "PRODUCT_VARIANT", joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id") )
     public List<Product> getProducts() {
         return products;
     }

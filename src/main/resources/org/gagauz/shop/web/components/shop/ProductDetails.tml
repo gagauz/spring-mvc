@@ -20,18 +20,23 @@
 	</div>
 	<div class="col-sm-6">
 		<h3>${product.name}</h3>
+		<h4>Article: ${product.article}</h4>
 		<div>
 		${product.description}
 		</div>
 		<div>
 			<t:foreach source="product.variants" value="variant">
-				<div>
-				<t:foreach source="variant.group" value="variant">
-					<div class="">
-						${variant.group.name}: ${variant.name}
-					</div>
+				<p>
+					${variant.group.name}:
+				<t:foreach source="variant.group.products" value="row">
+					<t:if test="current">
+					<span class="btn btn-danger">${getGroupVariant().getName()}</span>&nbsp;
+					<p:else>
+					<span class="btn btn-default">${getGroupVariant().getName()}</span>&nbsp;	
+					</p:else>
+					</t:if>
 				</t:foreach>
-				</div>
+				</p>
 			</t:foreach>
 		</div>
 		<t:if test="product.discount">

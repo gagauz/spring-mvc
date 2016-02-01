@@ -1,5 +1,8 @@
 package org.webservice.scenarios;
 
+import java.io.File;
+import java.io.InputStream;
+
 import org.gagauz.shop.database.dao.SellerDao;
 import org.gagauz.shop.database.dao.ShopDao;
 import org.gagauz.shop.database.model.Seller;
@@ -10,9 +13,6 @@ import org.gagauz.shop.services.CategoriesImporter;
 import org.gagauz.shop.services.ProductsImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
-import java.io.InputStream;
 
 @Service
 public class ScenarioShop extends DataBaseScenario {
@@ -61,11 +61,9 @@ public class ScenarioShop extends DataBaseScenario {
         shopDao.save(shop1);
 
         final InputStream in1 = getClass().getResourceAsStream("/scenarios/market_categories1.csv");
-        final File f2 = new File(getClass().getResource("/scenarios/market_products1.xlsx").getFile());
+        final File f2 = new File(getClass().getResource("/scenarios/market_products1.csv").getFile());
 
         categoriesImporter.importCategories(shop1, in1);
         productsImporter.importProducts(shop1, f2);
-
     }
-
 }

@@ -1,13 +1,18 @@
 package org.gagauz.shop.services;
 
-import org.apache.commons.io.IOUtils;
-import org.gagauz.shop.database.dao.*;
-import org.gagauz.shop.database.model.*;
-import org.gagauz.shop.database.model.enums.Currency;
-import org.gagauz.shop.database.model.enums.ProductUnit;
-import org.gagauz.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import static org.gagauz.shop.services.Columns.ARTICLE;
+import static org.gagauz.shop.services.Columns.ATTRIBUTES;
+import static org.gagauz.shop.services.Columns.CATEGORY;
+import static org.gagauz.shop.services.Columns.CURRENCY;
+import static org.gagauz.shop.services.Columns.DESCRIPTION;
+import static org.gagauz.shop.services.Columns.DISCOUNT;
+import static org.gagauz.shop.services.Columns.GROUPS;
+import static org.gagauz.shop.services.Columns.IMAGES;
+import static org.gagauz.shop.services.Columns.MANUFACTURER;
+import static org.gagauz.shop.services.Columns.NAME;
+import static org.gagauz.shop.services.Columns.PRICE;
+import static org.gagauz.shop.services.Columns.UNIT;
+import static org.gagauz.shop.services.Columns.VARIANTS;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +23,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.gagauz.shop.services.Columns.*;
+import org.apache.commons.io.IOUtils;
+import org.gagauz.shop.database.dao.ManufacturerDao;
+import org.gagauz.shop.database.dao.ProductAttributeDao;
+import org.gagauz.shop.database.dao.ProductCategoryDao;
+import org.gagauz.shop.database.dao.ProductDao;
+import org.gagauz.shop.database.dao.ProductGroupDao;
+import org.gagauz.shop.database.model.Manufacturer;
+import org.gagauz.shop.database.model.Product;
+import org.gagauz.shop.database.model.ProductAttribute;
+import org.gagauz.shop.database.model.ProductCategory;
+import org.gagauz.shop.database.model.ProductGroup;
+import org.gagauz.shop.database.model.ProductVariant;
+import org.gagauz.shop.database.model.Shop;
+import org.gagauz.shop.database.model.enums.Currency;
+import org.gagauz.shop.database.model.enums.ProductUnit;
+import org.gagauz.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ProductsImporter extends AbstractCsvImporter {
@@ -124,8 +146,11 @@ public class ProductsImporter extends AbstractCsvImporter {
         p.setDescription(getString(DESCRIPTION));
         p.setShop(shop);
         p.setImages(getString(IMAGES));
-        p.setAttributes(parseAttributes(getStrings(ATTRIBUTES)));
         p.setVariants(parseGroups(p, getStrings(GROUPS), getStrings(VARIANTS)));
+        try {
+            p.setAttributes(parseAttributes(getStrings(ATTRIBUTES)));
+        } catch (Exception e) {
+        }
     }
 
     @Override

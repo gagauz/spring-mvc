@@ -32,6 +32,9 @@ public class ProductDetails {
     private ProductVariant variant;
 
     @Property
+    private Product row;
+
+    @Property
     private ProductAttribute attribute;
 
     @Inject
@@ -61,4 +64,16 @@ public class ProductDetails {
 
     }
 
+    public boolean isCurrent() {
+        return product.equals(row);
+    }
+
+    public ProductVariant getGroupVariant() {
+        for (ProductVariant v : row.getVariants()) {
+            if (v.getGroup().equals(variant.getGroup())) {
+                return v;
+            }
+        }
+        return null;
+    }
 }
