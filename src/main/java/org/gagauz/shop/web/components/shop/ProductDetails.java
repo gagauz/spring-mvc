@@ -1,6 +1,7 @@
 package org.gagauz.shop.web.components.shop;
 
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Zone;
@@ -10,9 +11,11 @@ import org.apache.tapestry5.services.ajax.JavaScriptCallback;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.gagauz.shop.database.model.Product;
 import org.gagauz.shop.database.model.ProductAttribute;
+import org.gagauz.shop.database.model.ProductGroup;
 import org.gagauz.shop.database.model.ProductVariant;
 import org.gagauz.shop.web.services.shop.BasketService;
 
+@Import(module = "bootstrap/carousel")
 public class ProductDetails {
 
     @Component
@@ -33,6 +36,9 @@ public class ProductDetails {
 
     @Property
     private Product row;
+
+    @Property
+    private ProductGroup group;
 
     @Property
     private ProductAttribute attribute;
@@ -70,7 +76,7 @@ public class ProductDetails {
 
     public ProductVariant getGroupVariant() {
         for (ProductVariant v : row.getVariants()) {
-            if (v.getGroup().equals(variant.getGroup())) {
+            if (v.getGroup().equals(group)) {
                 return v;
             }
         }

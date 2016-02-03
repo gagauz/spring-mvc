@@ -1,12 +1,12 @@
-article	groups	variants	name	category	brand	price	currency	unit	discount	description	images	attributes		
-ART_001_L_W	SIZE_001,COLOR_001	L,WHITE	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg		SIZE_140	COLOR_137
-ART_001_M_W	SIZE_001,COLOR_001	M,WHITE	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_S_W	SIZE_001,COLOR_001	S,WHITE	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_L_B	SIZE_001,COLOR_001	L,BLACK	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_XL_B	SIZE_001,COLOR_001	XL,BLACK	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_XS_R	SIZE_001,COLOR_001	XS,RED	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_S_R	SIZE_001,COLOR_001	S,RED	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_M_R	SIZE_001,COLOR_001	M,RED	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_L_R	SIZE_001,COLOR_001	L,RED	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_XL_R	SIZE_001,COLOR_001	XL,RED	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
-ART_001_XXL_R	SIZE_001,COLOR_001	XXL,RED	Футболкa	Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы	Unknown	5470	usd	piece	0	Описание	004.jpg,005.jpg,006.jpg			
+"article"	"group"	"variant"	"name"	"category"	"brand"	"price"	"currency"	"unit"	"discount"	"description"	"images"	"attributes"		
+"ART_001_L_W"	"g1,m1"	"L,white"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_001,COLOR_001"	"L,WHITE"
+"ART_001_M_W"	"g1,m1"	"M,white"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_001,COLOR_001"	"M,WHITE"
+"ART_001_S_W"	"g1,m1"	"S,white"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_001,COLOR_001"	"S,WHITE"
+"ART_001_L_B"	"g2,m1"	"L,black"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_002,COLOR_001"	"L,BLACK"
+"ART_001_XL_B"	"g2,m1"	"XL,black"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_002,COLOR_001"	"XL,BLACK"
+"ART_001_XS_R"	"g3,m1"	"XS,red"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_003,COLOR_001"	"XS,RED"
+"ART_001_S_R"	"g3,m1"	"S,red"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_003,COLOR_001"	"S,RED"
+"ART_001_M_R"	"g3,m1"	"M,red"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_003,COLOR_001"	"M,RED"
+"ART_001_L_R"	"g3,m1"	"L,red"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_003,COLOR_001"	"L,RED"
+"ART_001_XL_R"	"g3,m1"	"XL,red"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_003,COLOR_001"	"XL,RED"
+"ART_001_XXL_R"	"g3,m1"	"XXL,red"	"Футболкa"	"Одежда, обувь и аксессуары/Женская одежда/Одежда/Футболки и топы"	"Unknown"	5470	"usd"	"piece"	0	"Описание"	"004.jpg,005.jpg,006.jpg"		"SIZE_003,COLOR_001"	"XXL,RED"

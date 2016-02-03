@@ -143,6 +143,10 @@ body {
 
 .photo img {width:100%;height:auto;}
 
+.photo-items {margin:0;padding:0;}
+.photo-items li {clear:both;width:100px;margin:0 0 15px;list-style:none;border:10px solid transparent;}
+.photo-items li.active {border:10px solid #f0f0f0;}
+
 .currency-RUR .price:after {content:"\20B1";margin-left:2px}
 .currency-BYR .price:after {content:"бел.руб.";margin-left:2px}
 .currency-KZT .price:after {content:"\20B8";margin-left:2px}

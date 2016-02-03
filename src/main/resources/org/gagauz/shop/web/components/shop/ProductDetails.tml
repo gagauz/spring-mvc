@@ -1,21 +1,32 @@
 <div class="row" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="col-sm-6">
 		<div class="photo">
-			<div class="top carousel slide" id="product-zoom-${product.id}" onmouseenter="$(this).carousel()" data-interval="false">
-				<div class="carousel-inner" role="listbox">
-					<t:foreach source="product.imageUrls" value="image" index="var:i">
-						<div class="item ${cond:var:i,,active}">
-							<img src="/static/images/${image}" alt="" />
-						</div>
-					</t:foreach>
+			<div class="row carousel slide" id="product-zoom-${product.id}" onmouseenter="$(this).carousel()" data-interval="false" data-indicators=".photo-items">
+				<div class="col-sm-2">
+					<ul class="photo-items">
+					    <t:foreach source="product.imageUrls" value="image" index="var:i">
+							<li class="${cond:var:i,,active}" data-target="#product-zoom-${product.id}" data-slide-to="${var:i}">
+								<img src="/static/images/${image}" alt="" />
+							</li>
+						</t:foreach>
+					</ul>
+				</div>
+				<div class="col-sm-10">
+					<div class="carousel-inner" role="listbox">
+						<t:foreach source="product.imageUrls" value="image" index="var:i">
+							<div class="item ${cond:var:i,,active}">
+								<img src="/static/images/${image}" alt="" />
+							</div>
+						</t:foreach>
+					</div>
+					<a href="#product-zoom-${product.id}" role="button" data-slide="prev" class="carousel-control left">
+						<i class="glyphicon glyphicon-chevron-left"></i>
+					</a>
+					<a href="#product-zoom-${product.id}" role="button" data-slide="next" class="carousel-control right">
+						<i class="glyphicon glyphicon-chevron-right"></i>
+					</a>
 				</div>
 			</div>
-			<a href="#product-zoom-${product.id}" role="button" data-slide="prev" class="carousel-control left">
-				<i class="glyphicon glyphicon-chevron-left"></i>
-			</a>
-			<a href="#product-zoom-${product.id}" role="button" data-slide="next" class="carousel-control right">
-				<i class="glyphicon glyphicon-chevron-right"></i>
-			</a>
 		</div>
 	</div>
 	<div class="col-sm-6">
@@ -25,17 +36,14 @@
 		${product.description}
 		</div>
 		<div>
-			<t:foreach source="product.variants" value="variant">
+			<t:foreach source="product.groups" value="group">
 				<p>
-					${variant.group.name}:
-				<t:foreach source="variant.group.products" value="row">
-					<t:if test="current">
-					<span class="btn btn-danger">${getGroupVariant().getName()}</span>&nbsp;
-					<p:else>
-					<span class="btn btn-default">${getGroupVariant().getName()}</span>&nbsp;	
-					</p:else>
-					</t:if>
-				</t:foreach>
+					${group.name}:
+					<t:foreach source="group.products" value="row">
+						<a t:type="pagelink" t:page="shop/product" t:context="row" class="btn ${cond:current,btn-danger,btn-default}">
+							 ${row.getVariant(group).getName()}
+						</a>&nbsp;
+					</t:foreach>
 				</p>
 			</t:foreach>
 		</div>

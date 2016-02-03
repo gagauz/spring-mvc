@@ -19,7 +19,7 @@ public class Product extends ShopEntity {
     private String description;
     private String images;
     private List<ProductAttribute> attributes;
-    //    private List<ProductGroup> groups;
+    private List<ProductGroup> groups;
     private List<ProductVariant> variants;
     private ProductUnit unit;
     private BigDecimal price;
@@ -91,15 +91,15 @@ public class Product extends ShopEntity {
         this.attributes = attributes;
     }
 
-    //    @ManyToMany(fetch = FetchType.LAZY)
-    //    @JoinTable(name = "PRODUCT_TO_GROUP", joinColumns = @JoinColumn(name = "productId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "groupId", referencedColumnName = "id") )
-    //    public List<ProductGroup> getGroups() {
-    //        return groups;
-    //    }
-    //
-    //    public void setGroups(List<ProductGroup> groups) {
-    //        this.groups = groups;
-    //    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PRODUCT_VARIANT", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id") )
+    public List<ProductGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<ProductGroup> groups) {
+        this.groups = groups;
+    }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.product", cascade = CascadeType.ALL)
     public List<ProductVariant> getVariants() {
@@ -158,6 +158,16 @@ public class Product extends ShopEntity {
             imageUrls = images.split(",");
         }
         return imageUrls;
+    }
+
+    @Transient
+    public ProductVariant getVariant(ProductGroup group) {
+        for (ProductVariant v : getVariants()) {
+            if (v.getGroup().equals(group)) {
+                return v;
+            }
+        }
+        return null;
     }
 
 }
